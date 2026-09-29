@@ -1,6 +1,7 @@
 """无需额外网页框架的 TEP 故障诊断演示入口。"""
 
 import json
+import hmac
 from html import escape
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import os
@@ -121,6 +122,12 @@ def render_answer(question: str) -> str:
 
 
 class Handler(BaseHTTPRequestHandler):
+    def api_authorized(self) -> bool:
+        token = os.getenv("TEP_ACCESS_TOKEN", "")
+        return not token or hmac.compare_digest(
+            self.headers.get("Authorization", ""), f"Bearer {token}"
+        )
+
     def send_cors_headers(self) -> None:
         allowed = os.getenv("TEP_ALLOWED_ORIGIN", "")
         if allowed and self.headers.get("Origin") == allowed:
@@ -161,18 +168,26 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(204)
         self.send_cors_headers()
         self.send_header("Access-Control-Allow-Methods", "POST, OPTIONS")
-        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization")
         self.end_headers()
 
     def do_GET(self) -> None:
         if self.path == "/":
             self.send_page("")
+        elif self.path == "/health":
+            self.send_json({"status": "ok"})
         else:
             self.send_error(404)
 
     def do_POST(self) -> None:
         if self.path not in ("/run", "/api/diagnose", "/ask", "/api/ask"):
             self.send_error(404)
+            return
+        if not self.api_authorized():
+            if self.path.startswith("/api/"):
+                self.send_json({"error": "请填写正确的访问口令"}, 401)
+            else:
+                self.send_page("<section class='card error'>请填写正确的访问口令</section>", 401)
             return
         length = int(self.headers.get("Content-Length", "0"))
         if length < 0 or length > 16000:
@@ -210,6 +225,10 @@ def serve() -> None:
     os.environ.setdefault("TEP_LLM_BASE_URL", BAILIAN_BASE_URL)
     os.environ.setdefault("TEP_LLM_MODEL", BAILIAN_MODEL)
     load_saved_key()
+    if os.getenv("RENDER") == "true" and not os.getenv("TEP_ACCESS_TOKEN"):
+        raise RuntimeError("Render 部署必须配置 TEP_ACCESS_TOKEN，避免公开接口被任意调用")
+    if os.getenv("RENDER") == "true" and not os.getenv("TEP_LLM_API_KEY"):
+        raise RuntimeError("Render 部署必须配置 TEP_LLM_API_KEY，才能启用知识问答")
     server = ThreadingHTTPServer((HOST, PORT), Handler)
     print(f"打开 http://{HOST}:{PORT}，按 Ctrl+C 退出")
     try:

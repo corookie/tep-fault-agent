@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: tep-fault-agent-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python retrieve_chunks.py build
+    startCommand: python app.py
+    healthCheckPath: /health
+    envVars:
+      - key: TEP_HOST
+        value: 0.0.0.0
+      - key: TEP_ALLOWED_ORIGIN
+        value: https://corookie.github.io
+      - key: TEP_LLM_API_KEY
+        sync: false
+      - key: TEP_ACCESS_TOKEN
+        sync: false

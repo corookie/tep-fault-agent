@@ -2,7 +2,7 @@
 
 The process animation stays interactive. The nine supported diagnosis parameter
 combinations are precomputed with the same Python code as the local service.
-Online Q&A requires a separate backend and is not emulated here.
+Online Q&A and live diagnosis use a separately hosted backend when configured.
 """
 
 import argparse
@@ -42,11 +42,11 @@ def main() -> None:
         f'<script>window.TEP_DEPLOYMENT = {configuration};</script><script>',
         1,
     )
-    status = "GitHub Pages：在线问答已接入" if api_base else "GitHub Pages 演示：知识问答需独立后端"
+    status = "GitHub Pages：在线问答与实时诊断已接入" if api_base else "GitHub Pages 演示：知识问答需独立后端"
     page = page.replace("{configuration_status}", status)
     page = page.replace("{diagnose_result}", "").replace("{qa_result}", "")
     page = page.replace(" · 本地研究演示", " · 公开交互演示")
-    note = ("此公开页面可体验工艺动画、在线知识问答和预计算的故障诊断结果（9组参数）。"
+    note = ("此页面可体验工艺动画、在线知识问答和实时故障诊断。问答与诊断需要访问口令，口令与模型密钥不同。"
             if api_base else
             "此公开页面可体验工艺动画和预计算的故障诊断结果（9组参数）。在线知识问答暂未启用；本地运行版本可使用完整功能。")
     page = page.replace(
