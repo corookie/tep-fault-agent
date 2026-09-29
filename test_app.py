@@ -17,6 +17,25 @@ import app
 
 
 class AppTests(unittest.TestCase):
+    def test_hosted_api_only_advertises_configured_browser_origin(self) -> None:
+        with patch.dict(os.environ, {"TEP_ALLOWED_ORIGIN": "https://corookie.github.io"}):
+            server = ThreadingHTTPServer(("127.0.0.1", 0), app.Handler)
+            thread = Thread(target=server.serve_forever, daemon=True)
+            thread.start()
+            url = f"http://127.0.0.1:{server.server_port}/api/ask"
+            try:
+                with patch.object(app, "answer_question", return_value={"answer": "ok", "sources": []}):
+                    for origin, expected in [
+                        ("https://corookie.github.io", "https://corookie.github.io"),
+                        ("https://example.org", None),
+                    ]:
+                        request = Request(url, data=b"question=X4", headers={"Origin": origin})
+                        with urlopen(request) as response:
+                            self.assertEqual(response.headers.get("Access-Control-Allow-Origin"), expected)
+            finally:
+                server.shutdown()
+                server.server_close()
+
     def test_diagnosis_api_returns_graphs_and_updates_for_empty_window(self):
         server = ThreadingHTTPServer(("127.0.0.1", 0), app.Handler)
         Thread(target=server.serve_forever, daemon=True).start()

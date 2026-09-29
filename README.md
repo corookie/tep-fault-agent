@@ -49,6 +49,8 @@ IDV(7) 的仿真设定是 C 进料压力损失；X4 是混合进料流量，X45 
 
 仓库的 `docs/` 目录可发布为 GitHub Pages 页面。它保留交互式工艺图，并提供当前程序对9组采样点数/时滞参数预先计算的诊断结果。运行 `python3 export_pages.py` 可重新生成页面和结果。GitHub Pages 无法运行 Python，也不能安全保存模型 API Key，因此公开预览中的在线问答暂不可用；完整三功能版本可按上面的步骤在本机运行。接入独立后端后应将 Key 放在后端环境变量中，不要写进公开源码或浏览器脚本。
 
+已上线地址和后端接入方式见 [双语部署说明](DEPLOYMENT.md)。
+
 ## English
 
 ### Overview
@@ -79,3 +81,5 @@ Run `python -m unittest discover -q` for the local regression suite. For the com
 ### Deployment note
 
 GitHub Pages can publish the static web interface, but it cannot run Python or keep an API key secret. Online Q&A therefore requires a separate backend. Keep the API key as a server-side secret on that backend; the static page must never contain it. The repository includes the original local Python application so the full three-feature version remains reproducible.
+
+See the [bilingual deployment guide](DEPLOYMENT.md) for the live preview, configuration, and backend integration steps.

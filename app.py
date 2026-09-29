@@ -15,8 +15,8 @@ from qa import QAError, answer_question
 from process_diagram import PROCESS_CSS, PROCESS_JS, render_process_diagram
 
 
-HOST = "127.0.0.1"
-PORT = 8765
+HOST = os.getenv("TEP_HOST", "127.0.0.1")
+PORT = int(os.getenv("PORT", "8765"))
 BAILIAN_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
 BAILIAN_MODEL = "qwen3.8-flash"
 KEY_DIR = Path.home() / ".tep-fault-agent"
@@ -121,6 +121,12 @@ def render_answer(question: str) -> str:
 
 
 class Handler(BaseHTTPRequestHandler):
+    def send_cors_headers(self) -> None:
+        allowed = os.getenv("TEP_ALLOWED_ORIGIN", "")
+        if allowed and self.headers.get("Origin") == allowed:
+            self.send_header("Access-Control-Allow-Origin", allowed)
+            self.send_header("Vary", "Origin")
+
     def send_page(self, result: str, status: int = 200, slot: str = "qa") -> None:
         configured = all(os.getenv(name) for name in (
             "TEP_LLM_API_KEY", "TEP_LLM_BASE_URL", "TEP_LLM_MODEL"
@@ -134,6 +140,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Cache-Control", "no-store")
         self.send_header("Referrer-Policy", "no-referrer")
+        self.send_cors_headers()
         self.end_headers()
         self.wfile.write(body)
 
@@ -143,8 +150,19 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Cache-Control", "no-store")
+        self.send_cors_headers()
         self.end_headers()
         self.wfile.write(body)
+
+    def do_OPTIONS(self) -> None:
+        if self.path not in ("/api/ask", "/api/diagnose"):
+            self.send_error(404)
+            return
+        self.send_response(204)
+        self.send_cors_headers()
+        self.send_header("Access-Control-Allow-Methods", "POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
 
     def do_GET(self) -> None:
         if self.path == "/":
@@ -189,6 +207,8 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def serve() -> None:
+    os.environ.setdefault("TEP_LLM_BASE_URL", BAILIAN_BASE_URL)
+    os.environ.setdefault("TEP_LLM_MODEL", BAILIAN_MODEL)
     load_saved_key()
     server = ThreadingHTTPServer((HOST, PORT), Handler)
     print(f"打开 http://{HOST}:{PORT}，按 Ctrl+C 退出")
