@@ -1,0 +1,483 @@
+{
+  "variables": [
+    "X4",
+    "X7",
+    "X13",
+    "X16",
+    "X20",
+    "X45",
+    "X46"
+  ],
+  "edges": [
+    {
+      "source": "X13",
+      "target": "X7",
+      "improvement": 0.0998583189905588,
+      "positive_tests": 57,
+      "test_count": 57,
+      "p_value": 6.938893903907228e-18,
+      "q_value": 1.457167719820518e-16,
+      "selected": true
+    },
+    {
+      "source": "X16",
+      "target": "X7",
+      "improvement": 0.16701744744030841,
+      "positive_tests": 44,
+      "test_count": 57,
+      "p_value": 2.3552188046976893e-05,
+      "q_value": 0.00016486531632883825,
+      "selected": true
+    },
+    {
+      "source": "X7",
+      "target": "X13",
+      "improvement": 0.11692190148491982,
+      "positive_tests": 56,
+      "test_count": 57,
+      "p_value": 4.0245584642661925e-16,
+      "q_value": 5.6343818499726694e-15,
+      "selected": true
+    },
+    {
+      "source": "X16",
+      "target": "X13",
+      "improvement": 0.16550870974074844,
+      "positive_tests": 43,
+      "test_count": 57,
+      "p_value": 7.694451122217115e-05,
+      "q_value": 0.00046166706733302693,
+      "selected": true
+    },
+    {
+      "source": "X7",
+      "target": "X16",
+      "improvement": 0.09980715131964027,
+      "positive_tests": 55,
+      "test_count": 57,
+      "p_value": 1.1476930517062556e-14,
+      "q_value": 1.2050777042915684e-13,
+      "selected": true
+    },
+    {
+      "source": "X13",
+      "target": "X16",
+      "improvement": 0.08305325337664274,
+      "positive_tests": 57,
+      "test_count": 57,
+      "p_value": 6.938893903907228e-18,
+      "q_value": 1.457167719820518e-16,
+      "selected": true
+    },
+    {
+      "source": "X7",
+      "target": "X20",
+      "improvement": 0.07365585150751298,
+      "positive_tests": 40,
+      "test_count": 57,
+      "p_value": 0.0016007718837251906,
+      "q_value": 0.005602701593038168,
+      "selected": true
+    },
+    {
+      "source": "X13",
+      "target": "X20",
+      "improvement": 0.07170560057375942,
+      "positive_tests": 39,
+      "test_count": 57,
+      "p_value": 0.0037540877670751,
+      "q_value": 0.0121285912474734,
+      "selected": true
+    },
+    {
+      "source": "X16",
+      "target": "X20",
+      "improvement": 0.07989203793045895,
+      "positive_tests": 44,
+      "test_count": 57,
+      "p_value": 2.3552188046976893e-05,
+      "q_value": 0.00016486531632883825,
+      "selected": true
+    },
+    {
+      "source": "X46",
+      "target": "X20",
+      "improvement": 0.038387084875441714,
+      "positive_tests": 41,
+      "test_count": 57,
+      "p_value": 0.0006317797362177315,
+      "q_value": 0.0026534748921144724,
+      "selected": true
+    },
+    {
+      "source": "X46",
+      "target": "X45",
+      "improvement": 0.02009556224795339,
+      "positive_tests": 36,
+      "test_count": 57,
+      "p_value": 0.03136834017791424,
+      "q_value": 0.08783135249815986,
+      "selected": true
+    },
+    {
+      "source": "X7",
+      "target": "X46",
+      "improvement": 0.09032807953626204,
+      "positive_tests": 41,
+      "test_count": 57,
+      "p_value": 0.0006317797362177315,
+      "q_value": 0.0026534748921144724,
+      "selected": true
+    },
+    {
+      "source": "X13",
+      "target": "X46",
+      "improvement": 0.08792765711322482,
+      "positive_tests": 40,
+      "test_count": 57,
+      "p_value": 0.0016007718837251906,
+      "q_value": 0.005602701593038168,
+      "selected": true
+    },
+    {
+      "source": "X16",
+      "target": "X46",
+      "improvement": 0.08664498426486321,
+      "positive_tests": 41,
+      "test_count": 57,
+      "p_value": 0.0006317797362177315,
+      "q_value": 0.0026534748921144724,
+      "selected": true
+    },
+    {
+      "source": "X20",
+      "target": "X46",
+      "improvement": 0.053009796385625196,
+      "positive_tests": 36,
+      "test_count": 57,
+      "p_value": 0.03136834017791424,
+      "q_value": 0.08783135249815986,
+      "selected": true
+    }
+  ],
+  "matrix": [
+    [
+      null,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      null,
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      null,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      null,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      null,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      null,
+      1
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      null
+    ]
+  ],
+  "feedback_groups": [
+    [
+      "X7",
+      "X13",
+      "X16"
+    ],
+    [
+      "X20",
+      "X46"
+    ]
+  ],
+  "candidates": [
+    "X7",
+    "X13",
+    "X16"
+  ],
+  "paths": [
+    {
+      "nodes": [
+        "X7",
+        "X13",
+        "X16",
+        "X20",
+        "X46",
+        "X45"
+      ],
+      "termination": "terminal"
+    },
+    {
+      "nodes": [
+        "X7",
+        "X13",
+        "X16",
+        "X46",
+        "X20"
+      ],
+      "termination": "feedback"
+    },
+    {
+      "nodes": [
+        "X7",
+        "X13",
+        "X16",
+        "X46",
+        "X45"
+      ],
+      "termination": "terminal"
+    },
+    {
+      "nodes": [
+        "X7",
+        "X13",
+        "X20",
+        "X46",
+        "X45"
+      ],
+      "termination": "terminal"
+    },
+    {
+      "nodes": [
+        "X7",
+        "X13",
+        "X46",
+        "X20"
+      ],
+      "termination": "feedback"
+    },
+    {
+      "nodes": [
+        "X7",
+        "X13",
+        "X46",
+        "X45"
+      ],
+      "termination": "terminal"
+    },
+    {
+      "nodes": [
+        "X7",
+        "X16",
+        "X13",
+        "X20",
+        "X46",
+        "X45"
+      ],
+      "termination": "terminal"
+    },
+    {
+      "nodes": [
+        "X7",
+        "X16",
+        "X13",
+        "X46",
+        "X20"
+      ],
+      "termination": "feedback"
+    },
+    {
+      "nodes": [
+        "X7",
+        "X16",
+        "X13",
+        "X46",
+        "X45"
+      ],
+      "termination": "terminal"
+    },
+    {
+      "nodes": [
+        "X7",
+        "X16",
+        "X20",
+        "X46",
+        "X45"
+      ],
+      "termination": "terminal"
+    },
+    {
+      "nodes": [
+        "X7",
+        "X16",
+        "X46",
+        "X20"
+      ],
+      "termination": "feedback"
+    },
+    {
+      "nodes": [
+        "X7",
+        "X16",
+        "X46",
+        "X45"
+      ],
+      "termination": "terminal"
+    },
+    {
+      "nodes": [
+        "X7",
+        "X20",
+        "X46",
+        "X45"
+      ],
+      "termination": "terminal"
+    },
+    {
+      "nodes": [
+        "X7",
+        "X46",
+        "X20"
+      ],
+      "termination": "feedback"
+    },
+    {
+      "nodes": [
+        "X7",
+        "X46",
+        "X45"
+      ],
+      "termination": "terminal"
+    },
+    {
+      "nodes": [
+        "X13",
+        "X7",
+        "X16",
+        "X20",
+        "X46",
+        "X45"
+      ],
+      "termination": "terminal"
+    },
+    {
+      "nodes": [
+        "X13",
+        "X7",
+        "X16",
+        "X46",
+        "X20"
+      ],
+      "termination": "feedback"
+    },
+    {
+      "nodes": [
+        "X13",
+        "X7",
+        "X16",
+        "X46",
+        "X45"
+      ],
+      "termination": "terminal"
+    },
+    {
+      "nodes": [
+        "X13",
+        "X7",
+        "X20",
+        "X46",
+        "X45"
+      ],
+      "termination": "terminal"
+    },
+    {
+      "nodes": [
+        "X13",
+        "X7",
+        "X46",
+        "X20"
+      ],
+      "termination": "feedback"
+    },
+    {
+      "nodes": [
+        "X13",
+        "X7",
+        "X46",
+        "X45"
+      ],
+      "termination": "terminal"
+    },
+    {
+      "nodes": [
+        "X13",
+        "X16",
+        "X7",
+        "X20",
+        "X46",
+        "X45"
+      ],
+      "termination": "terminal"
+    },
+    {
+      "nodes": [
+        "X13",
+        "X16",
+        "X7",
+        "X46",
+        "X20"
+      ],
+      "termination": "feedback"
+    },
+    {
+      "nodes": [
+        "X13",
+        "X16",
+        "X7",
+        "X46",
+        "X45"
+      ],
+      "termination": "terminal"
+    }
+  ],
+  "paths_truncated": true,
+  "isolated": [
+    "X4"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "document_id": "TEP-KB-001",
+  "document_version": "1.0.0",
+  "chunker_version": "1.0.0",
+  "input_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+  "sources_sha256": "d8f38c1da16199bc8694a4d16fc23e8ab105ec856d61db284c419e6d107c74f9",
+  "max_chars_soft_limit": 2000,
+  "size_measure": "Unicode characters, not tokens",
+  "chunk_count": 110,
+  "unit_count": 110,
+  "counts_by_kind": {
+    "scope": 1,
+    "chemistry": 1,
+    "process_overview": 1,
+    "stream": 11,
+    "utility": 2,
+    "equipment": 5,
+    "variable_conventions": 1,
+    "variable": 52,
+    "sampling": 1,
+    "dataset_scope": 1,
+    "editorial_guidance": 1,
+    "fault_conventions": 1,
+    "fault": 21,
+    "limitations": 1,
+    "source_correction": 10
+  },
+  "char_stats": {
+    "min": 123,
+    "median": 503,
+    "max": 1615
+  },
+  "checks": {
+    "unique_chunk_ids": true,
+    "variables_52": true,
+    "faults_21": true,
+    "streams_11": true,
+    "utilities_2": true,
+    "equipment_5": true,
+    "fault_boundaries_present": true,
+    "provenance_lines_valid": true
+  },
+  "warnings": [],
+  "excluded": [
+    {
+      "section": "引言、阅读路径、来源登记、交付状态",
+      "reason": "不作为领域检索正文；来源登记进入元数据"
+    },
+    {
+      "section": "3.2 Mermaid 结构图",
+      "reason": "本轮为文本切分；完整流程文字与流股表已纳入，图保留在原手册"
+    }
+  ],
+  "status": "本地切分完成，未接入在线问答；尚未做检索效果评测",
+  "chunks_sha256": "e594277ec102af81be56641c282c196229010457ddc99cfcdc65fa87d6e61a2a"
+}

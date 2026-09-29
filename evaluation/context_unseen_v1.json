@@ -1,0 +1,313 @@
+{
+  "suite_id": "tep-context-new-wordings-v1",
+  "version": "1.0.0",
+  "purpose": "在运行前登记的新问法；初次结果保留，后续使用属于开发回归，不称独立盲测",
+  "cases": [
+    {
+      "id": "N01",
+      "query": "IDV(9)的扰动类型是什么？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "FAULT-IDV09",
+          "any_of": [
+            "FAULT-IDV09"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N02",
+      "query": "十号故障改变的是哪一股进料的温度？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "FAULT-IDV10",
+          "any_of": [
+            "FAULT-IDV10"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N03",
+      "query": "第十五个故障的预设是什么？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "FAULT-IDV15",
+          "any_of": [
+            "FAULT-IDV15"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N04",
+      "query": "xmeas(22)对应的设备和单位是什么？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "VAR-X22",
+          "any_of": [
+            "VAR-X22"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N05",
+      "query": "XMV(10)在52列里对应哪个X编号？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "VAR-X51",
+          "any_of": [
+            "VAR-X51"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N06",
+      "query": "流股十一是产品流吗？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "STREAM-11",
+          "any_of": [
+            "STREAM-11"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N07",
+      "query": "流12和流13分别服务哪个设备？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "UTILITY-12",
+          "any_of": [
+            "UTILITY-12"
+          ]
+        },
+        {
+          "description": "UTILITY-13",
+          "any_of": [
+            "UTILITY-13"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N08",
+      "query": "TEP为什么要有循环压缩机？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "EQUIP-COMPRESSOR",
+          "any_of": [
+            "EQUIP-COMPRESSOR"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N09",
+      "query": "TEP中的B是不是反应原料？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "CHEM-001",
+          "any_of": [
+            "CHEM-001"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N10",
+      "query": "TEP的产品G和H由什么反应生成？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "CHEM-001",
+          "any_of": [
+            "CHEM-001"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N11",
+      "query": "流股八离开分离器之后如何分流？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "STREAM-08",
+          "any_of": [
+            "STREAM-08"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N12",
+      "query": "这份TEP数据的组分分析值为何连续几行一样？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "DATA-TIMING",
+          "any_of": [
+            "DATA-TIMING"
+          ]
+        },
+        {
+          "description": "DATA-002",
+          "any_of": [
+            "DATA-002"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N13",
+      "query": "那么十一呢？",
+      "previous_question": "IDV(10)是什么故障？",
+      "required_evidence": [
+        {
+          "description": "FAULT-IDV11",
+          "any_of": [
+            "FAULT-IDV11"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N14",
+      "query": "换成四十九",
+      "previous_question": "X48的含义与单位是什么？",
+      "required_evidence": [
+        {
+          "description": "VAR-X49",
+          "any_of": [
+            "VAR-X49"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N15",
+      "query": "该故障的预设扰动是什么？",
+      "previous_question": "IDV(12)是什么故障？",
+      "required_evidence": [
+        {
+          "description": "FAULT-IDV12",
+          "any_of": [
+            "FAULT-IDV12"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N16",
+      "query": "这条流的去向呢？",
+      "previous_question": "流6是什么？",
+      "required_evidence": [
+        {
+          "description": "STREAM-06",
+          "any_of": [
+            "STREAM-06"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N17",
+      "query": "那12呢？",
+      "previous_question": "XMV(11)是什么？",
+      "required_evidence": [
+        {
+          "description": "SCOPE-001",
+          "any_of": [
+            "SCOPE-001"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "N18",
+      "query": "IDV(19)的确切物理起因有记载吗？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "FAULT-IDV19",
+          "any_of": [
+            "FAULT-IDV19"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "B01",
+      "query": "那6呢？",
+      "previous_question": "",
+      "required_evidence": [],
+      "expected_no_results": true
+    },
+    {
+      "id": "B02",
+      "query": "它的单位呢？",
+      "previous_question": "X2和X3分别是什么？",
+      "required_evidence": [],
+      "expected_no_results": true
+    },
+    {
+      "id": "B03",
+      "query": "那99呢？",
+      "previous_question": "IDV(7)是什么？",
+      "required_evidence": [],
+      "expected_no_results": true
+    },
+    {
+      "id": "B04",
+      "query": "今天杭州天气怎么样？",
+      "previous_question": "",
+      "required_evidence": [],
+      "expected_no_results": true
+    },
+    {
+      "id": "B05",
+      "query": "帮我写一首关于春天的诗",
+      "previous_question": "",
+      "required_evidence": [],
+      "expected_no_results": true
+    },
+    {
+      "id": "B06",
+      "query": "怎样重置Windows登录密码？",
+      "previous_question": "",
+      "required_evidence": [],
+      "expected_no_results": true
+    }
+  ]
+}

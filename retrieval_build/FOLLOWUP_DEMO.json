@@ -1,0 +1,2441 @@
+[
+  {
+    "label": "故障编号继承",
+    "analysis": {
+      "parser_version": "1.0.0",
+      "original_query": "那15呢？",
+      "normalized_query": "那15呢?",
+      "retrieval_query": "IDV(15)是什么故障? IDV(15)",
+      "entities": [
+        {
+          "kind": "fault",
+          "number": 15,
+          "canonical": "IDV(15)",
+          "valid": true,
+          "primary_unit": "FAULT-IDV15",
+          "raw": "IDV(15)",
+          "span": [
+            0,
+            7
+          ]
+        }
+      ],
+      "quantities": [],
+      "intent": "entity_lookup",
+      "intent_kinds": [],
+      "primary_units": [
+        "FAULT-IDV15"
+      ],
+      "ambiguous_number": false,
+      "issues": [],
+      "reasons": [
+        "仅按片段unit_id识别主体，不把正文或entities中提到的编号当作主体"
+      ],
+      "context_used": true,
+      "followup_version": "1.0.0",
+      "previous_question": "IDV(14)是什么故障？",
+      "resolved_query": "IDV(15)是什么故障?",
+      "resolution_status": "resolved",
+      "resolution_reason": "从上一轮继承 fault 类型及问法，仅替换主体编号",
+      "clarification": null,
+      "context_units": [
+        "FAULT-IDV14"
+      ]
+    },
+    "hits": [
+      {
+        "score": 0.4239767813459318,
+        "priority": 3,
+        "rank_reason": "编号主体精确匹配",
+        "char_count": 507,
+        "chunk_id": "TEP-KB-001:FAULT-IDV15:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "7.15 IDV(15)：冷凝器冷却水阀门粘滞｜FAULT-IDV15\n\n- **扰动类型：**阀门粘滞。\n- **预设注入：**冷凝器冷却水阀门出现粘滞。\n- **可观测性：**X52 = XMV(11) 是对应操纵通道；并非另有一个实际阀位测量。\n- **关联字段：**X22 为冷却水出口温度，X11 为分离器温度。\n- **解释边界：**不能把本故障改写为压缩机冷却水阀故障。\n- **来源：**[S03，Process Disturbances 的 IDV(15)](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)；中文对照 [S01，表 2-2](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)。\n\n【继承的限定与来源】\n【故障解释边界】\n本节的“故障根源”仅指仿真设定中被改变的物理量或部件。**注入量、测量量、操纵命令、诊断结果四者必须分开。**关联字段用于把描述连到变量字典，不表示这些字段必然异常或按列举顺序传播。",
+        "content_sha256": "3153f75d3a93cfd637684925f81680e63d9717f13e388eaef7d0a4263cee23d5",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "FAULT-IDV15",
+          "IDV(15)",
+          "X11",
+          "X22",
+          "X52",
+          "XMV(11)"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "7. 预设故障目录与可观测边界｜FAULTS-001",
+          "7.15 IDV(15)：冷凝器冷却水阀门粘滞｜FAULT-IDV15"
+        ],
+        "kind": "fault",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 437,
+              "role": "body",
+              "start_line": 432
+            },
+            {
+              "end_line": 300,
+              "role": "fault_boundary",
+              "start_line": 300
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，表 2-2"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，Process Disturbances 的 IDV(15)"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          }
+        ],
+        "title": "7.15 IDV(15)：冷凝器冷却水阀门粘滞｜FAULT-IDV15",
+        "unit_id": "FAULT-IDV15",
+        "rank": 1
+      },
+      {
+        "score": 0.18924976364846097,
+        "priority": 2,
+        "rank_reason": "上一轮主体作为辅助对照；当前主体仍优先",
+        "char_count": 503,
+        "chunk_id": "TEP-KB-001:FAULT-IDV14:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "7.14 IDV(14)：反应器冷却水阀门粘滞｜FAULT-IDV14\n\n- **扰动类型：**阀门粘滞。\n- **预设注入：**反应器冷却水阀门出现粘滞。\n- **可观测性：**X51 = XMV(10) 是对应操纵通道；并非另有一个实际阀位测量。\n- **关联字段：**X21 为冷却水出口温度，X9 为反应器温度。\n- **解释边界：**命令变化不证明实际阀门已经跟随。\n- **来源：**[S03，Process Disturbances 的 IDV(14)](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)；中文对照 [S01，表 2-2](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)。\n\n【继承的限定与来源】\n【故障解释边界】\n本节的“故障根源”仅指仿真设定中被改变的物理量或部件。**注入量、测量量、操纵命令、诊断结果四者必须分开。**关联字段用于把描述连到变量字典，不表示这些字段必然异常或按列举顺序传播。",
+        "content_sha256": "09dca6c077849ded06ba9ad5c4b172d7524bd2edbf1fdd7ea3e01f63333759fd",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "FAULT-IDV14",
+          "IDV(14)",
+          "X21",
+          "X51",
+          "X9",
+          "XMV(10)"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "7. 预设故障目录与可观测边界｜FAULTS-001",
+          "7.14 IDV(14)：反应器冷却水阀门粘滞｜FAULT-IDV14"
+        ],
+        "kind": "fault",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 428,
+              "role": "body",
+              "start_line": 423
+            },
+            {
+              "end_line": 300,
+              "role": "fault_boundary",
+              "start_line": 300
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，表 2-2"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，Process Disturbances 的 IDV(14)"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          }
+        ],
+        "title": "7.14 IDV(14)：反应器冷却水阀门粘滞｜FAULT-IDV14",
+        "unit_id": "FAULT-IDV14",
+        "rank": 2
+      }
+    ],
+    "clarification": null
+  },
+  {
+    "label": "变量编号继承",
+    "analysis": {
+      "parser_version": "1.0.0",
+      "original_query": "那15呢？",
+      "normalized_query": "那15呢?",
+      "retrieval_query": "X15是什么变量? X15",
+      "entities": [
+        {
+          "kind": "variable",
+          "number": 15,
+          "canonical": "X15",
+          "valid": true,
+          "primary_unit": "VAR-X15",
+          "raw": "X15",
+          "span": [
+            0,
+            3
+          ]
+        }
+      ],
+      "quantities": [],
+      "intent": "entity_lookup",
+      "intent_kinds": [],
+      "primary_units": [
+        "VAR-X15"
+      ],
+      "ambiguous_number": false,
+      "issues": [],
+      "reasons": [
+        "仅按片段unit_id识别主体，不把正文或entities中提到的编号当作主体"
+      ],
+      "context_used": true,
+      "followup_version": "1.0.0",
+      "previous_question": "X14是什么变量？",
+      "resolved_query": "X15是什么变量?",
+      "resolution_status": "resolved",
+      "resolution_reason": "从上一轮继承 variable 类型及问法，仅替换主体编号",
+      "clarification": null,
+      "context_units": [
+        "VAR-X14"
+      ]
+    },
+    "hits": [
+      {
+        "score": 0.4732652445350621,
+        "priority": 3,
+        "rank_reason": "编号主体精确匹配",
+        "char_count": 422,
+        "chunk_id": "TEP-KB-001:VAR-X15:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "X15 / XMEAS(15)：汽提塔液位\n\n- 条目 ID：VAR-X15\n- 项目字段：X15\n- 原始标识：XMEAS(15)\n- 含义与测点：汽提塔液位\n- 单位：%\n\n【继承的限定与来源】\n【单位与来源】\n液位 % 是模型的液位标度，不保证等于容器总体积百分比。\n\n【单位与来源】\n变量表来源：[S01，表 2-1，印刷页 22](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)与 [S03，文件头三个变量区段](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)；XMV 归一化定义核对 [S02，表 3 下方说明](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s02)。",
+        "content_sha256": "fe2ee98a6bc10c6c9e2721d90434f81fa2b595a9e44cd98e407b6ddbbdfb8d99",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "VAR-X15",
+          "X15",
+          "XMEAS(15)"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "5. 完整变量字典｜VARS-001",
+          "5.1 连续过程测量：X1–X22"
+        ],
+        "kind": "variable",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 208,
+              "role": "table_row",
+              "start_line": 208
+            },
+            {
+              "end_line": 186,
+              "role": "units_and_sources",
+              "start_line": 186
+            },
+            {
+              "end_line": 188,
+              "role": "units_and_sources",
+              "start_line": 188
+            },
+            {
+              "end_line": 192,
+              "role": "table_header",
+              "start_line": 192
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，表 2-1，印刷页 22"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "doi": "10.1016/0098-1354(93)80018-I",
+            "locator": "pp.245–250; Figure 1; Tables 3–5,8",
+            "mentions": [
+              "S02，表 3 下方说明"
+            ],
+            "sha256": "5f19b0bf7f0e5c052335943fff263769a28757066582c3166e16ac163e0e9538",
+            "snapshot_note": "校验值来自核对时下载文件；原文件未复制到项目",
+            "source_id": "S02",
+            "url": "https://users.abo.fi/~khaggblo/RS/Downs.pdf"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，文件头三个变量区段"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          }
+        ],
+        "title": "X15 / XMEAS(15)：汽提塔液位",
+        "unit_id": "VAR-X15",
+        "rank": 1
+      },
+      {
+        "score": 0.0842527268227032,
+        "priority": 2,
+        "rank_reason": "上一轮主体作为辅助对照；当前主体仍优先",
+        "char_count": 474,
+        "chunk_id": "TEP-KB-001:VAR-X14:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "X14 / XMEAS(14)：分离器液相出口流量；流 10\n\n- 条目 ID：VAR-X14\n- 项目字段：X14\n- 原始标识：XMEAS(14)\n- 含义与测点：分离器液相出口流量；流 10\n- 单位：m³/h\n\n【继承的限定与来源】\n【单位与来源】\n操纵量 % 是 XMV 的归一化设置，不能直接按 m³/h 或 kg/h 解释；也不代表独立传感器测得的真实阀芯位置。\n\n【单位与来源】\n变量表来源：[S01，表 2-1，印刷页 22](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)与 [S03，文件头三个变量区段](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)；XMV 归一化定义核对 [S02，表 3 下方说明](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s02)。",
+        "content_sha256": "4f1c3cfeec2d7352bf5156e69cf69b627d3c3c7d7d5597ff459d3a061289aa7f",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "STREAM-10",
+          "VAR-X14",
+          "X14",
+          "XMEAS(14)"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "5. 完整变量字典｜VARS-001",
+          "5.1 连续过程测量：X1–X22"
+        ],
+        "kind": "variable",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 207,
+              "role": "table_row",
+              "start_line": 207
+            },
+            {
+              "end_line": 186,
+              "role": "units_and_sources",
+              "start_line": 186
+            },
+            {
+              "end_line": 188,
+              "role": "units_and_sources",
+              "start_line": 188
+            },
+            {
+              "end_line": 192,
+              "role": "table_header",
+              "start_line": 192
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，表 2-1，印刷页 22"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "doi": "10.1016/0098-1354(93)80018-I",
+            "locator": "pp.245–250; Figure 1; Tables 3–5,8",
+            "mentions": [
+              "S02，表 3 下方说明"
+            ],
+            "sha256": "5f19b0bf7f0e5c052335943fff263769a28757066582c3166e16ac163e0e9538",
+            "snapshot_note": "校验值来自核对时下载文件；原文件未复制到项目",
+            "source_id": "S02",
+            "url": "https://users.abo.fi/~khaggblo/RS/Downs.pdf"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，文件头三个变量区段"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          }
+        ],
+        "title": "X14 / XMEAS(14)：分离器液相出口流量；流 10",
+        "unit_id": "VAR-X14",
+        "rank": 2
+      }
+    ],
+    "clarification": null
+  },
+  {
+    "label": "物流编号继承",
+    "analysis": {
+      "parser_version": "1.0.0",
+      "original_query": "那5呢？",
+      "normalized_query": "那5呢?",
+      "retrieval_query": "流 5是什么? 流 5",
+      "entities": [
+        {
+          "kind": "stream",
+          "number": 5,
+          "canonical": "流 5",
+          "valid": true,
+          "primary_unit": "STREAM-05",
+          "raw": "流 5",
+          "span": [
+            0,
+            3
+          ]
+        }
+      ],
+      "quantities": [],
+      "intent": "entity_lookup",
+      "intent_kinds": [],
+      "primary_units": [
+        "STREAM-05"
+      ],
+      "ambiguous_number": false,
+      "issues": [],
+      "reasons": [
+        "仅按片段unit_id识别主体，不把正文或entities中提到的编号当作主体"
+      ],
+      "context_used": true,
+      "followup_version": "1.0.0",
+      "previous_question": "流4是什么？",
+      "resolved_query": "流 5是什么?",
+      "resolution_status": "resolved",
+      "resolution_reason": "从上一轮继承 stream 类型及问法，仅替换主体编号",
+      "clarification": null,
+      "context_units": [
+        "STREAM-04"
+      ]
+    },
+    "hits": [
+      {
+        "score": 0.03267577448352049,
+        "priority": 3,
+        "rank_reason": "编号主体精确匹配",
+        "char_count": 614,
+        "chunk_id": "TEP-KB-001:STREAM-05:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "TEP 流股 5：汽提塔顶 → 进料混合处\n\n- 稳定 ID：STREAM-05\n- 图中编号：5\n- 上游 → 下游：汽提塔顶 → 进料混合处\n- 物料及作用：汽提塔顶返回物料\n- 本项目直接相关测量：没有独立流量列\n\n【继承的限定与来源】\n【本节限定】\n12/13 采用经典图 1 的公用工程编号；部分修订模型另有编号。X51/X52 是操纵量，没有提供以 m³/h 表示的独立冷却水流量测量列。汽提蒸汽/冷凝水在图上单独标注，本表不擅自赋予新的物料流号。\n\n【本节限定】\n依据：[S01，图 2.3、表 2-1](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)、[S02，图 1](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s02)、[S03，测量/操纵变量声明](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)。\n\n【来源差异处理】\n- ID：C08\n- 问题：部分修订结构模型将反应器出料编号为 13\n- 本手册采用的表述：本文经典图中反应器出料为 7，13 是冷凝冷却水侧编号\n- 核对依据与状态：S02 图 1；S06 只作版本差异线索，不混用编号",
+        "content_sha256": "8892c77cd50ffc0a63e18994334a8e01a95f19379f99021596fe9fdf403e0bfc",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "STREAM-05"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "3. 工艺结构与文字流程｜PROC-001",
+          "3.3 物流连接字典｜STREAM-001"
+        ],
+        "kind": "stream",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 112,
+              "role": "table_row",
+              "start_line": 112
+            },
+            {
+              "end_line": 122,
+              "role": "section_context",
+              "start_line": 122
+            },
+            {
+              "end_line": 124,
+              "role": "section_context",
+              "start_line": 124
+            },
+            {
+              "end_line": 506,
+              "role": "source_correction",
+              "start_line": 506
+            },
+            {
+              "end_line": 106,
+              "role": "table_header",
+              "start_line": 106
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，图 2.3、表 2-1"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "doi": "10.1016/0098-1354(93)80018-I",
+            "locator": "pp.245–250; Figure 1; Tables 3–5,8",
+            "mentions": [
+              "S02，图 1"
+            ],
+            "sha256": "5f19b0bf7f0e5c052335943fff263769a28757066582c3166e16ac163e0e9538",
+            "snapshot_note": "校验值来自核对时下载文件；原文件未复制到项目",
+            "source_id": "S02",
+            "url": "https://users.abo.fi/~khaggblo/RS/Downs.pdf"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，测量/操纵变量声明"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          },
+          {
+            "locator": "Appendix A",
+            "mentions": [],
+            "snapshot_note": "此前资料核对；本次不用于新增工艺定义",
+            "source_id": "S06",
+            "url": "https://zenodo.org/records/5171645/files/TE_Structural_Model_Vs00.pdf",
+            "usage": "只用于已识别的版本差异说明，不作为经典流股编号来源"
+          }
+        ],
+        "title": "TEP 流股 5：汽提塔顶 → 进料混合处",
+        "unit_id": "STREAM-05",
+        "rank": 1
+      },
+      {
+        "score": 0.01284335616833485,
+        "priority": 2,
+        "rank_reason": "上一轮主体作为辅助对照；当前主体仍优先",
+        "char_count": 648,
+        "chunk_id": "TEP-KB-001:STREAM-04:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "TEP 流股 4：A/C 原料边界 → 汽提塔\n\n- 稳定 ID：STREAM-04\n- 图中编号：4\n- 上游 → 下游：A/C 原料边界 → 汽提塔\n- 物料及作用：含 A、C 和 B 的进料，参与汽提\n- 本项目直接相关测量：X4 总流量；没有流 4 组分/温度/总管压力直接记录\n\n【继承的限定与来源】\n【本节限定】\n12/13 采用经典图 1 的公用工程编号；部分修订模型另有编号。X51/X52 是操纵量，没有提供以 m³/h 表示的独立冷却水流量测量列。汽提蒸汽/冷凝水在图上单独标注，本表不擅自赋予新的物料流号。\n\n【本节限定】\n依据：[S01，图 2.3、表 2-1](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)、[S02，图 1](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s02)、[S03，测量/操纵变量声明](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)。\n\n【来源差异处理】\n- ID：C08\n- 问题：部分修订结构模型将反应器出料编号为 13\n- 本手册采用的表述：本文经典图中反应器出料为 7，13 是冷凝冷却水侧编号\n- 核对依据与状态：S02 图 1；S06 只作版本差异线索，不混用编号",
+        "content_sha256": "ff8413799a6e12f33ed0ca68912534a9692256fa11a00b8ec35afe3010c9b064",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "STREAM-04",
+          "X4"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "3. 工艺结构与文字流程｜PROC-001",
+          "3.3 物流连接字典｜STREAM-001"
+        ],
+        "kind": "stream",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 111,
+              "role": "table_row",
+              "start_line": 111
+            },
+            {
+              "end_line": 122,
+              "role": "section_context",
+              "start_line": 122
+            },
+            {
+              "end_line": 124,
+              "role": "section_context",
+              "start_line": 124
+            },
+            {
+              "end_line": 506,
+              "role": "source_correction",
+              "start_line": 506
+            },
+            {
+              "end_line": 106,
+              "role": "table_header",
+              "start_line": 106
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，图 2.3、表 2-1"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "doi": "10.1016/0098-1354(93)80018-I",
+            "locator": "pp.245–250; Figure 1; Tables 3–5,8",
+            "mentions": [
+              "S02，图 1"
+            ],
+            "sha256": "5f19b0bf7f0e5c052335943fff263769a28757066582c3166e16ac163e0e9538",
+            "snapshot_note": "校验值来自核对时下载文件；原文件未复制到项目",
+            "source_id": "S02",
+            "url": "https://users.abo.fi/~khaggblo/RS/Downs.pdf"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，测量/操纵变量声明"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          },
+          {
+            "locator": "Appendix A",
+            "mentions": [],
+            "snapshot_note": "此前资料核对；本次不用于新增工艺定义",
+            "source_id": "S06",
+            "url": "https://zenodo.org/records/5171645/files/TE_Structural_Model_Vs00.pdf",
+            "usage": "只用于已识别的版本差异说明，不作为经典流股编号来源"
+          }
+        ],
+        "title": "TEP 流股 4：A/C 原料边界 → 汽提塔",
+        "unit_id": "STREAM-04",
+        "rank": 2
+      }
+    ],
+    "clarification": null
+  },
+  {
+    "label": "指代替换",
+    "analysis": {
+      "parser_version": "1.0.0",
+      "original_query": "它的单位是什么？",
+      "normalized_query": "它的单位是什么?",
+      "retrieval_query": "X4的单位是什么? X4",
+      "entities": [
+        {
+          "kind": "variable",
+          "number": 4,
+          "canonical": "X4",
+          "valid": true,
+          "primary_unit": "VAR-X04",
+          "raw": "X4",
+          "span": [
+            0,
+            2
+          ]
+        }
+      ],
+      "quantities": [],
+      "intent": "entity_lookup",
+      "intent_kinds": [],
+      "primary_units": [
+        "VAR-X04"
+      ],
+      "ambiguous_number": false,
+      "issues": [],
+      "reasons": [
+        "仅按片段unit_id识别主体，不把正文或entities中提到的编号当作主体"
+      ],
+      "context_used": true,
+      "followup_version": "1.0.0",
+      "previous_question": "X4是什么变量？",
+      "resolved_query": "X4的单位是什么?",
+      "resolution_status": "resolved",
+      "resolution_reason": "用上一轮唯一主体替换指代词，保留当前问法",
+      "clarification": null,
+      "context_units": []
+    },
+    "hits": [
+      {
+        "score": 0.1391006907205143,
+        "priority": 3,
+        "rank_reason": "编号主体精确匹配",
+        "char_count": 450,
+        "chunk_id": "TEP-KB-001:VAR-X04:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "X4 / XMEAS(4)：A/C 混合进料总流量；流 4\n\n- 条目 ID：VAR-X04\n- 项目字段：X4\n- 原始标识：XMEAS(4)\n- 含义与测点：A/C 混合进料总流量；流 4\n- 单位：kscmh\n\n【继承的限定与来源】\n【单位与来源】\nkscmh 表示千标准立方米/小时；本手册未补造“标准状态”的温压定义。\n\n【单位与来源】\n变量表来源：[S01，表 2-1，印刷页 22](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)与 [S03，文件头三个变量区段](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)；XMV 归一化定义核对 [S02，表 3 下方说明](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s02)。",
+        "content_sha256": "149163462a33f5e4ea59d02c34629194a3817ec5ae2b78cab2f2ce02b95ce1a9",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "STREAM-04",
+          "VAR-X04",
+          "X4",
+          "XMEAS(4)"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "5. 完整变量字典｜VARS-001",
+          "5.1 连续过程测量：X1–X22"
+        ],
+        "kind": "variable",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 197,
+              "role": "table_row",
+              "start_line": 197
+            },
+            {
+              "end_line": 186,
+              "role": "units_and_sources",
+              "start_line": 186
+            },
+            {
+              "end_line": 188,
+              "role": "units_and_sources",
+              "start_line": 188
+            },
+            {
+              "end_line": 192,
+              "role": "table_header",
+              "start_line": 192
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，表 2-1，印刷页 22"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "doi": "10.1016/0098-1354(93)80018-I",
+            "locator": "pp.245–250; Figure 1; Tables 3–5,8",
+            "mentions": [
+              "S02，表 3 下方说明"
+            ],
+            "sha256": "5f19b0bf7f0e5c052335943fff263769a28757066582c3166e16ac163e0e9538",
+            "snapshot_note": "校验值来自核对时下载文件；原文件未复制到项目",
+            "source_id": "S02",
+            "url": "https://users.abo.fi/~khaggblo/RS/Downs.pdf"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，文件头三个变量区段"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          }
+        ],
+        "title": "X4 / XMEAS(4)：A/C 混合进料总流量；流 4",
+        "unit_id": "VAR-X04",
+        "rank": 1
+      },
+      {
+        "score": 0.2807631850264218,
+        "priority": 0,
+        "rank_reason": "文本匹配",
+        "char_count": 684,
+        "chunk_id": "TEP-KB-001:VARS-001:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "5. 完整变量字典｜VARS-001\n\n本节复用论文表 2-1 的 X1–X52 顺序，补齐原始标识、单位和测点范围；有冲突的中文名称见第 8 节。每行的 `VAR-Xnn` 是知识条目 ID，便于稳定引用。\n\n**单位约定：**kscmh 表示千标准立方米/小时；本手册未补造“标准状态”的温压定义。kPa(g) 为表压。mol% 为摩尔百分数，不能当作质量百分数。液位 % 是模型的液位标度，不保证等于容器总体积百分比。操纵量 % 是 XMV 的归一化设置，不能直接按 m³/h 或 kg/h 解释；也不代表独立传感器测得的真实阀芯位置。\n\n变量表来源：[S01，表 2-1，印刷页 22](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)与 [S03，文件头三个变量区段](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)；XMV 归一化定义核对 [S02，表 3 下方说明](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s02)。\n\n【继承的限定与来源】\n【来源差异处理】\n- ID：C07\n- 问题：原模型有 12 个 XMV，数据只有 52 列\n- 本手册采用的表述：41 个 XMEAS + 前 11 个 XMV；搅拌器未收录\n- 核对依据与状态：S03、S04；数据模式差异，不是缺失一行字典",
+        "content_sha256": "fa0d96434f4b6977396e4aa510290311c177ca9c46f9e36198ae07b93824e3ae",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "VARS-001",
+          "X1",
+          "X10",
+          "X11",
+          "X12",
+          "X13",
+          "X14",
+          "X15",
+          "X16",
+          "X17",
+          "X18",
+          "X19",
+          "X2",
+          "X20",
+          "X21",
+          "X22",
+          "X23",
+          "X24",
+          "X25",
+          "X26",
+          "X27",
+          "X28",
+          "X29",
+          "X3",
+          "X30",
+          "X31",
+          "X32",
+          "X33",
+          "X34",
+          "X35",
+          "X36",
+          "X37",
+          "X38",
+          "X39",
+          "X4",
+          "X40",
+          "X41",
+          "X42",
+          "X43",
+          "X44",
+          "X45",
+          "X46",
+          "X47",
+          "X48",
+          "X49",
+          "X5",
+          "X50",
+          "X51",
+          "X52",
+          "X6",
+          "X7",
+          "X8",
+          "X9"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "5. 完整变量字典｜VARS-001"
+        ],
+        "kind": "variable_conventions",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 188,
+              "role": "body",
+              "start_line": 184
+            },
+            {
+              "end_line": 505,
+              "role": "source_correction",
+              "start_line": 505
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，表 2-1，印刷页 22"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "doi": "10.1016/0098-1354(93)80018-I",
+            "locator": "pp.245–250; Figure 1; Tables 3–5,8",
+            "mentions": [
+              "S02，表 3 下方说明"
+            ],
+            "sha256": "5f19b0bf7f0e5c052335943fff263769a28757066582c3166e16ac163e0e9538",
+            "snapshot_note": "校验值来自核对时下载文件；原文件未复制到项目",
+            "source_id": "S02",
+            "url": "https://users.abo.fi/~khaggblo/RS/Downs.pdf"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，文件头三个变量区段"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          },
+          {
+            "git_commit": "9a6c8e5fcef4a2850778704e7793c87b0a187005",
+            "locator": "File Format; Fault Scenarios",
+            "mentions": [],
+            "sha256": "d148c027f974223d4da43924153ea706962da7c56297b6cf423854e45761c1eb",
+            "source_id": "S04",
+            "url": "https://github.com/jkitchin/tennessee-eastman-profbraatz/blob/9a6c8e5fcef4a2850778704e7793c87b0a187005/data/README.md"
+          }
+        ],
+        "title": "5. 完整变量字典｜VARS-001",
+        "unit_id": "VARS-001",
+        "rank": 2
+      }
+    ],
+    "clarification": null
+  },
+  {
+    "label": "上一轮有多个主体",
+    "analysis": {
+      "parser_version": "1.0.0",
+      "original_query": "它的单位是什么？",
+      "normalized_query": "它的单位是什么?",
+      "retrieval_query": "",
+      "entities": [],
+      "quantities": [],
+      "intent": "general",
+      "intent_kinds": [],
+      "primary_units": [],
+      "ambiguous_number": false,
+      "issues": [],
+      "reasons": [],
+      "context_used": false,
+      "followup_version": "1.0.0",
+      "previous_question": "X4和X45有什么区别？",
+      "resolved_query": "它的单位是什么？",
+      "resolution_status": "needs_clarification",
+      "resolution_reason": "上一问没有唯一且有效的主体，不能安全继承",
+      "clarification": "这次指的是哪个故障、变量或流股？请补充具体编号。",
+      "context_units": []
+    },
+    "hits": [],
+    "clarification": "这次指的是哪个故障、变量或流股？请补充具体编号。"
+  },
+  {
+    "label": "没有上下文",
+    "analysis": {
+      "parser_version": "1.0.0",
+      "original_query": "那15呢？",
+      "normalized_query": "那15呢?",
+      "retrieval_query": "",
+      "entities": [],
+      "quantities": [],
+      "intent": "general",
+      "intent_kinds": [],
+      "primary_units": [],
+      "ambiguous_number": true,
+      "issues": [
+        "存在没有类型标识的数字；本阶段不根据历史猜测编号类型"
+      ],
+      "reasons": [],
+      "context_used": false,
+      "followup_version": "1.0.0",
+      "previous_question": "",
+      "resolved_query": "那15呢？",
+      "resolution_status": "needs_clarification",
+      "resolution_reason": "缺少可用上一轮问题",
+      "clarification": "这次指的是哪个故障、变量或流股？请补充具体编号。",
+      "context_units": []
+    },
+    "hits": [],
+    "clarification": "这次指的是哪个故障、变量或流股？请补充具体编号。"
+  },
+  {
+    "label": "数据范围边界",
+    "analysis": {
+      "parser_version": "1.0.0",
+      "original_query": "那12呢？",
+      "normalized_query": "那12呢?",
+      "retrieval_query": "XMV(12)是什么变量? XMV(12)",
+      "entities": [
+        {
+          "kind": "xmv",
+          "number": 12,
+          "canonical": "XMV(12)",
+          "valid": true,
+          "primary_unit": null,
+          "raw": "XMV(12)",
+          "span": [
+            0,
+            7
+          ]
+        }
+      ],
+      "quantities": [],
+      "intent": "data_schema",
+      "intent_kinds": [
+        "scope",
+        "variable_conventions"
+      ],
+      "primary_units": [],
+      "ambiguous_number": false,
+      "issues": [
+        "XMV(12) 是搅拌器操纵量，但未记录在52列文件中；不映射为X53"
+      ],
+      "reasons": [
+        "询问数据列/操纵变量覆盖范围"
+      ],
+      "context_used": true,
+      "followup_version": "1.0.0",
+      "previous_question": "XMV(11)是什么变量？",
+      "resolved_query": "XMV(12)是什么变量?",
+      "resolution_status": "resolved",
+      "resolution_reason": "从上一轮继承 xmv 类型及问法，仅替换主体编号",
+      "clarification": null,
+      "context_units": [
+        "VAR-X52"
+      ]
+    },
+    "hits": [
+      {
+        "score": 0.21412203157034465,
+        "priority": 1,
+        "rank_reason": "意图匹配",
+        "char_count": 1070,
+        "chunk_id": "TEP-KB-001:SCOPE-001:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "1. 适用范围与术语｜SCOPE-001\n\n- TE、TEP、Tennessee Eastman Process、田纳西伊斯曼过程：本文中指同一过程控制基准。\n- 设备编号、物流编号、测量变量编号和故障编号是不同体系。“流 4”是物料通道，“X4”是该通道的进料流量记录，“IDV(4)”则是反应器冷却水入口温度扰动。\n- `X1–X41 = XMEAS(1)–XMEAS(41)`；`X42–X52 = XMV(1)–XMV(11)`。Python 的列位置比 X 编号小 1。\n- 原始模型有 12 个操纵变量；第 12 个是搅拌器转速。本项目的 52 列文件没有收录它，不能自行增加一个 X53 后假定与原文件一致。\n- 原始故障表包含 IDV(1)–IDV(20)；本文另外记录参考数据版本中的 IDV(21)，并标明其版本来源。\n- 图和物流编号采用经典 TE 版本。不同修订模型可能重编号、增加传感器、改变控制器；不能只凭“TEP”名称合并定义。\n\n依据：[S01，§2.4、表 2-1/2-2](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)、[S02，图 1、表 3–5/8](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s02)、[S03，文件头接口说明](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)、[S04，File Format / Fault Scenarios](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s04)。\n\n【继承的限定与来源】\n【来源差异处理】\n- ID：C04\n- 问题：论文正文统称 IDV(16)–(21) 未知，但表中定义了 21\n- 本手册采用的表述：IDV(16)–(20) 为 Unknown；21 按扩展数据说明\n- 核对依据与状态：S01 表 2-2、S03、S04；按版本拆分\n\n【来源差异处理】\n- ID：C07\n- 问题：原模型有 12 个 XMV，数据只有 52 列\n- 本手册采用的表述：41 个 XMEAS + 前 11 个 XMV；搅拌器未收录\n- 核对依据与状态：S03、S04；数据模式差异，不是缺失一行字典",
+        "content_sha256": "9a4a964de47cdc73e14c5f027865c665634d0bc9aa41c9b25d20a074ae15608f",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "IDV(1)",
+          "IDV(10)",
+          "IDV(11)",
+          "IDV(12)",
+          "IDV(13)",
+          "IDV(14)",
+          "IDV(15)",
+          "IDV(16)",
+          "IDV(17)",
+          "IDV(18)",
+          "IDV(19)",
+          "IDV(2)",
+          "IDV(20)",
+          "IDV(21)",
+          "IDV(3)",
+          "IDV(4)",
+          "IDV(5)",
+          "IDV(6)",
+          "IDV(7)",
+          "IDV(8)",
+          "IDV(9)",
+          "SCOPE-001",
+          "STREAM-04",
+          "X1",
+          "X10",
+          "X11",
+          "X12",
+          "X13",
+          "X14",
+          "X15",
+          "X16",
+          "X17",
+          "X18",
+          "X19",
+          "X2",
+          "X20",
+          "X21",
+          "X22",
+          "X23",
+          "X24",
+          "X25",
+          "X26",
+          "X27",
+          "X28",
+          "X29",
+          "X3",
+          "X30",
+          "X31",
+          "X32",
+          "X33",
+          "X34",
+          "X35",
+          "X36",
+          "X37",
+          "X38",
+          "X39",
+          "X4",
+          "X40",
+          "X41",
+          "X42",
+          "X43",
+          "X44",
+          "X45",
+          "X46",
+          "X47",
+          "X48",
+          "X49",
+          "X5",
+          "X50",
+          "X51",
+          "X52",
+          "X53",
+          "X6",
+          "X7",
+          "X8",
+          "X9",
+          "XMEAS(1)",
+          "XMEAS(41)",
+          "XMV(1)",
+          "XMV(11)"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "1. 适用范围与术语｜SCOPE-001"
+        ],
+        "kind": "scope",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 29,
+              "role": "body",
+              "start_line": 22
+            },
+            {
+              "end_line": 502,
+              "role": "source_correction",
+              "start_line": 502
+            },
+            {
+              "end_line": 505,
+              "role": "source_correction",
+              "start_line": 505
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，§2.4、表 2-1/2-2"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "doi": "10.1016/0098-1354(93)80018-I",
+            "locator": "pp.245–250; Figure 1; Tables 3–5,8",
+            "mentions": [
+              "S02，图 1、表 3–5/8"
+            ],
+            "sha256": "5f19b0bf7f0e5c052335943fff263769a28757066582c3166e16ac163e0e9538",
+            "snapshot_note": "校验值来自核对时下载文件；原文件未复制到项目",
+            "source_id": "S02",
+            "url": "https://users.abo.fi/~khaggblo/RS/Downs.pdf"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，文件头接口说明"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          },
+          {
+            "git_commit": "9a6c8e5fcef4a2850778704e7793c87b0a187005",
+            "locator": "File Format; Fault Scenarios",
+            "mentions": [
+              "S04，File Format / Fault Scenarios"
+            ],
+            "sha256": "d148c027f974223d4da43924153ea706962da7c56297b6cf423854e45761c1eb",
+            "source_id": "S04",
+            "url": "https://github.com/jkitchin/tennessee-eastman-profbraatz/blob/9a6c8e5fcef4a2850778704e7793c87b0a187005/data/README.md"
+          }
+        ],
+        "title": "1. 适用范围与术语｜SCOPE-001",
+        "unit_id": "SCOPE-001",
+        "rank": 1
+      },
+      {
+        "score": 0.061302521882134337,
+        "priority": 1,
+        "rank_reason": "意图匹配",
+        "char_count": 684,
+        "chunk_id": "TEP-KB-001:VARS-001:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "5. 完整变量字典｜VARS-001\n\n本节复用论文表 2-1 的 X1–X52 顺序，补齐原始标识、单位和测点范围；有冲突的中文名称见第 8 节。每行的 `VAR-Xnn` 是知识条目 ID，便于稳定引用。\n\n**单位约定：**kscmh 表示千标准立方米/小时；本手册未补造“标准状态”的温压定义。kPa(g) 为表压。mol% 为摩尔百分数，不能当作质量百分数。液位 % 是模型的液位标度，不保证等于容器总体积百分比。操纵量 % 是 XMV 的归一化设置，不能直接按 m³/h 或 kg/h 解释；也不代表独立传感器测得的真实阀芯位置。\n\n变量表来源：[S01，表 2-1，印刷页 22](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)与 [S03，文件头三个变量区段](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)；XMV 归一化定义核对 [S02，表 3 下方说明](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s02)。\n\n【继承的限定与来源】\n【来源差异处理】\n- ID：C07\n- 问题：原模型有 12 个 XMV，数据只有 52 列\n- 本手册采用的表述：41 个 XMEAS + 前 11 个 XMV；搅拌器未收录\n- 核对依据与状态：S03、S04；数据模式差异，不是缺失一行字典",
+        "content_sha256": "fa0d96434f4b6977396e4aa510290311c177ca9c46f9e36198ae07b93824e3ae",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "VARS-001",
+          "X1",
+          "X10",
+          "X11",
+          "X12",
+          "X13",
+          "X14",
+          "X15",
+          "X16",
+          "X17",
+          "X18",
+          "X19",
+          "X2",
+          "X20",
+          "X21",
+          "X22",
+          "X23",
+          "X24",
+          "X25",
+          "X26",
+          "X27",
+          "X28",
+          "X29",
+          "X3",
+          "X30",
+          "X31",
+          "X32",
+          "X33",
+          "X34",
+          "X35",
+          "X36",
+          "X37",
+          "X38",
+          "X39",
+          "X4",
+          "X40",
+          "X41",
+          "X42",
+          "X43",
+          "X44",
+          "X45",
+          "X46",
+          "X47",
+          "X48",
+          "X49",
+          "X5",
+          "X50",
+          "X51",
+          "X52",
+          "X6",
+          "X7",
+          "X8",
+          "X9"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "5. 完整变量字典｜VARS-001"
+        ],
+        "kind": "variable_conventions",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 188,
+              "role": "body",
+              "start_line": 184
+            },
+            {
+              "end_line": 505,
+              "role": "source_correction",
+              "start_line": 505
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，表 2-1，印刷页 22"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "doi": "10.1016/0098-1354(93)80018-I",
+            "locator": "pp.245–250; Figure 1; Tables 3–5,8",
+            "mentions": [
+              "S02，表 3 下方说明"
+            ],
+            "sha256": "5f19b0bf7f0e5c052335943fff263769a28757066582c3166e16ac163e0e9538",
+            "snapshot_note": "校验值来自核对时下载文件；原文件未复制到项目",
+            "source_id": "S02",
+            "url": "https://users.abo.fi/~khaggblo/RS/Downs.pdf"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，文件头三个变量区段"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          },
+          {
+            "git_commit": "9a6c8e5fcef4a2850778704e7793c87b0a187005",
+            "locator": "File Format; Fault Scenarios",
+            "mentions": [],
+            "sha256": "d148c027f974223d4da43924153ea706962da7c56297b6cf423854e45761c1eb",
+            "source_id": "S04",
+            "url": "https://github.com/jkitchin/tennessee-eastman-profbraatz/blob/9a6c8e5fcef4a2850778704e7793c87b0a187005/data/README.md"
+          }
+        ],
+        "title": "5. 完整变量字典｜VARS-001",
+        "unit_id": "VARS-001",
+        "rank": 2
+      }
+    ],
+    "clarification": null
+  },
+  {
+    "label": "连续追问：第1轮",
+    "analysis": {
+      "parser_version": "1.0.0",
+      "original_query": "IDV(14)是什么故障？",
+      "normalized_query": "IDV(14)是什么故障?",
+      "retrieval_query": "IDV(14)是什么故障? IDV(14)",
+      "entities": [
+        {
+          "kind": "fault",
+          "number": 14,
+          "canonical": "IDV(14)",
+          "valid": true,
+          "primary_unit": "FAULT-IDV14",
+          "raw": "IDV(14)",
+          "span": [
+            0,
+            7
+          ]
+        }
+      ],
+      "quantities": [],
+      "intent": "entity_lookup",
+      "intent_kinds": [],
+      "primary_units": [
+        "FAULT-IDV14"
+      ],
+      "ambiguous_number": false,
+      "issues": [],
+      "reasons": [
+        "仅按片段unit_id识别主体，不把正文或entities中提到的编号当作主体"
+      ],
+      "context_used": false,
+      "followup_version": "1.0.0",
+      "previous_question": "",
+      "resolved_query": "IDV(14)是什么故障？",
+      "resolution_status": "standalone",
+      "resolution_reason": "当前问题独立解析",
+      "clarification": null,
+      "context_units": []
+    },
+    "hits": [
+      {
+        "score": 0.4256185606109308,
+        "priority": 3,
+        "rank_reason": "编号主体精确匹配",
+        "char_count": 503,
+        "chunk_id": "TEP-KB-001:FAULT-IDV14:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "7.14 IDV(14)：反应器冷却水阀门粘滞｜FAULT-IDV14\n\n- **扰动类型：**阀门粘滞。\n- **预设注入：**反应器冷却水阀门出现粘滞。\n- **可观测性：**X51 = XMV(10) 是对应操纵通道；并非另有一个实际阀位测量。\n- **关联字段：**X21 为冷却水出口温度，X9 为反应器温度。\n- **解释边界：**命令变化不证明实际阀门已经跟随。\n- **来源：**[S03，Process Disturbances 的 IDV(14)](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)；中文对照 [S01，表 2-2](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)。\n\n【继承的限定与来源】\n【故障解释边界】\n本节的“故障根源”仅指仿真设定中被改变的物理量或部件。**注入量、测量量、操纵命令、诊断结果四者必须分开。**关联字段用于把描述连到变量字典，不表示这些字段必然异常或按列举顺序传播。",
+        "content_sha256": "09dca6c077849ded06ba9ad5c4b172d7524bd2edbf1fdd7ea3e01f63333759fd",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "FAULT-IDV14",
+          "IDV(14)",
+          "X21",
+          "X51",
+          "X9",
+          "XMV(10)"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "7. 预设故障目录与可观测边界｜FAULTS-001",
+          "7.14 IDV(14)：反应器冷却水阀门粘滞｜FAULT-IDV14"
+        ],
+        "kind": "fault",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 428,
+              "role": "body",
+              "start_line": 423
+            },
+            {
+              "end_line": 300,
+              "role": "fault_boundary",
+              "start_line": 300
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，表 2-2"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，Process Disturbances 的 IDV(14)"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          }
+        ],
+        "title": "7.14 IDV(14)：反应器冷却水阀门粘滞｜FAULT-IDV14",
+        "unit_id": "FAULT-IDV14",
+        "rank": 1
+      },
+      {
+        "score": 0.45910412299292286,
+        "priority": 0,
+        "rank_reason": "文本匹配",
+        "char_count": 608,
+        "chunk_id": "TEP-KB-001:FAULT-IDV21:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "7.21 IDV(21)：流 4 阀门位置固定｜FAULT-IDV21\n\n- **扰动类型：**固定阀位（参考数据扩展）。\n- **预设注入：**后续参考数据将本项定义为流 4 阀门位置保持常数。\n- **可观测性：**X45 = XMV(4) 是对应进料操纵通道；X4 记录流 4 流量。\n- **关联字段：**需结合具体生成器区分阀位固定值、控制命令和实际执行值。\n- **解释边界：**不属于原始 1993 年 IDV(1)–(20) 表；固定阀位与 IDV(14)/(15) 的粘滞不能直接混用。\n- **来源：**[S04，Fault Scenarios 的 d21](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s04)。\n\n【继承的限定与来源】\n【故障解释边界】\n本节的“故障根源”仅指仿真设定中被改变的物理量或部件。**注入量、测量量、操纵命令、诊断结果四者必须分开。**关联字段用于把描述连到变量字典，不表示这些字段必然异常或按列举顺序传播。\n\n【来源差异处理】\n- ID：C04\n- 问题：论文正文统称 IDV(16)–(21) 未知，但表中定义了 21\n- 本手册采用的表述：IDV(16)–(20) 为 Unknown；21 按扩展数据说明\n- 核对依据与状态：S01 表 2-2、S03、S04；按版本拆分",
+        "content_sha256": "36644fa9e157594484b0a72f2f41989710c3012d95966b65b011511cce167a48",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "FAULT-IDV21",
+          "IDV(1)",
+          "IDV(10)",
+          "IDV(11)",
+          "IDV(12)",
+          "IDV(13)",
+          "IDV(14)",
+          "IDV(15)",
+          "IDV(16)",
+          "IDV(17)",
+          "IDV(18)",
+          "IDV(19)",
+          "IDV(2)",
+          "IDV(20)",
+          "IDV(21)",
+          "IDV(3)",
+          "IDV(4)",
+          "IDV(5)",
+          "IDV(6)",
+          "IDV(7)",
+          "IDV(8)",
+          "IDV(9)",
+          "STREAM-04",
+          "X4",
+          "X45",
+          "XMV(4)"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "7. 预设故障目录与可观测边界｜FAULTS-001",
+          "7.21 IDV(21)：流 4 阀门位置固定｜FAULT-IDV21"
+        ],
+        "kind": "fault",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 491,
+              "role": "body",
+              "start_line": 486
+            },
+            {
+              "end_line": 300,
+              "role": "fault_boundary",
+              "start_line": 300
+            },
+            {
+              "end_line": 502,
+              "role": "source_correction",
+              "start_line": 502
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          },
+          {
+            "git_commit": "9a6c8e5fcef4a2850778704e7793c87b0a187005",
+            "locator": "File Format; Fault Scenarios",
+            "mentions": [
+              "S04，Fault Scenarios 的 d21"
+            ],
+            "sha256": "d148c027f974223d4da43924153ea706962da7c56297b6cf423854e45761c1eb",
+            "source_id": "S04",
+            "url": "https://github.com/jkitchin/tennessee-eastman-profbraatz/blob/9a6c8e5fcef4a2850778704e7793c87b0a187005/data/README.md"
+          }
+        ],
+        "title": "7.21 IDV(21)：流 4 阀门位置固定｜FAULT-IDV21",
+        "unit_id": "FAULT-IDV21",
+        "rank": 2
+      }
+    ],
+    "clarification": null
+  },
+  {
+    "label": "连续追问：第2轮",
+    "analysis": {
+      "parser_version": "1.0.0",
+      "original_query": "那15呢？",
+      "normalized_query": "那15呢?",
+      "retrieval_query": "IDV(15)是什么故障? IDV(15)",
+      "entities": [
+        {
+          "kind": "fault",
+          "number": 15,
+          "canonical": "IDV(15)",
+          "valid": true,
+          "primary_unit": "FAULT-IDV15",
+          "raw": "IDV(15)",
+          "span": [
+            0,
+            7
+          ]
+        }
+      ],
+      "quantities": [],
+      "intent": "entity_lookup",
+      "intent_kinds": [],
+      "primary_units": [
+        "FAULT-IDV15"
+      ],
+      "ambiguous_number": false,
+      "issues": [],
+      "reasons": [
+        "仅按片段unit_id识别主体，不把正文或entities中提到的编号当作主体"
+      ],
+      "context_used": true,
+      "followup_version": "1.0.0",
+      "previous_question": "IDV(14)是什么故障？",
+      "resolved_query": "IDV(15)是什么故障?",
+      "resolution_status": "resolved",
+      "resolution_reason": "从上一轮继承 fault 类型及问法，仅替换主体编号",
+      "clarification": null,
+      "context_units": [
+        "FAULT-IDV14"
+      ]
+    },
+    "hits": [
+      {
+        "score": 0.4239767813459318,
+        "priority": 3,
+        "rank_reason": "编号主体精确匹配",
+        "char_count": 507,
+        "chunk_id": "TEP-KB-001:FAULT-IDV15:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "7.15 IDV(15)：冷凝器冷却水阀门粘滞｜FAULT-IDV15\n\n- **扰动类型：**阀门粘滞。\n- **预设注入：**冷凝器冷却水阀门出现粘滞。\n- **可观测性：**X52 = XMV(11) 是对应操纵通道；并非另有一个实际阀位测量。\n- **关联字段：**X22 为冷却水出口温度，X11 为分离器温度。\n- **解释边界：**不能把本故障改写为压缩机冷却水阀故障。\n- **来源：**[S03，Process Disturbances 的 IDV(15)](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)；中文对照 [S01，表 2-2](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)。\n\n【继承的限定与来源】\n【故障解释边界】\n本节的“故障根源”仅指仿真设定中被改变的物理量或部件。**注入量、测量量、操纵命令、诊断结果四者必须分开。**关联字段用于把描述连到变量字典，不表示这些字段必然异常或按列举顺序传播。",
+        "content_sha256": "3153f75d3a93cfd637684925f81680e63d9717f13e388eaef7d0a4263cee23d5",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "FAULT-IDV15",
+          "IDV(15)",
+          "X11",
+          "X22",
+          "X52",
+          "XMV(11)"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "7. 预设故障目录与可观测边界｜FAULTS-001",
+          "7.15 IDV(15)：冷凝器冷却水阀门粘滞｜FAULT-IDV15"
+        ],
+        "kind": "fault",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 437,
+              "role": "body",
+              "start_line": 432
+            },
+            {
+              "end_line": 300,
+              "role": "fault_boundary",
+              "start_line": 300
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，表 2-2"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，Process Disturbances 的 IDV(15)"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          }
+        ],
+        "title": "7.15 IDV(15)：冷凝器冷却水阀门粘滞｜FAULT-IDV15",
+        "unit_id": "FAULT-IDV15",
+        "rank": 1
+      },
+      {
+        "score": 0.18924976364846097,
+        "priority": 2,
+        "rank_reason": "上一轮主体作为辅助对照；当前主体仍优先",
+        "char_count": 503,
+        "chunk_id": "TEP-KB-001:FAULT-IDV14:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "7.14 IDV(14)：反应器冷却水阀门粘滞｜FAULT-IDV14\n\n- **扰动类型：**阀门粘滞。\n- **预设注入：**反应器冷却水阀门出现粘滞。\n- **可观测性：**X51 = XMV(10) 是对应操纵通道；并非另有一个实际阀位测量。\n- **关联字段：**X21 为冷却水出口温度，X9 为反应器温度。\n- **解释边界：**命令变化不证明实际阀门已经跟随。\n- **来源：**[S03，Process Disturbances 的 IDV(14)](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)；中文对照 [S01，表 2-2](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)。\n\n【继承的限定与来源】\n【故障解释边界】\n本节的“故障根源”仅指仿真设定中被改变的物理量或部件。**注入量、测量量、操纵命令、诊断结果四者必须分开。**关联字段用于把描述连到变量字典，不表示这些字段必然异常或按列举顺序传播。",
+        "content_sha256": "09dca6c077849ded06ba9ad5c4b172d7524bd2edbf1fdd7ea3e01f63333759fd",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "FAULT-IDV14",
+          "IDV(14)",
+          "X21",
+          "X51",
+          "X9",
+          "XMV(10)"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "7. 预设故障目录与可观测边界｜FAULTS-001",
+          "7.14 IDV(14)：反应器冷却水阀门粘滞｜FAULT-IDV14"
+        ],
+        "kind": "fault",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 428,
+              "role": "body",
+              "start_line": 423
+            },
+            {
+              "end_line": 300,
+              "role": "fault_boundary",
+              "start_line": 300
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，表 2-2"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，Process Disturbances 的 IDV(14)"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          }
+        ],
+        "title": "7.14 IDV(14)：反应器冷却水阀门粘滞｜FAULT-IDV14",
+        "unit_id": "FAULT-IDV14",
+        "rank": 2
+      }
+    ],
+    "clarification": null
+  },
+  {
+    "label": "连续追问：第3轮",
+    "analysis": {
+      "parser_version": "1.0.0",
+      "original_query": "那16呢？",
+      "normalized_query": "那16呢?",
+      "retrieval_query": "IDV(16)是什么故障? IDV(16)",
+      "entities": [
+        {
+          "kind": "fault",
+          "number": 16,
+          "canonical": "IDV(16)",
+          "valid": true,
+          "primary_unit": "FAULT-IDV16",
+          "raw": "IDV(16)",
+          "span": [
+            0,
+            7
+          ]
+        }
+      ],
+      "quantities": [],
+      "intent": "entity_lookup",
+      "intent_kinds": [],
+      "primary_units": [
+        "FAULT-IDV16"
+      ],
+      "ambiguous_number": false,
+      "issues": [],
+      "reasons": [
+        "仅按片段unit_id识别主体，不把正文或entities中提到的编号当作主体"
+      ],
+      "context_used": true,
+      "followup_version": "1.0.0",
+      "previous_question": "IDV(15)是什么故障?",
+      "resolved_query": "IDV(16)是什么故障?",
+      "resolution_status": "resolved",
+      "resolution_reason": "从上一轮继承 fault 类型及问法，仅替换主体编号",
+      "clarification": null,
+      "context_units": [
+        "FAULT-IDV15"
+      ]
+    },
+    "hits": [
+      {
+        "score": 0.47109718721175925,
+        "priority": 3,
+        "rank_reason": "编号主体精确匹配",
+        "char_count": 674,
+        "chunk_id": "TEP-KB-001:FAULT-IDV16:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "7.16 IDV(16)：未公开定义的预设故障 16｜FAULT-IDV16\n\n- **扰动类型：**Unknown。\n- **预设注入：**原始故障清单将本项标为 Unknown；本版本没有经核实的具体物理定义。\n- **可观测性：**无法建立已确认的注入量—X 字段映射。\n- **关联字段：**保留故障编号供检索和实验索引；不指定根源 X。\n- **解释边界：**未知定义不表示没有故障，也不表示算法不能分析；推测必须作为实验结论另行保存。\n- **来源：**[S03，Process Disturbances 的 IDV(16)](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)；中文对照 [S01，表 2-2](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)。\n\n【继承的限定与来源】\n【故障解释边界】\n本节的“故障根源”仅指仿真设定中被改变的物理量或部件。**注入量、测量量、操纵命令、诊断结果四者必须分开。**关联字段用于把描述连到变量字典，不表示这些字段必然异常或按列举顺序传播。\n\n【来源差异处理】\n- ID：C04\n- 问题：论文正文统称 IDV(16)–(21) 未知，但表中定义了 21\n- 本手册采用的表述：IDV(16)–(20) 为 Unknown；21 按扩展数据说明\n- 核对依据与状态：S01 表 2-2、S03、S04；按版本拆分",
+        "content_sha256": "b28ef9f2b40f6ab7cceeb3ada2927c3d36a0643029517fa37323a4501735b327",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "FAULT-IDV16",
+          "IDV(16)"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "7. 预设故障目录与可观测边界｜FAULTS-001",
+          "7.16 IDV(16)：未公开定义的预设故障 16｜FAULT-IDV16"
+        ],
+        "kind": "fault",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 446,
+              "role": "body",
+              "start_line": 441
+            },
+            {
+              "end_line": 300,
+              "role": "fault_boundary",
+              "start_line": 300
+            },
+            {
+              "end_line": 502,
+              "role": "source_correction",
+              "start_line": 502
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，表 2-2"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，Process Disturbances 的 IDV(16)"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          },
+          {
+            "git_commit": "9a6c8e5fcef4a2850778704e7793c87b0a187005",
+            "locator": "File Format; Fault Scenarios",
+            "mentions": [],
+            "sha256": "d148c027f974223d4da43924153ea706962da7c56297b6cf423854e45761c1eb",
+            "source_id": "S04",
+            "url": "https://github.com/jkitchin/tennessee-eastman-profbraatz/blob/9a6c8e5fcef4a2850778704e7793c87b0a187005/data/README.md"
+          }
+        ],
+        "title": "7.16 IDV(16)：未公开定义的预设故障 16｜FAULT-IDV16",
+        "unit_id": "FAULT-IDV16",
+        "rank": 1
+      },
+      {
+        "score": 0.207049653029515,
+        "priority": 2,
+        "rank_reason": "上一轮主体作为辅助对照；当前主体仍优先",
+        "char_count": 507,
+        "chunk_id": "TEP-KB-001:FAULT-IDV15:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "7.15 IDV(15)：冷凝器冷却水阀门粘滞｜FAULT-IDV15\n\n- **扰动类型：**阀门粘滞。\n- **预设注入：**冷凝器冷却水阀门出现粘滞。\n- **可观测性：**X52 = XMV(11) 是对应操纵通道；并非另有一个实际阀位测量。\n- **关联字段：**X22 为冷却水出口温度，X11 为分离器温度。\n- **解释边界：**不能把本故障改写为压缩机冷却水阀故障。\n- **来源：**[S03，Process Disturbances 的 IDV(15)](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)；中文对照 [S01，表 2-2](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)。\n\n【继承的限定与来源】\n【故障解释边界】\n本节的“故障根源”仅指仿真设定中被改变的物理量或部件。**注入量、测量量、操纵命令、诊断结果四者必须分开。**关联字段用于把描述连到变量字典，不表示这些字段必然异常或按列举顺序传播。",
+        "content_sha256": "3153f75d3a93cfd637684925f81680e63d9717f13e388eaef7d0a4263cee23d5",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "FAULT-IDV15",
+          "IDV(15)",
+          "X11",
+          "X22",
+          "X52",
+          "XMV(11)"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "7. 预设故障目录与可观测边界｜FAULTS-001",
+          "7.15 IDV(15)：冷凝器冷却水阀门粘滞｜FAULT-IDV15"
+        ],
+        "kind": "fault",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 437,
+              "role": "body",
+              "start_line": 432
+            },
+            {
+              "end_line": 300,
+              "role": "fault_boundary",
+              "start_line": 300
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，表 2-2"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，Process Disturbances 的 IDV(15)"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          }
+        ],
+        "title": "7.15 IDV(15)：冷凝器冷却水阀门粘滞｜FAULT-IDV15",
+        "unit_id": "FAULT-IDV15",
+        "rank": 2
+      }
+    ],
+    "clarification": null
+  },
+  {
+    "label": "切换话题：第1轮",
+    "analysis": {
+      "parser_version": "1.0.0",
+      "original_query": "IDV(14)是什么故障？",
+      "normalized_query": "IDV(14)是什么故障?",
+      "retrieval_query": "IDV(14)是什么故障? IDV(14)",
+      "entities": [
+        {
+          "kind": "fault",
+          "number": 14,
+          "canonical": "IDV(14)",
+          "valid": true,
+          "primary_unit": "FAULT-IDV14",
+          "raw": "IDV(14)",
+          "span": [
+            0,
+            7
+          ]
+        }
+      ],
+      "quantities": [],
+      "intent": "entity_lookup",
+      "intent_kinds": [],
+      "primary_units": [
+        "FAULT-IDV14"
+      ],
+      "ambiguous_number": false,
+      "issues": [],
+      "reasons": [
+        "仅按片段unit_id识别主体，不把正文或entities中提到的编号当作主体"
+      ],
+      "context_used": false,
+      "followup_version": "1.0.0",
+      "previous_question": "",
+      "resolved_query": "IDV(14)是什么故障？",
+      "resolution_status": "standalone",
+      "resolution_reason": "当前问题独立解析",
+      "clarification": null,
+      "context_units": []
+    },
+    "hits": [
+      {
+        "score": 0.4256185606109308,
+        "priority": 3,
+        "rank_reason": "编号主体精确匹配",
+        "char_count": 503,
+        "chunk_id": "TEP-KB-001:FAULT-IDV14:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "7.14 IDV(14)：反应器冷却水阀门粘滞｜FAULT-IDV14\n\n- **扰动类型：**阀门粘滞。\n- **预设注入：**反应器冷却水阀门出现粘滞。\n- **可观测性：**X51 = XMV(10) 是对应操纵通道；并非另有一个实际阀位测量。\n- **关联字段：**X21 为冷却水出口温度，X9 为反应器温度。\n- **解释边界：**命令变化不证明实际阀门已经跟随。\n- **来源：**[S03，Process Disturbances 的 IDV(14)](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)；中文对照 [S01，表 2-2](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)。\n\n【继承的限定与来源】\n【故障解释边界】\n本节的“故障根源”仅指仿真设定中被改变的物理量或部件。**注入量、测量量、操纵命令、诊断结果四者必须分开。**关联字段用于把描述连到变量字典，不表示这些字段必然异常或按列举顺序传播。",
+        "content_sha256": "09dca6c077849ded06ba9ad5c4b172d7524bd2edbf1fdd7ea3e01f63333759fd",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "FAULT-IDV14",
+          "IDV(14)",
+          "X21",
+          "X51",
+          "X9",
+          "XMV(10)"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "7. 预设故障目录与可观测边界｜FAULTS-001",
+          "7.14 IDV(14)：反应器冷却水阀门粘滞｜FAULT-IDV14"
+        ],
+        "kind": "fault",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 428,
+              "role": "body",
+              "start_line": 423
+            },
+            {
+              "end_line": 300,
+              "role": "fault_boundary",
+              "start_line": 300
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，表 2-2"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，Process Disturbances 的 IDV(14)"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          }
+        ],
+        "title": "7.14 IDV(14)：反应器冷却水阀门粘滞｜FAULT-IDV14",
+        "unit_id": "FAULT-IDV14",
+        "rank": 1
+      },
+      {
+        "score": 0.45910412299292286,
+        "priority": 0,
+        "rank_reason": "文本匹配",
+        "char_count": 608,
+        "chunk_id": "TEP-KB-001:FAULT-IDV21:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "7.21 IDV(21)：流 4 阀门位置固定｜FAULT-IDV21\n\n- **扰动类型：**固定阀位（参考数据扩展）。\n- **预设注入：**后续参考数据将本项定义为流 4 阀门位置保持常数。\n- **可观测性：**X45 = XMV(4) 是对应进料操纵通道；X4 记录流 4 流量。\n- **关联字段：**需结合具体生成器区分阀位固定值、控制命令和实际执行值。\n- **解释边界：**不属于原始 1993 年 IDV(1)–(20) 表；固定阀位与 IDV(14)/(15) 的粘滞不能直接混用。\n- **来源：**[S04，Fault Scenarios 的 d21](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s04)。\n\n【继承的限定与来源】\n【故障解释边界】\n本节的“故障根源”仅指仿真设定中被改变的物理量或部件。**注入量、测量量、操纵命令、诊断结果四者必须分开。**关联字段用于把描述连到变量字典，不表示这些字段必然异常或按列举顺序传播。\n\n【来源差异处理】\n- ID：C04\n- 问题：论文正文统称 IDV(16)–(21) 未知，但表中定义了 21\n- 本手册采用的表述：IDV(16)–(20) 为 Unknown；21 按扩展数据说明\n- 核对依据与状态：S01 表 2-2、S03、S04；按版本拆分",
+        "content_sha256": "36644fa9e157594484b0a72f2f41989710c3012d95966b65b011511cce167a48",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "FAULT-IDV21",
+          "IDV(1)",
+          "IDV(10)",
+          "IDV(11)",
+          "IDV(12)",
+          "IDV(13)",
+          "IDV(14)",
+          "IDV(15)",
+          "IDV(16)",
+          "IDV(17)",
+          "IDV(18)",
+          "IDV(19)",
+          "IDV(2)",
+          "IDV(20)",
+          "IDV(21)",
+          "IDV(3)",
+          "IDV(4)",
+          "IDV(5)",
+          "IDV(6)",
+          "IDV(7)",
+          "IDV(8)",
+          "IDV(9)",
+          "STREAM-04",
+          "X4",
+          "X45",
+          "XMV(4)"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "7. 预设故障目录与可观测边界｜FAULTS-001",
+          "7.21 IDV(21)：流 4 阀门位置固定｜FAULT-IDV21"
+        ],
+        "kind": "fault",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 491,
+              "role": "body",
+              "start_line": 486
+            },
+            {
+              "end_line": 300,
+              "role": "fault_boundary",
+              "start_line": 300
+            },
+            {
+              "end_line": 502,
+              "role": "source_correction",
+              "start_line": 502
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          },
+          {
+            "git_commit": "9a6c8e5fcef4a2850778704e7793c87b0a187005",
+            "locator": "File Format; Fault Scenarios",
+            "mentions": [
+              "S04，Fault Scenarios 的 d21"
+            ],
+            "sha256": "d148c027f974223d4da43924153ea706962da7c56297b6cf423854e45761c1eb",
+            "source_id": "S04",
+            "url": "https://github.com/jkitchin/tennessee-eastman-profbraatz/blob/9a6c8e5fcef4a2850778704e7793c87b0a187005/data/README.md"
+          }
+        ],
+        "title": "7.21 IDV(21)：流 4 阀门位置固定｜FAULT-IDV21",
+        "unit_id": "FAULT-IDV21",
+        "rank": 2
+      }
+    ],
+    "clarification": null
+  },
+  {
+    "label": "切换话题：第2轮",
+    "analysis": {
+      "parser_version": "1.0.0",
+      "original_query": "介绍TEP整体工艺流程",
+      "normalized_query": "介绍TEP整体工艺流程",
+      "retrieval_query": "介绍TEP整体工艺流程",
+      "entities": [],
+      "quantities": [],
+      "intent": "process_topology",
+      "intent_kinds": [
+        "process_overview",
+        "stream",
+        "equipment"
+      ],
+      "primary_units": [],
+      "ambiguous_number": false,
+      "issues": [],
+      "reasons": [
+        "询问进出口或物流连接，优先流程类资料"
+      ],
+      "context_used": false,
+      "followup_version": "1.0.0",
+      "previous_question": "IDV(14)是什么故障？",
+      "resolved_query": "介绍TEP整体工艺流程",
+      "resolution_status": "standalone",
+      "resolution_reason": "当前问题独立解析",
+      "clarification": null,
+      "context_units": []
+    },
+    "hits": [
+      {
+        "score": 0.013608739246222742,
+        "priority": 2,
+        "rank_reason": "流程意图匹配",
+        "char_count": 1100,
+        "chunk_id": "TEP-KB-001:PROC-001:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "3.1 从原料到产品，以及两条返回路径\n\nTEP 的主设备为反应器、冷凝器、汽液分离器、循环压缩机和汽提塔。以下按物流讲解，**不是故障因果图**。\n\n1. **原料补充与进料混合。**流 1 补充 A，流 2 补充 D，流 3 补充 E。这些原料与汽提塔顶返回的流 5、压缩机侧返回的循环流 8 汇合，形成流 6，进入反应器。流 6 是混合后的总进料，不能视为某一路新鲜原料。\n2. **反应与移热。**反应器接收流 6，进行产品和副产物生成反应。内部冷却水回路承担移热。反应器物料通过流 7 离开并进入冷凝段；流 7 包含产品和未反应组分。\n3. **冷却、冷凝与分相。**冷凝器先对反应器出料换热，使可凝组分形成液相。随后汽液分离器把气液两相分开。冷凝是热交换/相变环节，分离器是相分离及液体滞留环节，二者不可合并成一个变量名称。\n4. **气相循环与排放。**分离器气相有两条去向：一部分经流 9 排出系统，另一部分经循环压缩机返回进料端，构成流 8。排放为循环系统提供物料出口；循环回收未反应组分。排放气并非只有 B 或 F，流 9 的分析仪记录 A–H 八个组分。\n5. **液相汽提。**分离器液体由流 10 进入汽提塔。流 4 是含 A/C 的新鲜混合进料，它先进入汽提塔参与汽提，而不是从图上直接连到反应器。汽提塔还有蒸汽供热环节，塔顶物料通过流 5 返回反应器进料混合处。\n6. **产品输出。**汽提塔底通过流 11 输出含 G/H 的产品混合物。它不是已经分成两路的纯 G、纯 H。后续产品精制不属于本基准的五个主设备。\n\n这形成两条返回路径：**分离器气相 → 压缩机 → 进料混合处**，以及**分离器液相 → 汽提塔 → 塔顶返回进料混合处**。因此某条管线的结构上游，并不自动等同于统计诊断中的根源。\n\n依据：[S01，图 2.3、§2.4](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)，对照 [S02，图 1、p.247](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s02)。设备和流股的文本连接为本手册依据上述图示整理。\n\n【继承的限定与来源】\n【来源差异处理】\n- ID：C08\n- 问题：部分修订结构模型将反应器出料编号为 13\n- 本手册采用的表述：本文经典图中反应器出料为 7，13 是冷凝冷却水侧编号\n- 核对依据与状态：S02 图 1；S06 只作版本差异线索，不混用编号",
+        "content_sha256": "5d2eb1a3ea5c9fd519b15f37dcdb3c6f9c7783c2b3271efdf32788481b81059b",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "PROC-001",
+          "STREAM-01",
+          "STREAM-02",
+          "STREAM-03",
+          "STREAM-04",
+          "STREAM-05",
+          "STREAM-06",
+          "STREAM-07",
+          "STREAM-08",
+          "STREAM-09",
+          "STREAM-10",
+          "STREAM-11"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "3. 工艺结构与文字流程｜PROC-001",
+          "3.1 从原料到产品，以及两条返回路径"
+        ],
+        "kind": "process_overview",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 78,
+              "role": "body",
+              "start_line": 67
+            },
+            {
+              "end_line": 506,
+              "role": "source_correction",
+              "start_line": 506
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，图 2.3、§2.4"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "doi": "10.1016/0098-1354(93)80018-I",
+            "locator": "pp.245–250; Figure 1; Tables 3–5,8",
+            "mentions": [
+              "S02，图 1、p.247"
+            ],
+            "sha256": "5f19b0bf7f0e5c052335943fff263769a28757066582c3166e16ac163e0e9538",
+            "snapshot_note": "校验值来自核对时下载文件；原文件未复制到项目",
+            "source_id": "S02",
+            "url": "https://users.abo.fi/~khaggblo/RS/Downs.pdf"
+          },
+          {
+            "locator": "Appendix A",
+            "mentions": [],
+            "snapshot_note": "此前资料核对；本次不用于新增工艺定义",
+            "source_id": "S06",
+            "url": "https://zenodo.org/records/5171645/files/TE_Structural_Model_Vs00.pdf",
+            "usage": "只用于已识别的版本差异说明，不作为经典流股编号来源"
+          }
+        ],
+        "title": "3.1 从原料到产品，以及两条返回路径",
+        "unit_id": "PROC-001",
+        "rank": 1
+      },
+      {
+        "score": 0.062117689151459425,
+        "priority": 1,
+        "rank_reason": "流程意图匹配",
+        "char_count": 614,
+        "chunk_id": "TEP-KB-001:STREAM-02:v1.0.0:1.0.0",
+        "chunker_version": "1.0.0",
+        "content": "TEP 流股 2：D 原料边界 → 进料混合处\n\n- 稳定 ID：STREAM-02\n- 图中编号：2\n- 上游 → 下游：D 原料边界 → 进料混合处\n- 物料及作用：D 新鲜进料\n- 本项目直接相关测量：X2 流量\n\n【继承的限定与来源】\n【本节限定】\n12/13 采用经典图 1 的公用工程编号；部分修订模型另有编号。X51/X52 是操纵量，没有提供以 m³/h 表示的独立冷却水流量测量列。汽提蒸汽/冷凝水在图上单独标注，本表不擅自赋予新的物料流号。\n\n【本节限定】\n依据：[S01，图 2.3、表 2-1](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s01)、[S02，图 1](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s02)、[S03，测量/操纵变量声明](/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md#src-s03)。\n\n【来源差异处理】\n- ID：C08\n- 问题：部分修订结构模型将反应器出料编号为 13\n- 本手册采用的表述：本文经典图中反应器出料为 7，13 是冷凝冷却水侧编号\n- 核对依据与状态：S02 图 1；S06 只作版本差异线索，不混用编号",
+        "content_sha256": "ec520e43130b6ff1514bd35bfac2558d002dd8ff7098574bf5380e10fb8e4ebf",
+        "document_id": "TEP-KB-001",
+        "document_version": "1.0.0",
+        "entities": [
+          "STREAM-02",
+          "X2"
+        ],
+        "heading_path": [
+          "TEP 工艺、变量与预设故障知识手册",
+          "3. 工艺结构与文字流程｜PROC-001",
+          "3.3 物流连接字典｜STREAM-001"
+        ],
+        "kind": "stream",
+        "part": 1,
+        "parts": 1,
+        "provenance": {
+          "document_path": "/Users/rowen/Documents/高校/tep-fault-agent/TEP_SOURCE_MAP.md",
+          "document_sha256": "fb62574675d67ce275634ccbd111f53f7339da9f5d0ba008ecd627ddee1051c6",
+          "spans": [
+            {
+              "end_line": 109,
+              "role": "table_row",
+              "start_line": 109
+            },
+            {
+              "end_line": 122,
+              "role": "section_context",
+              "start_line": 122
+            },
+            {
+              "end_line": 124,
+              "role": "section_context",
+              "start_line": 124
+            },
+            {
+              "end_line": 506,
+              "role": "source_correction",
+              "start_line": 506
+            },
+            {
+              "end_line": 106,
+              "role": "table_header",
+              "start_line": 106
+            }
+          ]
+        },
+        "review_status": "内容整理与来源核对完成，待领域复核",
+        "scope": "经典 TE 流程；41 个测量变量与前 11 个操纵变量组成的 52 列数据",
+        "sources": [
+          {
+            "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录",
+            "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+            "mentions": [
+              "S01，图 2.3、表 2-1"
+            ],
+            "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+            "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+            "source_id": "S01",
+            "type": "user_provided_thesis"
+          },
+          {
+            "doi": "10.1016/0098-1354(93)80018-I",
+            "locator": "pp.245–250; Figure 1; Tables 3–5,8",
+            "mentions": [
+              "S02，图 1"
+            ],
+            "sha256": "5f19b0bf7f0e5c052335943fff263769a28757066582c3166e16ac163e0e9538",
+            "snapshot_note": "校验值来自核对时下载文件；原文件未复制到项目",
+            "source_id": "S02",
+            "url": "https://users.abo.fi/~khaggblo/RS/Downs.pdf"
+          },
+          {
+            "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+            "locator": "Header: variable declarations, disturbances and code/paper differences",
+            "mentions": [
+              "S03，测量/操纵变量声明"
+            ],
+            "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+            "source_id": "S03",
+            "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f"
+          },
+          {
+            "locator": "Appendix A",
+            "mentions": [],
+            "snapshot_note": "此前资料核对；本次不用于新增工艺定义",
+            "source_id": "S06",
+            "url": "https://zenodo.org/records/5171645/files/TE_Structural_Model_Vs00.pdf",
+            "usage": "只用于已识别的版本差异说明，不作为经典流股编号来源"
+          }
+        ],
+        "title": "TEP 流股 2：D 原料边界 → 进料混合处",
+        "unit_id": "STREAM-02",
+        "rank": 2
+      }
+    ],
+    "clarification": null
+  },
+  {
+    "label": "切换话题：第3轮",
+    "analysis": {
+      "parser_version": "1.0.0",
+      "original_query": "那15呢？",
+      "normalized_query": "那15呢?",
+      "retrieval_query": "",
+      "entities": [],
+      "quantities": [],
+      "intent": "general",
+      "intent_kinds": [],
+      "primary_units": [],
+      "ambiguous_number": true,
+      "issues": [
+        "存在没有类型标识的数字；本阶段不根据历史猜测编号类型"
+      ],
+      "reasons": [],
+      "context_used": false,
+      "followup_version": "1.0.0",
+      "previous_question": "介绍TEP整体工艺流程",
+      "resolved_query": "那15呢？",
+      "resolution_status": "needs_clarification",
+      "resolution_reason": "上一问没有唯一且有效的主体，不能安全继承",
+      "clarification": "这次指的是哪个故障、变量或流股？请补充具体编号。",
+      "context_units": []
+    },
+    "hits": [],
+    "clarification": "这次指的是哪个故障、变量或流股？请补充具体编号。"
+  }
+]

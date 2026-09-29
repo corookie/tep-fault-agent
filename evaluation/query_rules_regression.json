@@ -1,0 +1,160 @@
+{
+  "suite_id": "query-rules-regression-v1",
+  "version": "1.0.0",
+  "purpose": "新增回归问法；开发者知晓规则后编写，不是独立盲测集",
+  "cases": [
+    {
+      "id": "R01",
+      "query": "能解释一下第十五个故障吗？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "FAULT-IDV15",
+          "any_of": [
+            "FAULT-IDV15"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "R02",
+      "query": "xmeas(4) 和 XMV（4）各自指什么？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "VAR-X04",
+          "any_of": [
+            "VAR-X04"
+          ]
+        },
+        {
+          "description": "VAR-X45",
+          "any_of": [
+            "VAR-X45"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "R03",
+      "query": "流股四先送到哪个设备？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "STREAM-04",
+          "any_of": [
+            "STREAM-04"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "R04",
+      "query": "我们验证过全部21种故障了吗？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "DATA-FILES",
+          "any_of": [
+            "DATA-FILES"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "R05",
+      "query": "ＩＤＶ（９）定义是什么？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "FAULT-IDV09",
+          "any_of": [
+            "FAULT-IDV09"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "R06",
+      "query": "为什么X29到X36的组分总和要注意噪声？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "DATA-002",
+          "any_of": [
+            "DATA-002"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "R07",
+      "query": "循环压缩机和汽提塔是怎么连接的？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "PROC-001",
+          "any_of": [
+            "PROC-001"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "R08",
+      "query": "A进料丢失对应哪个故障？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "FAULT-IDV06",
+          "any_of": [
+            "FAULT-IDV06"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "R09",
+      "query": "XMV(12)为什么不在数据文件里？",
+      "previous_question": "",
+      "required_evidence": [
+        {
+          "description": "SCOPE-001",
+          "any_of": [
+            "SCOPE-001"
+          ]
+        }
+      ],
+      "expected_no_results": false
+    },
+    {
+      "id": "RN01",
+      "query": "IDV(99)是什么",
+      "previous_question": "",
+      "required_evidence": [],
+      "expected_no_results": true
+    },
+    {
+      "id": "RN02",
+      "query": "流99是什么",
+      "previous_question": "",
+      "required_evidence": [],
+      "expected_no_results": true
+    },
+    {
+      "id": "RN03",
+      "query": "这21个软件都测试过了吗",
+      "previous_question": "",
+      "required_evidence": [],
+      "expected_no_results": true
+    }
+  ]
+}

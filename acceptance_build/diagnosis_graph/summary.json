@@ -1,0 +1,53 @@
+[
+  {
+    "samples": 50,
+    "edges": 0,
+    "candidates": [],
+    "feedback_groups": [],
+    "paths_displayed": 0,
+    "paths_truncated": false
+  },
+  {
+    "samples": 100,
+    "edges": 13,
+    "candidates": [
+      "X4",
+      "X45"
+    ],
+    "feedback_groups": [
+      [
+        "X4",
+        "X45"
+      ],
+      [
+        "X7",
+        "X13",
+        "X16"
+      ]
+    ],
+    "paths_displayed": 8,
+    "paths_truncated": false
+  },
+  {
+    "samples": 200,
+    "edges": 15,
+    "candidates": [
+      "X7",
+      "X13",
+      "X16"
+    ],
+    "feedback_groups": [
+      [
+        "X7",
+        "X13",
+        "X16"
+      ],
+      [
+        "X20",
+        "X46"
+      ]
+    ],
+    "paths_displayed": 24,
+    "paths_truncated": true
+  }
+]

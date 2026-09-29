@@ -1,0 +1,278 @@
+[
+  {
+    "id": "N01",
+    "query": "IDV(9)的扰动类型是什么？",
+    "status": "ready",
+    "units": [
+      "FAULT-IDV09",
+      "FAULT-IDV21",
+      "FAULTS-001",
+      "SCOPE-001",
+      "VAR-X09"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N02",
+    "query": "十号故障改变的是哪一股进料的温度？",
+    "status": "ready",
+    "units": [
+      "C03",
+      "FAULT-IDV10",
+      "FAULT-IDV21",
+      "FAULTS-001",
+      "SCOPE-001"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N03",
+    "query": "第十五个故障的预设是什么？",
+    "status": "ready",
+    "units": [
+      "FAULT-IDV15",
+      "FAULT-IDV21",
+      "FAULTS-001",
+      "SCOPE-001",
+      "VAR-X15"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N04",
+    "query": "xmeas(22)对应的设备和单位是什么？",
+    "status": "ready",
+    "units": [
+      "C01",
+      "VAR-X02",
+      "VAR-X20",
+      "VAR-X21",
+      "VAR-X22"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N05",
+    "query": "XMV(10)在52列里对应哪个X编号？",
+    "status": "ready",
+    "units": [
+      "FAULT-IDV10",
+      "SCOPE-001",
+      "VAR-X10",
+      "VAR-X51",
+      "VARS-001"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N06",
+    "query": "流股十一是产品流吗？",
+    "status": "ready",
+    "units": [
+      "STREAM-11",
+      "VAR-X17",
+      "VAR-X37",
+      "VAR-X39",
+      "VAR-X41"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N07",
+    "query": "流12和流13分别服务哪个设备？",
+    "status": "ready",
+    "units": [
+      "FAULT-IDV12",
+      "STREAM-02",
+      "UTILITY-12",
+      "UTILITY-13",
+      "VAR-X12"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N08",
+    "query": "TEP为什么要有循环压缩机？",
+    "status": "ready",
+    "units": [
+      "EQUIP-COMPRESSOR",
+      "PROC-001",
+      "STREAM-08",
+      "VAR-X20",
+      "VAR-X46"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N09",
+    "query": "TEP中的B是不是反应原料？",
+    "status": "ready",
+    "units": [
+      "CHEM-001",
+      "STREAM-01",
+      "STREAM-02",
+      "UTILITY-12",
+      "UTILITY-13"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N10",
+    "query": "TEP的产品G和H由什么反应生成？",
+    "status": "ready",
+    "units": [
+      "CHEM-001",
+      "PROC-001",
+      "STREAM-06",
+      "STREAM-11",
+      "UTILITY-12"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N11",
+    "query": "流股八离开分离器之后如何分流？",
+    "status": "ready",
+    "units": [
+      "PROC-001",
+      "STREAM-07",
+      "STREAM-08",
+      "VAR-X05",
+      "VAR-X11"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N12",
+    "query": "这份TEP数据的组分分析值为何连续几行一样？",
+    "status": "ready",
+    "units": [
+      "C09",
+      "DATA-002",
+      "DATA-FILES",
+      "DATA-TIMING",
+      "EQUIP-REACTOR"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N13",
+    "query": "那么十一呢？",
+    "status": "ready",
+    "units": [
+      "FAULT-IDV10",
+      "FAULT-IDV11",
+      "FAULT-IDV21",
+      "FAULTS-001",
+      "SCOPE-001"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N14",
+    "query": "换成四十九",
+    "status": "ready",
+    "units": [
+      "EQUIP-STRIPPER",
+      "SCOPE-001",
+      "VAR-X48",
+      "VAR-X49",
+      "VARS-001"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N15",
+    "query": "该故障的预设扰动是什么？",
+    "status": "ready",
+    "units": [
+      "FAULT-IDV12",
+      "FAULT-IDV21",
+      "FAULTS-001",
+      "SCOPE-001",
+      "VAR-X12"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N16",
+    "query": "这条流的去向呢？",
+    "status": "ready",
+    "units": [
+      "EQUIP-REACTOR",
+      "EQUIP-SEPARATOR",
+      "EQUIP-STRIPPER",
+      "PROC-001",
+      "STREAM-06"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N17",
+    "query": "那12呢？",
+    "status": "ready",
+    "units": [
+      "C02",
+      "FAULT-IDV12",
+      "SCOPE-001",
+      "VAR-X12",
+      "VARS-001"
+    ],
+    "passed": true
+  },
+  {
+    "id": "N18",
+    "query": "IDV(19)的确切物理起因有记载吗？",
+    "status": "ready",
+    "units": [
+      "C04",
+      "FAULT-IDV19",
+      "FAULT-IDV21",
+      "FAULTS-001",
+      "VAR-X19"
+    ],
+    "passed": true
+  },
+  {
+    "id": "B01",
+    "query": "那6呢？",
+    "status": "needs_clarification",
+    "units": [],
+    "passed": true
+  },
+  {
+    "id": "B02",
+    "query": "它的单位呢？",
+    "status": "needs_clarification",
+    "units": [],
+    "passed": true
+  },
+  {
+    "id": "B03",
+    "query": "那99呢？",
+    "status": "needs_clarification",
+    "units": [],
+    "passed": true
+  },
+  {
+    "id": "B04",
+    "query": "今天杭州天气怎么样？",
+    "status": "insufficient_evidence",
+    "units": [],
+    "passed": true
+  },
+  {
+    "id": "B05",
+    "query": "帮我写一首关于春天的诗",
+    "status": "insufficient_evidence",
+    "units": [],
+    "passed": true
+  },
+  {
+    "id": "B06",
+    "query": "怎样重置Windows登录密码？",
+    "status": "insufficient_evidence",
+    "units": [],
+    "passed": true
+  }
+]

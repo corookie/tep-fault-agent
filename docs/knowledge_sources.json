@@ -1,0 +1,51 @@
+{
+  "manifest_version": "1.0.0",
+  "checked_at": "2026-09-26",
+  "document_id": "TEP-KB-001",
+  "document_version": "1.0.0",
+  "sources": [
+    {
+      "source_id": "S01",
+      "type": "user_provided_thesis",
+      "path": "/Users/rowen/Desktop/rowenList/个人信息/研究生课题和项目/论文/毕业论文余国源-送审版.pdf",
+      "locator": "§2.4; PDF pages 32–35; printed pages 20–23",
+      "sha256": "6436726e0a7c3cc69daea65100d357a792c16b5dfaeae234ae67a7f5eadc1b7f",
+      "identity_note": "送审版封面作者匿名，归属根据用户说明和本地文件名记录"
+    },
+    {
+      "source_id": "S02",
+      "url": "https://users.abo.fi/~khaggblo/RS/Downs.pdf",
+      "doi": "10.1016/0098-1354(93)80018-I",
+      "locator": "pp.245–250; Figure 1; Tables 3–5,8",
+      "sha256": "5f19b0bf7f0e5c052335943fff263769a28757066582c3166e16ac163e0e9538",
+      "snapshot_note": "校验值来自核对时下载文件；原文件未复制到项目"
+    },
+    {
+      "source_id": "S03",
+      "url": "https://github.com/camaramm/tennessee-eastman-profBraatz/blob/0643318858ce7c87292bd59820b459e12a13d009/teprob.f",
+      "git_commit": "0643318858ce7c87292bd59820b459e12a13d009",
+      "sha256": "409975e070780a3b197d37125dddeca64e46c11d8c99028528a56a1f238d45e3",
+      "locator": "Header: variable declarations, disturbances and code/paper differences"
+    },
+    {
+      "source_id": "S04",
+      "url": "https://github.com/jkitchin/tennessee-eastman-profbraatz/blob/9a6c8e5fcef4a2850778704e7793c87b0a187005/data/README.md",
+      "git_commit": "9a6c8e5fcef4a2850778704e7793c87b0a187005",
+      "sha256": "d148c027f974223d4da43924153ea706962da7c56297b6cf423854e45761c1eb",
+      "locator": "File Format; Fault Scenarios"
+    },
+    {
+      "source_id": "S05",
+      "url": "https://depts.washington.edu/control/LARRY/TE/download.html",
+      "locator": "Updated TE Code; Basic TEC Code; Decentralized control",
+      "snapshot_note": "网页核对，未留离线快照"
+    },
+    {
+      "source_id": "S06",
+      "url": "https://zenodo.org/records/5171645/files/TE_Structural_Model_Vs00.pdf",
+      "locator": "Appendix A",
+      "usage": "只用于已识别的版本差异说明，不作为经典流股编号来源",
+      "snapshot_note": "此前资料核对；本次不用于新增工艺定义"
+    }
+  ]
+}
