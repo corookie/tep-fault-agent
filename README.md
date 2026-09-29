@@ -3,6 +3,7 @@
 中文说明在前；[English](#english) follows below.
 
 三个功能的制作过程、当前代码实现、算法计算示例、28个面试追问和动手练习，见 [项目技术实现与面试手册](docs/TECHNICAL_GUIDE_ZH.md)（2026-09-29核对）。
+英文技术概览见 [Technical Overview](docs/TECHNICAL_OVERVIEW_EN.md)。
 
 完整交付说明、五分钟演示、验收结果与面试表述见 [PROJECT_GUIDE.md](PROJECT_GUIDE.md)。
 
@@ -76,7 +77,7 @@ Open `http://127.0.0.1:8765/`. The server reads the API key from a private file 
 
 The handbook is split into 110 structured passages. Retrieval uses character-level TF-IDF plus entity and intent rules, then sends up to five passages to the language model. A limited follow-up resolver handles cases such as “And fault 15?” after a question about IDV(14). The diagnosis uses the seven variables X4, X7, X13, X16, X20, X45, and X46, starting at sample 161 of the public IDV(7) data.
 
-Run `python -m unittest discover -q` for the local regression suite. For the complete implementation, evidence, limitations, interview questions, and hands-on exercises, see the [Chinese technical guide](docs/TECHNICAL_GUIDE_ZH.md). Other detailed project notes are currently in Chinese. Data provenance is in [data/README.md](data/README.md).
+Run `python -m unittest discover -q` for the local regression suite. Read the [English technical overview](docs/TECHNICAL_OVERVIEW_EN.md) or the [full Chinese implementation and interview guide](docs/TECHNICAL_GUIDE_ZH.md). Other detailed project notes are currently in Chinese. Data provenance is in [data/README.md](data/README.md).
 
 ### Deployment note
 
