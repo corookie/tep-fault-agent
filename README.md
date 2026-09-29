@@ -1,86 +1,83 @@
 # TEP 故障助手 / TEP Fault Assistant
 
-中文说明在前；[English](#english) follows below.
+这是一个围绕 Tennessee Eastman Process（TEP）构建的网页：先认识化工过程，再查询相关知识，最后用数据分析故障可能从哪里开始传播。页面按这个顺序分为三个部分。
 
-三个功能的制作过程、当前代码实现、算法计算示例、28个面试追问和动手练习，见 [项目技术实现与面试手册](docs/TECHNICAL_GUIDE_ZH.md)（2026-09-29核对）。
-英文技术概览见 [Technical Overview](docs/TECHNICAL_OVERVIEW_EN.md)。
+## 网页由哪三部分组成
 
-完整交付说明、五分钟演示、验收结果与面试表述见 [PROJECT_GUIDE.md](PROJECT_GUIDE.md)。
+### 01 过程介绍
 
-页面已按“了解工艺 → 知识查证 → 故障诊断”完成整页重构，设备和候选变量可带着问题进入问答，诊断图与候选路径联动。界面、交互与验收记录见 [PRODUCT_REDESIGN.md](PRODUCT_REDESIGN.md)。
+用可交互的工艺图介绍 TEP 的主要设备与物流。页面展示反应器、冷凝器、汽液分离器、循环压缩机和汽提塔；约 8 秒一轮的动画演示原料进入、反应、分离、循环以及产品输出。点击设备可以查看它的作用和相连的物流。这一部分帮助第一次接触 TEP 的人建立整体认识。
 
-项目有三个功能：用8秒循环动画介绍TEP过程；回答TEP领域知识问题；用核岭回归分析IDV(7)数据，给出候选变量和预测关系。三者都在同一个页面中；过程图说明见 [PROCESS_OVERVIEW.md](PROCESS_OVERVIEW.md)。
+### 02 智能助手
 
-## 运行
+在聊天窗口提问，例如“汽提塔有什么作用？”或“IDV(7) 是什么故障？”。助手从 TEP 知识手册中检索相关片段，再由在线大模型组织答案，并附上可展开的资料依据。知识范围包括工艺流程、设备、变量含义和预设故障；支持围绕上一问继续追问。资料不足或问题超出范围时，助手会明确说明。
 
-在项目目录安装依赖。若使用阿里云百炼，先到[百炼 API Key 页面](https://bailian.console.aliyun.com/)创建**模型 API Key**；阿里云 AccessKey ID/Secret 不用于这里的模型调用。然后运行：
+### 03 故障根源诊断
+
+以 TEP 的 IDV(7) 仿真故障为案例，选择故障后的采样点数和历史时滞，点击“开始分析”。页面给出可能的根源变量、变量间的格兰杰预测关系图和候选故障传播路径；点击路径可以在关系图中高亮对应变量与箭头。还可以查看关系矩阵及计算依据，比较不同参数下的结果。
+
+这部分是**基于数据的线索分析**：图中的箭头表示一个变量的历史数据有助于预测另一个变量，并不能单凭这张图证明物理因果或确认真实根因。
+
+## 怎么使用
+
+### 在线体验
+
+打开 [GitHub Pages 预览](https://corookie.github.io/tep-fault-agent/)。工艺图可以交互；诊断部分提供 9 组预先计算的参数组合，供浏览和比较。**在线知识问答在此预览中不可用**，因为 GitHub Pages 只能托管静态文件，无法运行 Python 服务或安全保存模型 API Key。要使用全部三个功能，请在本地运行。
+
+### 本地运行完整版本
+
+准备 Python 环境和阿里云百炼的**模型 API Key**。依次执行：
 
 ```bash
+git clone https://github.com/corookie/tep-fault-agent.git
+cd tep-fault-agent
 python -m pip install -r requirements.txt
-python retrieve_chunks.py build  # 首次克隆到新电脑后，重建本机检索索引
-python configure_local.py  # 首次配置；已有密钥则跳过
+python retrieve_chunks.py build
+python configure_local.py
 python app.py
 ```
 
-首次在终端运行 `python configure_local.py`，按隐藏输入提示保存 API Key，再启动服务。已有配置无需重新输入。浏览器打开 `http://127.0.0.1:8765` 即可使用，网页不再提供密钥设置入口，旧配置接口也已移除。密钥保存在本机 `~/.tep-fault-agent/bailian-api-key`，目录权限为 700、文件权限为 600；服务重启后自动读取，不写入网页源码或项目文件。服务端默认使用**华北2（北京）**的 `qwen3.8-flash`；其他地域可用下面的手动配置方式。知识问答以聊天窗口呈现，每个页面仅保存上一条补全后的问题；刷新或点击“新对话”会清空。追问有歧义时要求用户补充编号；问题和匹配到的参考条目会发给在线模型。故障诊断无需调用模型。
+首次运行 `configure_local.py` 时，按终端的隐藏输入提示保存 Key；以后启动只需运行 `python app.py`。打开 `http://127.0.0.1:8765/`，即可依次体验工艺介绍、知识问答和故障诊断。检索索引包含本机路径，因此首次克隆到新电脑后需要执行一次 `python retrieve_chunks.py build`。
 
-也可手动设置 `TEP_LLM_API_KEY`、`TEP_LLM_BASE_URL`、`TEP_LLM_MODEL` 三个环境变量，再运行 `python app.py`。
+Key 保存在当前用户的本地配置文件，不写入仓库或网页源码。也可以在服务端设置 `TEP_LLM_API_KEY`、`TEP_LLM_BASE_URL` 和 `TEP_LLM_MODEL` 环境变量。这里需要的是百炼模型 API Key，不是阿里云 AccessKey ID/Secret。
 
-若需要保存诊断的完整 JSON 结果，运行 `python diagnose.py`；例如 `python diagnose.py --samples 200 --lag 3` 可以比较不同时间窗。
+## 技术与项目文档
 
-诊断默认读取公开的 `data/raw/d07_te.dat`，从第 161 个采样点开始；变量采用论文实验中选出的 X4、X7、X13、X16、X20、X45、X46。
+- **过程介绍：** SVG 工艺图、设备交互和循环动画。
+- **知识问答：** 结构化知识手册切分、检索、追问补全、在线大模型生成和资料引用。
+- **故障诊断：** `scikit-learn` 核岭回归比较预测误差，筛选格兰杰预测关系，并展示关系图与候选路径。当前案例使用 IDV(7) 数据中的 7 个变量；这是论文方法的最小工程版本，不能视为完整复现。
 
-知识问答现已使用 [TEP_SOURCE_MAP.md](TEP_SOURCE_MAP.md) 切分出的110个片段，加载本地索引，通过编号/意图规则和追问补全检索前5块，再交给在线模型。明显偏题、歧义或无结果时不调用模型；分别提示范围外、需要澄清或资料不足；模型阅读资料后也可以明确弃答；引用可展开到片段正文与来源位置。原 knowledge.json 保留作旧版记录，不再参与当前问答。诊断功能调用第三方库 `scikit-learn` 的 `KernelRidge`，默认使用故障后的 100 个采样点。
-
-诊断图升级说明见 [DIAGNOSIS_GRAPHS.md](DIAGNOSIS_GRAPHS.md)：分析后展示关系矩阵、有向图、统计反馈环与候选传播路径，且不刷新聊天窗口。点击候选路径可联动高亮有向图，默认显示3条，其余折叠。计算依据保留在折叠区，说明预测误差降低和排序的含义。
-
-## 如何读结果
-
-IDV(7) 的仿真设定是 C 进料压力损失；X4 是混合进料流量，X45 是相应阀门开度。算法只能评估记录变量之间的**时序预测关系**，不能直接观测或证明压力损失。X4 与 X45 可能形成控制反馈，所以候选并列是可以讨论的结果。
-
-100 点和 200 点的分析可能给出不同的排名。时序测试点也可能彼此相关，因此本版 p/q 值只作探索性参考。不要把单次排名写成“已确认物理根因”；面试展示时应同时说明数据窗口、参数和上述限制。
-
-诊断是论文方法的最小工程版；论文中 PCA 变量选择、BIC 选阶、FIR 滤波和 20 点样本结果尚未复现。在线问答已通过本地模拟测试及真实模型网页连续问答验证，详情见 [本轮接入记录](WEB_RAG_RELEASE.md)。这只是本地单用户版本，尚不能据此认定生产验收通过。
-
-数据来源及检查记录见 [data/README.md](data/README.md)。
-
-后续知识库、界面和诊断的迭代顺序及验收点见 [ITERATION_PLAN.md](ITERATION_PLAN.md)。
-
-## GitHub Pages 公开预览
-
-仓库的 `docs/` 目录可发布为 GitHub Pages 页面。它保留交互式工艺图，并提供当前程序对9组采样点数/时滞参数预先计算的诊断结果。运行 `python3 export_pages.py` 可重新生成页面和结果。GitHub Pages 无法运行 Python，也不能安全保存模型 API Key，因此公开预览中的在线问答暂不可用；完整三功能版本可按上面的步骤在本机运行。接入独立后端后应将 Key 放在后端环境变量中，不要写进公开源码或浏览器脚本。
-
-已上线地址和后端接入方式见 [双语部署说明](DEPLOYMENT.md)。
+制作过程、关键实现、结果限制和面试追问见[中文技术手册](docs/TECHNICAL_GUIDE_ZH.md)及 [English technical overview](docs/TECHNICAL_OVERVIEW_EN.md)。部署方式见[双语部署说明](DEPLOYMENT.md)，数据来源见[数据说明](data/README.md)。本地回归检查可运行 `python -m unittest discover -q`。
 
 ## English
 
-### Overview
+TEP Fault Assistant is a web application built around the Tennessee Eastman Process (TEP). Its three sections follow one workflow: **understand the process → ask a technical question → explore fault data**.
 
-TEP Fault Assistant combines three features in one web interface:
+### What is on the page?
 
-1. An interactive SVG overview of the Tennessee Eastman Process, with an eight-second material-flow animation.
-2. A domain question-answering assistant. It retrieves relevant passages from a curated TEP handbook and asks an online language model to answer with source references.
-3. A root-cause exploration tool for the IDV(7) fault data. It compares full and restricted kernel-ridge predictors, filters Granger-predictive relationships, and displays candidate root variables, a directed graph, and candidate propagation paths.
+**01 Process overview.** An interactive SVG diagram explains the reactor, condenser, vapor–liquid separator, recycle compressor, and stripper. An approximately eight-second loop shows material moving from feed to product. Click a device to see its role and connected streams.
 
-The intended workflow is **understand the process → check a technical question → inspect the fault data**. The graph reports predictive relationships under a chosen window and model; it does not by itself prove a physical root cause.
+**02 Knowledge assistant.** Ask about the process, equipment, variables, or predefined faults. The application retrieves passages from its TEP handbook and sends the relevant material to an online language model, which answers with expandable source references. It supports limited follow-up questions and says when the available material is insufficient.
 
-### Local setup
+**03 Root-cause exploration.** Using the IDV(7) simulated fault, choose a post-fault sample window and time lag, then start the analysis. The page shows candidate root variables, a directed graph of Granger-predictive relationships, and candidate propagation paths. Selecting a path highlights it in the graph. These are predictive clues under the selected settings, **not proof of physical causality**.
+
+### How to use it
+
+Open the [GitHub Pages preview](https://corookie.github.io/tep-fault-agent/) to explore the process diagram and nine precomputed diagnosis settings. Online Q&A is unavailable in that static preview. Run the project locally for all three features:
 
 ```bash
+git clone https://github.com/corookie/tep-fault-agent.git
+cd tep-fault-agent
 python -m pip install -r requirements.txt
-python retrieve_chunks.py build  # Rebuild the local retrieval index after cloning.
-python configure_local.py  # First run only; enter the model API key using the hidden prompt.
+python retrieve_chunks.py build
+python configure_local.py
 python app.py
 ```
 
-Open `http://127.0.0.1:8765/`. The server reads the API key from a private file in the user's home directory. Alternatively, configure `TEP_LLM_API_KEY`, `TEP_LLM_BASE_URL`, and `TEP_LLM_MODEL` in the server environment. Never place the key in browser JavaScript or the repository.
+On the first run, `configure_local.py` asks for an Alibaba Cloud Bailian **model API key** through a hidden terminal prompt. After that, start the server with `python app.py` and open `http://127.0.0.1:8765/`. The key stays in a private local configuration file, never in the repository or browser code. Rebuild the retrieval index once after cloning because it contains local file paths. Server-side environment variables `TEP_LLM_API_KEY`, `TEP_LLM_BASE_URL`, and `TEP_LLM_MODEL` are also supported.
 
-The handbook is split into 110 structured passages. Retrieval uses character-level TF-IDF plus entity and intent rules, then sends up to five passages to the language model. A limited follow-up resolver handles cases such as “And fault 15?” after a question about IDV(14). The diagnosis uses the seven variables X4, X7, X13, X16, X20, X45, and X46, starting at sample 161 of the public IDV(7) data.
+### Implementation and documentation
 
-Run `python -m unittest discover -q` for the local regression suite. Read the [English technical overview](docs/TECHNICAL_OVERVIEW_EN.md) or the [full Chinese implementation and interview guide](docs/TECHNICAL_GUIDE_ZH.md). Other detailed project notes are currently in Chinese. Data provenance is in [data/README.md](data/README.md).
+The process view uses SVG and browser animation. The assistant combines structured handbook retrieval with an online language model and cited answers. The diagnosis compares kernel-ridge predictors to identify Granger-predictive relationships in seven IDV(7) variables, then visualizes candidate paths. This is a minimal engineering version of the thesis method, not a full reproduction.
 
-### Deployment note
-
-GitHub Pages can publish the static web interface, but it cannot run Python or keep an API key secret. Online Q&A therefore requires a separate backend. Keep the API key as a server-side secret on that backend; the static page must never contain it. The repository includes the original local Python application so the full three-feature version remains reproducible.
-
-See the [bilingual deployment guide](DEPLOYMENT.md) for the live preview, configuration, and backend integration steps.
+See the [Chinese implementation and interview guide](docs/TECHNICAL_GUIDE_ZH.md), [English technical overview](docs/TECHNICAL_OVERVIEW_EN.md), [bilingual deployment guide](DEPLOYMENT.md), and [data provenance](data/README.md). Run `python -m unittest discover -q` for the local regression suite.
