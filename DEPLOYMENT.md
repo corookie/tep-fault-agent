@@ -2,11 +2,20 @@
 
 ## 中文
 
+### 当前部署
+
+- 前端：<https://corookie.github.io/tep-fault-agent/>
+- Python 后端：<https://tep-fault-agent-api.onrender.com>
+- 健康检查：<https://tep-fault-agent-api.onrender.com/health>
+- Render：免费 Python 3.12 服务，Singapore 区域。模型密钥和独立访问口令保存在服务端环境变量。
+
+网页首次问答或诊断会询问访问口令。项目持有者本机的口令保存在 `~/.tep-fault-agent/render-access-token`；请仅提供给获准使用的人，不要提交到仓库。免费实例闲置后会休眠，首次请求可能等待约一分钟或更久；网页超时为两分钟。当前使用公开仓库来源，更新后端代码后应在 Render 控制台确认是否触发部署，必要时选择 Manual Deploy → Deploy latest commit。
+
 ### 当前公开页面
 
 GitHub Pages 从 `main` 分支的 `docs/` 目录发布：<https://corookie.github.io/tep-fault-agent/>。
 
-该页面使用同一套工艺 SVG、样式和交互代码。未接入后端时，诊断的50/100/200点与1/2/3阶时滞共9组结果由 `export_pages.py` 在构建时调用当前 Python 算法生成，页面加载相应 JSON。接入后端后，问答与诊断均请求在线 Python 服务。更新算法后，先运行 `python3 export_pages.py`，再提交生成文件。
+该页面使用同一套工艺 SVG、样式和交互代码。未接入后端时，诊断的50/100/200点与1/2/3阶时滞共9组结果由 `export_pages.py` 在构建时调用当前 Python 算法生成，页面加载相应 JSON。接入后端后，问答与诊断均请求在线 Python 服务。更新算法后，先运行 `python3 export_pages.py --api-base https://tep-fault-agent-api.onrender.com`，再提交生成文件。
 
 ### 在线问答为什么需要独立服务
 
@@ -43,9 +52,18 @@ git push
 
 ## English
 
-### Published preview
+### Current deployment
 
-GitHub Pages serves the `docs/` folder on `main` at <https://corookie.github.io/tep-fault-agent/>. The process SVG remains interactive. The nine supported diagnosis parameter combinations are generated ahead of time by the current Python implementation and served as JSON. Local mode performs the calculation on demand; the Pages preview loads the matching precomputed result.
+- Frontend: <https://corookie.github.io/tep-fault-agent/>
+- Python backend: <https://tep-fault-agent-api.onrender.com>
+- Health endpoint: <https://tep-fault-agent-api.onrender.com/health>
+- Render: free Python 3.12 service in Singapore, with both secrets stored in server-side environment variables.
+
+The owner’s local access-token file is `~/.tep-fault-agent/render-access-token`; share it only with approved users and never commit it. The free instance sleeps when idle, and waking it may take around a minute or longer. The browser timeout is two minutes. With the public repository source, verify that a deployment starts after backend changes; otherwise use Manual Deploy → Deploy latest commit.
+
+### Published website
+
+GitHub Pages serves the `docs/` folder on `main` at <https://corookie.github.io/tep-fault-agent/>. The process SVG remains interactive. Q&A and diagnosis use the hosted Python backend when an API base is configured. Without an API base, the exported page loads one of nine precomputed diagnosis results. Local mode also calculates on demand.
 
 ### Hosting online Q&A
 

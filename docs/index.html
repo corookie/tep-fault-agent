@@ -65,7 +65,7 @@
 </div><p class="guide-note">回答下方的“查看依据”可展开参考资料。追问时请尽量写明变量或故障编号。</p>
 <a class="text-link" href="#diagnosis">进入 IDV(7) 故障诊断 <span aria-hidden="true">↓</span></a></aside>
 <section class="chat card" aria-label="故障知识聊天">
-<p class="deployment-note" role="status">此公开页面可体验工艺动画和预计算的故障诊断结果（9组参数）。在线知识问答暂未启用；本地运行版本可使用完整功能。</p><div class="chat-toolbar"><span><i class="quiet-dot" aria-hidden="true"></i> TEP 知识问答</span><button type="button" id="reset-chat" class="quiet-button">新对话</button></div>
+<p class="deployment-note" role="status">此页面可体验工艺动画、在线知识问答和实时故障诊断。问答与诊断需要访问口令，口令与模型密钥不同。</p><div class="chat-toolbar"><span><i class="quiet-dot" aria-hidden="true"></i> TEP 知识问答</span><button type="button" id="reset-chat" class="quiet-button">新对话</button></div>
 <div id="chat-log" class="chat-log" role="log" aria-live="polite" aria-relevant="additions text">
 <div class="message assistant">你好，我是TEP智能助手，可以回答工艺流程、变量含义和预设故障相关问题。例如：IDV(7)是什么故障？</div>
 </div>
@@ -86,8 +86,8 @@
 <div id="diagnose-output" aria-live="polite" aria-busy="false" tabindex="-1"></div>
 <div class="diagnose-empty" id="diagnose-empty"><div><h3>尚未运行诊断</h3><p>点击“开始诊断”，生成可能的故障根源变量、格兰杰因果关系图和候选故障传播路径。</p></div></div>
 </section>
-<footer class="app-footer"><span>TEP 故障助手<small>TEP过程介绍 / 智能问答 / 故障根源诊断</small></span><p>格兰杰因果关系反映时序预测作用，实际故障根因需结合工艺和实验验证。<br><span id="configuration-status">GitHub Pages 演示：知识问答需独立后端</span> · 公开交互演示</p><a href="#tep-process" aria-label="回到TEP过程介绍">回到顶部 ↑</a></footer>
-</main><script>window.TEP_DEPLOYMENT = {"staticMode": true, "apiBase": ""};</script><script>
+<footer class="app-footer"><span>TEP 故障助手<small>TEP过程介绍 / 智能问答 / 故障根源诊断</small></span><p>格兰杰因果关系反映时序预测作用，实际故障根因需结合工艺和实验验证。<br><span id="configuration-status">GitHub Pages：在线问答与实时诊断已接入</span> · 公开交互演示</p><a href="#tep-process" aria-label="回到TEP过程介绍">回到顶部 ↑</a></footer>
+</main><script>window.TEP_DEPLOYMENT = {"staticMode": true, "apiBase": "https://tep-fault-agent-api.onrender.com"};</script><script>
 (() => {
   const panel = document.getElementById('tep-process');
   if (!panel) return;

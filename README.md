@@ -22,7 +22,9 @@
 
 ### 在线体验
 
-打开 [GitHub Pages 预览](https://corookie.github.io/tep-fault-agent/)。工艺图可以交互；诊断部分提供 9 组预先计算的参数组合，供浏览和比较。**在线知识问答在此预览中不可用**，因为 GitHub Pages 只能托管静态文件，无法运行 Python 服务或安全保存模型 API Key。要使用全部三个功能，请在本地运行。
+打开 [TEP 故障助手](https://corookie.github.io/tep-fault-agent/)，可使用工艺介绍、在线知识问答和实时故障诊断。前端由 GitHub Pages 托管，问答与诊断请求 [Render 上的 Python 后端](https://tep-fault-agent-api.onrender.com)。首次提交问题或诊断时，输入项目持有者提供的访问口令；该口令与模型 API Key 不同，只在当前浏览器会话中保存。
+
+后端使用 Render 免费实例，闲置后会休眠；重新访问时可能需要等待约一分钟或更久。网页最多等待两分钟，超时可稍后重试。未配置后端地址时，导出页面仍支持 9 组预计算诊断结果。
 
 ### 本地运行完整版本
 
@@ -63,7 +65,9 @@ TEP Fault Assistant is a web application built around the Tennessee Eastman Proc
 
 ### How to use it
 
-Open the [GitHub Pages preview](https://corookie.github.io/tep-fault-agent/) to explore the process diagram and nine precomputed diagnosis settings. Online Q&A is unavailable in that static preview. Run the project locally for all three features:
+Open [TEP Fault Assistant](https://corookie.github.io/tep-fault-agent/) for the process diagram, online Q&A, and live diagnosis. GitHub Pages hosts the frontend; a [Python service on Render](https://tep-fault-agent-api.onrender.com) handles Q&A and diagnosis. Enter the project owner’s access token on the first protected request. This token is separate from the model API key and is stored only for the current browser session.
+
+The free Render instance sleeps when idle; waking it can take around a minute or longer. The page waits up to two minutes; retry later if it times out. Exports without a backend URL still support nine precomputed diagnosis settings. To run locally:
 
 ```bash
 git clone https://github.com/corookie/tep-fault-agent.git
