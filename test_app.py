@@ -17,8 +17,10 @@ import app
 
 
 class AppTests(unittest.TestCase):
-    def test_hosted_api_requires_access_token_without_exposing_model_key(self) -> None:
-        with patch.dict(os.environ, {"TEP_ACCESS_TOKEN": "test-access-only"}):
+    def test_hosted_api_is_public_without_exposing_model_key(self) -> None:
+        # 旧部署变量即使尚未删除，也不能继续阻止公开访问。
+        with patch.dict(os.environ, {"TEP_ACCESS_TOKEN": "obsolete-access-only",
+                                     "TEP_LLM_API_KEY": "sk-private-model-only"}):
             server = ThreadingHTTPServer(("127.0.0.1", 0), app.Handler)
             thread = Thread(target=server.serve_forever, daemon=True)
             thread.start()
@@ -26,17 +28,17 @@ class AppTests(unittest.TestCase):
             try:
                 self.assertEqual(json.load(urlopen(root + "health")), {"status": "ok"})
                 page = urlopen(root).read().decode("utf-8")
-                self.assertNotIn("test-access-only", page)
-                with patch.object(app, "answer_question", return_value={"answer": "ok"}) as answer:
+                self.assertNotIn("obsolete-access-only", page)
+                self.assertNotIn("sk-private-model-only", page)
+                self.assertNotIn("window.prompt", page)
+                self.assertNotIn("headers.Authorization", page)
+                with patch.object(app, "answer_question", return_value={"answer": "ok", "sources": []}) as answer, \
+                        patch.object(app, "render_result", return_value="<section>diagnosis</section>") as diagnosis:
                     for route in ("api/ask", "ask", "api/diagnose", "run"):
-                        with self.assertRaises(HTTPError) as error:
-                            urlopen(Request(root + route, data=b"question=X4"))
-                        self.assertEqual(error.exception.code, 401)
-                    answer.assert_not_called()
-                    request = Request(root + "api/ask", data=b"question=X4",
-                                      headers={"Authorization": "Bearer test-access-only"})
-                    self.assertEqual(json.load(urlopen(request))["answer"], "ok")
-                    answer.assert_called_once()
+                        with urlopen(Request(root + route, data=b"question=X4")) as response:
+                            self.assertEqual(response.status, 200)
+                    self.assertEqual(answer.call_count, 2)
+                    self.assertEqual(diagnosis.call_count, 2)
             finally:
                 server.shutdown()
                 server.server_close()
@@ -89,7 +91,7 @@ class AppTests(unittest.TestCase):
                 try:
                     page = urlopen(root).read().decode("utf-8")
                     self.assertIn('id="chat-log"', page)
-                    self.assertIn("protectedPost('/api/ask'", page)
+                    self.assertIn("postApi('/api/ask'", page)
                     self.assertNotIn('id="config-form"', page)
                     self.assertNotIn('type="password"', page)
                     self.assertNotIn('config_token', page)

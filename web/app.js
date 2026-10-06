@@ -4,23 +4,12 @@ const deployment = window.TEP_DEPLOYMENT || {};
 function apiUrl(path) {
   return (deployment.apiBase || '') + path;
 }
-async function protectedPost(path, body, signal) {
-  const storageKey = 'tep-access-token';
-  for (let attempt = 0; attempt < 2; attempt += 1) {
-    const token = sessionStorage.getItem(storageKey);
-    const headers = {'Content-Type': 'application/x-www-form-urlencoded'};
-    if (token) headers.Authorization = `Bearer ${token}`;
-    const response = await fetch(apiUrl(path), {
-      method: 'POST', headers, body, signal, cache: 'no-store'
-    });
-    if (response.status !== 401) return response;
-    sessionStorage.removeItem(storageKey);
-    if (attempt === 1) throw new Error('访问口令不正确，请重新提交后再试。');
-    const entered = window.prompt('请输入本项目的访问口令（不是模型 API Key）：');
-    if (entered === null) throw new Error('已取消输入访问口令。');
-    if (!entered.trim()) throw new Error('访问口令不能为空。');
-    sessionStorage.setItem(storageKey, entered.trim());
-  }
+async function postApi(path, body, signal) {
+  return fetch(apiUrl(path), {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body, signal, cache: 'no-store'
+  });
 }
 let lastQuestion = '';
 const resetButton = document.getElementById('reset-chat');
@@ -86,7 +75,7 @@ form.addEventListener('submit', async (event) => {
     if (deployment.staticMode && !deployment.apiBase) {
       throw new Error('GitHub Pages 目前仅提供工艺图和故障诊断演示。在线知识问答需要部署独立的安全后端。');
     }
-    const response = await protectedPost('/api/ask',
+    const response = await postApi('/api/ask',
       new URLSearchParams({question, previous_question: lastQuestion}), controller.signal);
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || '问答失败，请重试');
@@ -145,7 +134,7 @@ diagnoseForm.addEventListener('submit', async (event) => {
   try {
     const response = deployment.staticMode && !deployment.apiBase
       ? await fetch(`./diagnosis/${body.get('samples')}-${body.get('lag')}.json`, {signal: controller.signal, cache: 'no-store'})
-      : await protectedPost('/api/diagnose', body, controller.signal);
+      : await postApi('/api/diagnose', body, controller.signal);
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || '诊断失败');
     // HTML仅来自本服务的转义模板和诊断数值，不使用模型生成的HTML。

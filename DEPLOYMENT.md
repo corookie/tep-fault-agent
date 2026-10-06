@@ -7,9 +7,9 @@
 - 前端：<https://corookie.github.io/tep-fault-agent/>
 - Python 后端：<https://tep-fault-agent-api.onrender.com>
 - 健康检查：<https://tep-fault-agent-api.onrender.com/health>
-- Render：免费 Python 3.12 服务，Singapore 区域。模型密钥和独立访问口令保存在服务端环境变量。
+- Render：免费 Python 3.12 服务，Singapore 区域。模型密钥保存在服务端环境变量，问答与诊断接口公开访问。
 
-网页首次问答或诊断会询问访问口令。项目持有者本机的口令保存在 `~/.tep-fault-agent/render-access-token`；请仅提供给获准使用的人，不要提交到仓库。免费实例闲置后会休眠，首次请求可能等待约一分钟或更久；网页超时为两分钟。当前使用公开仓库来源，更新后端代码后应在 Render 控制台确认是否触发部署，必要时选择 Manual Deploy → Deploy latest commit。
+网页无需登录或访问口令，所有人都可以运行问答和诊断。免费实例闲置后会休眠，首次请求可能等待约一分钟或更久；网页超时为两分钟。当前使用公开仓库来源，更新后端代码后应在 Render 控制台确认是否触发部署，必要时选择 Manual Deploy → Deploy latest commit。
 
 ### 当前公开页面
 
@@ -35,9 +35,8 @@ GitHub Pages 只托管静态文件，不运行 Python。浏览器脚本对所有
 | `TEP_LLM_BASE_URL` | 默认百炼兼容接口地址；可在平台上覆盖 |
 | `TEP_LLM_MODEL` | 默认 `qwen3.8-flash`；可在平台上覆盖 |
 | `TEP_ALLOWED_ORIGIN` | `https://corookie.github.io`，只允许该浏览器来源读取跨域响应 |
-| `TEP_ACCESS_TOKEN` | 另设一串随机访问口令，放在服务端私密环境变量中；它不是模型 API Key |
 
-仓库根目录的 `render.yaml` 已设置免费 Python 服务、依赖安装、检索索引构建、启动命令和健康检查；`.python-version` 固定 Python 3.12。部署时需在 Render 后台分别填写 `TEP_LLM_API_KEY` 与 `TEP_ACCESS_TOKEN`，不要提交它们的值。Render 上缺少任一项时，服务会拒绝启动。网页首次调用线上接口时会询问访问口令，并仅在当前浏览器会话中保存；访问口令不能代替模型服务的消费上限。
+仓库根目录的 `render.yaml` 已设置免费 Python 服务、依赖安装、检索索引构建、启动命令和健康检查；`.python-version` 固定 Python 3.12。部署时在 Render 后台填写 `TEP_LLM_API_KEY`，不要提交其值。缺少模型密钥时，服务会拒绝启动。接口默认公开，所有人均可使用。旧部署中的 `TEP_ACCESS_TOKEN` 可以删除，代码不再读取它。
 
 后端有正式 HTTPS 域名后，在项目目录执行：
 
@@ -48,7 +47,7 @@ git commit -m "Connect hosted Q&A backend"
 git push
 ```
 
-这里的`--api-base`是公开后端地址，不能包含 Key。后端访问口令校验所有计算与问答 POST 请求；只设置 CORS 并不能阻止别人从服务器直接请求接口。投入使用后仍应设置模型消费上限并检查托管服务日志。不要把模型密钥放到 GitHub Pages、网页本地存储或 GitHub Actions 构建产物里。
+这里的`--api-base`是公开后端地址，不能包含 Key。问答与诊断 POST 请求无需认证。CORS 限制浏览器可读取响应的来源，不是账号权限控制。公开问答使用项目持有者的模型额度，请设置模型消费上限并检查托管服务日志。不要把模型密钥放到 GitHub Pages、网页本地存储或 GitHub Actions 构建产物里。
 
 ## English
 
@@ -57,9 +56,9 @@ git push
 - Frontend: <https://corookie.github.io/tep-fault-agent/>
 - Python backend: <https://tep-fault-agent-api.onrender.com>
 - Health endpoint: <https://tep-fault-agent-api.onrender.com/health>
-- Render: free Python 3.12 service in Singapore, with both secrets stored in server-side environment variables.
+- Render: free Python 3.12 service in Singapore, with the model API key stored in server-side environment variables and public Q&A and diagnosis endpoints.
 
-The owner’s local access-token file is `~/.tep-fault-agent/render-access-token`; share it only with approved users and never commit it. The free instance sleeps when idle, and waking it may take around a minute or longer. The browser timeout is two minutes. With the public repository source, verify that a deployment starts after backend changes; otherwise use Manual Deploy → Deploy latest commit.
+All visitors can use Q&A and diagnosis without signing in or entering an access token. The free instance sleeps when idle, and waking it may take around a minute or longer. The browser timeout is two minutes. With the public repository source, verify that a deployment starts after backend changes; otherwise use Manual Deploy → Deploy latest commit.
 
 ### Published website
 
@@ -67,6 +66,6 @@ GitHub Pages serves the `docs/` folder on `main` at <https://corookie.github.io/
 
 ### Hosting online Q&A
 
-Pages cannot execute Python or protect an API key. Use a separate Python host. The repository includes a free-plan `render.yaml` that installs dependencies, rebuilds the retrieval index, starts `app.py`, and checks `/health`. Set `TEP_HOST=0.0.0.0`, use the provider's `PORT`, store `TEP_LLM_API_KEY` and a separate random `TEP_ACCESS_TOKEN` as private runtime variables, and set `TEP_ALLOWED_ORIGIN=https://corookie.github.io`. Render deployments refuse to start without both secrets. `TEP_LLM_BASE_URL` and `TEP_LLM_MODEL` may override the defaults.
+Pages cannot execute Python or protect an API key. Use a separate Python host. The repository includes a free-plan `render.yaml` that installs dependencies, rebuilds the retrieval index, starts `app.py`, and checks `/health`. Set `TEP_HOST=0.0.0.0`, use the provider's `PORT`, store `TEP_LLM_API_KEY` as a private runtime variable, and set `TEP_ALLOWED_ORIGIN=https://corookie.github.io`. Render deployments refuse to start without the model API key. The endpoints are public; the old `TEP_ACCESS_TOKEN` variable is no longer read and can be deleted. `TEP_LLM_BASE_URL` and `TEP_LLM_MODEL` may override the defaults.
 
-Once the backend has an HTTPS origin, run `python3 export_pages.py --api-base https://YOUR-BACKEND-HOST` and push the generated `docs/` files. The API base is public; the model key never enters the site output. The page asks for the separate access token on its first online request and stores it only for that browser session. Both Q&A and diagnosis then run on the backend. Configure model spending limits and inspect service logs as well; CORS alone does not block direct server-to-server calls.
+Once the backend has an HTTPS origin, run `python3 export_pages.py --api-base https://YOUR-BACKEND-HOST` and push the generated `docs/` files. The API base is public; the model key never enters the site output. No login or access token is required. Both Q&A and diagnosis run on the backend. Public Q&A consumes the project owner’s model quota. Configure model spending limits and inspect service logs; CORS restricts browser response access and is not authentication.

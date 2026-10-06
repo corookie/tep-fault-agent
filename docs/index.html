@@ -65,7 +65,7 @@
 </div><p class="guide-note">回答下方的“查看依据”可展开参考资料。追问时请尽量写明变量或故障编号。</p>
 <a class="text-link" href="#diagnosis">进入 IDV(7) 故障诊断 <span aria-hidden="true">↓</span></a></aside>
 <section class="chat card" aria-label="故障知识聊天">
-<p class="deployment-note" role="status">此页面可体验工艺动画、在线知识问答和实时故障诊断。问答与诊断需要访问口令，口令与模型密钥不同。</p><div class="chat-toolbar"><span><i class="quiet-dot" aria-hidden="true"></i> TEP 知识问答</span><button type="button" id="reset-chat" class="quiet-button">新对话</button></div>
+<p class="deployment-note" role="status">此页面可直接体验工艺动画、在线知识问答和实时故障诊断，无需登录或访问口令。</p><div class="chat-toolbar"><span><i class="quiet-dot" aria-hidden="true"></i> TEP 知识问答</span><button type="button" id="reset-chat" class="quiet-button">新对话</button></div>
 <div id="chat-log" class="chat-log" role="log" aria-live="polite" aria-relevant="additions text">
 <div class="message assistant">你好，我是TEP智能助手，可以回答工艺流程、变量含义和预设故障相关问题。例如：IDV(7)是什么故障？</div>
 </div>
@@ -152,23 +152,12 @@ const deployment = window.TEP_DEPLOYMENT || {};
 function apiUrl(path) {
   return (deployment.apiBase || '') + path;
 }
-async function protectedPost(path, body, signal) {
-  const storageKey = 'tep-access-token';
-  for (let attempt = 0; attempt < 2; attempt += 1) {
-    const token = sessionStorage.getItem(storageKey);
-    const headers = {'Content-Type': 'application/x-www-form-urlencoded'};
-    if (token) headers.Authorization = `Bearer ${token}`;
-    const response = await fetch(apiUrl(path), {
-      method: 'POST', headers, body, signal, cache: 'no-store'
-    });
-    if (response.status !== 401) return response;
-    sessionStorage.removeItem(storageKey);
-    if (attempt === 1) throw new Error('访问口令不正确，请重新提交后再试。');
-    const entered = window.prompt('请输入本项目的访问口令（不是模型 API Key）：');
-    if (entered === null) throw new Error('已取消输入访问口令。');
-    if (!entered.trim()) throw new Error('访问口令不能为空。');
-    sessionStorage.setItem(storageKey, entered.trim());
-  }
+async function postApi(path, body, signal) {
+  return fetch(apiUrl(path), {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body, signal, cache: 'no-store'
+  });
 }
 let lastQuestion = '';
 const resetButton = document.getElementById('reset-chat');
@@ -234,7 +223,7 @@ form.addEventListener('submit', async (event) => {
     if (deployment.staticMode && !deployment.apiBase) {
       throw new Error('GitHub Pages 目前仅提供工艺图和故障诊断演示。在线知识问答需要部署独立的安全后端。');
     }
-    const response = await protectedPost('/api/ask',
+    const response = await postApi('/api/ask',
       new URLSearchParams({question, previous_question: lastQuestion}), controller.signal);
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || '问答失败，请重试');
@@ -293,7 +282,7 @@ diagnoseForm.addEventListener('submit', async (event) => {
   try {
     const response = deployment.staticMode && !deployment.apiBase
       ? await fetch(`./diagnosis/${body.get('samples')}-${body.get('lag')}.json`, {signal: controller.signal, cache: 'no-store'})
-      : await protectedPost('/api/diagnose', body, controller.signal);
+      : await postApi('/api/diagnose', body, controller.signal);
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || '诊断失败');
     // HTML仅来自本服务的转义模板和诊断数值，不使用模型生成的HTML。

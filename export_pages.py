@@ -46,7 +46,7 @@ def main() -> None:
     page = page.replace("{configuration_status}", status)
     page = page.replace("{diagnose_result}", "").replace("{qa_result}", "")
     page = page.replace(" · 本地研究演示", " · 公开交互演示")
-    note = ("此页面可体验工艺动画、在线知识问答和实时故障诊断。问答与诊断需要访问口令，口令与模型密钥不同。"
+    note = ("此页面可直接体验工艺动画、在线知识问答和实时故障诊断，无需登录或访问口令。"
             if api_base else
             "此公开页面可体验工艺动画和预计算的故障诊断结果（9组参数）。在线知识问答暂未启用；本地运行版本可使用完整功能。")
     page = page.replace(

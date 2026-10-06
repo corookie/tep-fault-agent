@@ -13,5 +13,3 @@ services:
         value: https://corookie.github.io
       - key: TEP_LLM_API_KEY
         sync: false
-      - key: TEP_ACCESS_TOKEN
-        sync: false
