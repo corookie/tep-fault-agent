@@ -10,3 +10,4 @@
 @media(max-width:700px){.process-next{align-items:flex-start;flex-direction:column}.network-plot svg{min-width:0}.path-explorer.is-enlarged .network-plot svg{min-width:700px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before{transition:none!important}.message.loading:before{animation:none}}
 .deployment-note { margin: 0 0 1rem; padding: .8rem 1rem; border: 1px solid #d4cab7; border-radius: 12px; background: #f7f1e8; color: #5d5548; line-height: 1.5; }
+.citation-marker{font-size:.68em;line-height:0;vertical-align:super;color:var(--accent);margin:0 1px;white-space:nowrap}

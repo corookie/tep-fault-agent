@@ -20,6 +20,20 @@ class QATests(unittest.TestCase):
         self.assertEqual(result['hits'][0]['unit_id'], 'STREAM-06')
         self.assertEqual(result['status'], 'ready')
 
+    def test_examples_keep_required_evidence_after_topic_switch(self):
+        questions = [
+            ('IDV(7)是什么故障？', {'FAULT-IDV07'}),
+            ('X4与X45有什么区别？', {'VAR-X04','VAR-X45'}),
+            ('汽提塔有什么作用？', {'EQUIP-STRIPPER'}),
+        ]
+        for previous in ['', *(q for q, _ in questions)]:
+            for question,required in questions:
+                with self.subTest(previous=previous, question=question):
+                    packet=evidence_packet(question,previous)
+                    self.assertEqual(packet['status'],'ready')
+                    self.assertFalse(packet['analysis']['context_used'])
+                    self.assertTrue(required.issubset({h['unit_id'] for h in packet['hits'][:2]}))
+
     def test_number_character_in_ordinary_word_does_not_force_clarification(self):
         p = evidence_packet('这份TEP数据的组分分析值为何连续几行一样？')
         self.assertEqual(p['status'], 'ready')

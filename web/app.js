@@ -29,12 +29,35 @@ resetButton.addEventListener('click', () => {
 function addMessage(role, content, sources = []) {
   const bubble = document.createElement('div');
   bubble.className = 'message ' + role;
-  bubble.textContent = content;
+  renderAnswer(bubble, content, sources);
   if (sources.length) {
     addSources(bubble, sources);
   }
   log.appendChild(bubble);
   return bubble;
+}
+function renderAnswer(bubble, content, sources = []) {
+  const references = new Map(sources.map(source => [source.marker, source]));
+  const fragment = document.createDocumentFragment();
+  let offset = 0;
+  // 只格式化可核对的引用，用文本节点保留模型正文，不解析模型生成的HTML。
+  for (const match of content.matchAll(/\[(\d+)\]/g)) {
+    fragment.append(document.createTextNode(content.slice(offset, match.index)));
+    const source = references.get(match[0]);
+    if (source) {
+      const marker = document.createElement('sup');
+      marker.className = 'citation-marker';
+      marker.textContent = match[0];
+      marker.setAttribute('aria-label', '参考依据 ' + match[1]);
+      marker.title = '参考依据 ' + match[1] + '：' + (source.title || source.id);
+      fragment.appendChild(marker);
+    } else {
+      fragment.append(document.createTextNode(match[0]));
+    }
+    offset = match.index + match[0].length;
+  }
+  fragment.append(document.createTextNode(content.slice(offset)));
+  bubble.replaceChildren(fragment);
 }
 function startChatTurn() {
   if (log.querySelector('.message.user')) {
@@ -102,7 +125,7 @@ form.addEventListener('submit', async (event) => {
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || '问答失败，请重试');
     reply.classList.remove('loading');
-    reply.textContent = data.answer;
+    renderAnswer(reply, data.answer, data.sources || []);
     if (data.sources && data.sources.length) {
       addSources(reply, data.sources);
     }

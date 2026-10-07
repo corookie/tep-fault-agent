@@ -41,7 +41,7 @@ def validate_question(question, label='问题'):
 
 
 def in_scope(analysis):
-    return bool(analysis['entities']) or bool(re.search(
+    return bool(analysis['entities'] or analysis.get('equipment_units')) or bool(re.search(
         r'TEP|TE过程|TE工艺|Tennessee|伊斯曼|反应器|汽提|分离器|冷凝器|压缩机|流股|操纵变量|组分|催化剂|故障|本项目',
         analysis['resolved_query'], re.I))
 

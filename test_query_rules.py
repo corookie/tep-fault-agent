@@ -59,6 +59,17 @@ class QueryRulesTests(unittest.TestCase):
         incidental={'unit_id':'FAULT-IDV21','kind':'fault','entities':['IDV(10)']}
         self.assertGreater(priority(direct,p)[0],priority(incidental,p)[0])
 
+    def test_named_equipment_and_numbered_subjects(self):
+        for name,unit in [('反应器','EQUIP-REACTOR'),('冷凝器','EQUIP-CONDENSER'),
+                          ('气液分离器','EQUIP-SEPARATOR'),('循环压缩机','EQUIP-COMPRESSOR'),
+                          ('汽提塔','EQUIP-STRIPPER'),('stripper','EQUIP-STRIPPER')]:
+            with self.subTest(name=name):
+                self.assertEqual(self.units(name+'有什么作用？'),[unit])
+        self.assertEqual(self.units('X22是汽提塔温度吗？'),['VAR-X22'])
+        self.assertEqual(self.units('流4进入反应器吗？'),['STREAM-04'])
+        self.assertEqual(set(self.units('冷凝器和分离器的区别？')),
+                         {'EQUIP-CONDENSER','EQUIP-SEPARATOR'})
+
 
 class RuleSearchTests(unittest.TestCase):
     @classmethod

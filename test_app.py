@@ -17,6 +17,17 @@ import app
 
 
 class AppTests(unittest.TestCase):
+    def test_citation_superscript_preserves_escaped_answer(self):
+        with patch.object(app,'answer_question',return_value={
+            'answer':'<script>unsafe</script> 正文[1] 未核对[99]',
+            'sources':[{'marker':'[1]','source':'测试来源','content':'测试资料'}],
+        }):
+            page=app.render_answer('测试问题')
+        self.assertIn('&lt;script&gt;unsafe&lt;/script&gt;',page)
+        self.assertNotIn('<script>',page)
+        self.assertIn('<sup class="citation-marker" aria-label="参考依据 1">[1]</sup>',page)
+        self.assertIn('未核对[99]',page)
+
     def test_hosted_api_is_public_without_exposing_model_key(self) -> None:
         # 旧部署变量即使尚未删除，也不能继续阻止公开访问。
         with patch.dict(os.environ, {"TEP_ACCESS_TOKEN": "obsolete-access-only",

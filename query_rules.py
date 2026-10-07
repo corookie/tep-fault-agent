@@ -2,8 +2,15 @@
 import re
 import unicodedata
 
-RULE_VERSION = '1.1.0'
+RULE_VERSION = '1.2.0'
 NUM = r'(?:\d+|[零〇一二两三四五六七八九十百]+)'
+EQUIPMENT_NAMES = {
+    'EQUIP-REACTOR': r'反应器|反应釜|(?<![A-Za-z0-9_])reactor(?![A-Za-z0-9_])',
+    'EQUIP-CONDENSER': r'冷凝器|(?<![A-Za-z0-9_])condenser(?![A-Za-z0-9_])',
+    'EQUIP-SEPARATOR': r'[汽气]液分离器|分离器|(?<![A-Za-z0-9_])separator(?![A-Za-z0-9_])',
+    'EQUIP-COMPRESSOR': r'(?:循环)?压缩机|(?<![A-Za-z0-9_])compressor(?![A-Za-z0-9_])',
+    'EQUIP-STRIPPER': r'[汽气]提塔|(?<![A-Za-z0-9_])stripper(?![A-Za-z0-9_])',
+}
 
 
 def number(text):
@@ -83,12 +90,13 @@ def parse_query(query):
     entities=list(unique.values())
     issues=[f"{e['raw']} 超出本手册编号范围或区间无效" for e in entities if not e['valid']]
     targets=list(dict.fromkeys(e['primary_unit'] for e in entities if e['valid'] and e['primary_unit']))
+    equipment_units=[unit for unit,pattern in EQUIPMENT_NAMES.items() if re.search(pattern,text,re.I)]
     if any(e['kind']=='xmv' and e['number']==12 and e['valid'] for e in entities):
         issues.append('XMV(12) 是搅拌器操纵量，但未记录在52列文件中；不映射为X53')
 
     # 意图只由词组与实体类型判断；不按Q01等题号或完整题目写特例。
     intent='general'; intent_kinds=[]
-    domain_context=bool(entities) or bool(re.search(r'TEP|TE过程|故障|反应器|汽提|分离器|冷凝|压缩机|物料|物流|流股|组分|本项目',text,re.I))
+    domain_context=bool(entities or equipment_units) or bool(re.search(r'TEP|TE过程|故障|反应器|汽提|分离器|冷凝|压缩机|物料|物流|流股|组分|本项目',text,re.I))
     if domain_context and not targets and re.search(r'反应式|化学反应|反应原料|惰性|催化剂|组分角色|反应生成',text):
         intent='chemistry';intent_kinds=['chemistry']
         reasons.append('询问组分角色或反应关系，优先化学反应说明')
@@ -114,6 +122,8 @@ def parse_query(query):
         intent='comparison'
     elif targets:
         intent='entity_lookup'
+    elif equipment_units:
+        intent='equipment_lookup';intent_kinds=['equipment']
     ambiguous=False
     if not entities and not counts and re.search(NUM,text):
         ambiguous=True
@@ -127,9 +137,13 @@ def parse_query(query):
         if e['valid']:
             retrieval_text+=' '+e['canonical']
     if targets:reasons.append('仅按片段unit_id识别主体，不把正文或entities中提到的编号当作主体')
+    # 有显式编号时仍以编号为主体；否则将点名设备定位到设备说明，避免被变量表淹没。
+    if not targets and equipment_units:
+        targets=equipment_units
+        reasons.append('设备名称匹配到设备说明条目，优先于仅提到设备的变量或流股')
     return {'parser_version':RULE_VERSION,'original_query':query,'normalized_query':text,
             'retrieval_query':retrieval_text.strip(),'entities':entities,'quantities':counts,
-            'intent':intent,'intent_kinds':intent_kinds,'primary_units':targets,
+            'intent':intent,'intent_kinds':intent_kinds,'primary_units':targets,'equipment_units':equipment_units,
             'ambiguous_number':ambiguous,'issues':issues,'reasons':reasons,'context_used':False}
 
 
@@ -140,7 +154,7 @@ def priority(chunk,parsed):
     if parsed['intent']=='composition_sum':
         return (3 if intent_match else 2 if direct else 0,
                 '组分求和解释' if intent_match else '编号主体' if direct else '文本匹配')
-    if direct:return 3,'编号主体精确匹配'
+    if direct:return 3,'主体条目精确匹配'
     if intent_match:
         # 未指明某条流时，完整总览优先于单独流股。
         if parsed['intent']=='process_topology' and not parsed['primary_units']:

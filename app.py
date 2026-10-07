@@ -4,6 +4,7 @@ import json
 from html import escape
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import os
+import re
 import tempfile
 from pathlib import Path
 from urllib.parse import parse_qs
@@ -108,6 +109,10 @@ def render_result(samples: int, lag: int) -> str:
 
 def render_answer(question: str) -> str:
     result = answer_question(question)
+    markers={item['marker'] for item in result['sources']}
+    answer_html=re.sub(r'\[(\d+)\]', lambda m: (
+        f'<sup class="citation-marker" aria-label="参考依据 {m[1]}">{m[0]}</sup>'
+        if m[0] in markers else m[0]), escape(result['answer']))
     sources = "".join(
         f"<li>{escape(item['marker'])} {escape(item['source'])}<p>{escape(item.get('content', ''))}</p></li>" for item in result["sources"]
     )
@@ -115,7 +120,7 @@ def render_answer(question: str) -> str:
     return (
         "<section class='card'>"
         f"<p><strong>问题：</strong>{escape(question)}</p>"
-        f"<p class='answer'>{escape(result['answer'])}</p>"
+        f"<p class='answer'>{answer_html}</p>"
         f"{source_section}</section>"
     )
 
