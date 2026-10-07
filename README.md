@@ -1,6 +1,6 @@
 # TEP 故障助手 / TEP Fault Assistant
 
-这是一个围绕 Tennessee Eastman Process（TEP）构建的网页：先认识化工过程，再查询相关知识，最后用数据分析故障可能从哪里开始传播。页面按这个顺序分为三个部分。
+这是一个围绕 Tennessee Eastman Process（TEP）构建的网页，包含过程介绍、智能助手和故障根源诊断三个独立 Tab。顶部导航和页面底部的文字箭头都可以切换功能，无需沿长页面往下找。
 
 ## 网页由哪三部分组成
 
@@ -10,7 +10,7 @@
 
 ### 02 智能助手
 
-在聊天窗口提问，例如“汽提塔有什么作用？”或“IDV(7) 是什么故障？”。助手从 TEP 知识手册中检索相关片段，再由在线大模型组织答案，并附上可展开的资料依据。知识范围包括工艺流程、设备、变量含义和预设故障；支持围绕上一问继续追问。资料不足或问题超出范围时，助手会明确说明。
+在聊天窗口提问，例如“汽提塔有什么作用？”或“IDV(7) 是什么故障？”。聊天记录按时间排列，输入框固定在聊天窗口底部；点击示例问题只填入输入框。助手从 TEP 知识手册中检索相关片段，再由在线大模型组织答案，并附上可展开的资料依据。知识范围包括工艺流程、设备、变量含义和预设故障；支持围绕上一问继续追问。资料不足或问题超出范围时，助手会明确说明。切换 Tab 会保留当前对话和诊断结果。
 
 ### 03 故障根源诊断
 
@@ -55,13 +55,13 @@ Key 保存在当前用户的本地配置文件，不写入仓库或网页源码�
 
 ## English
 
-TEP Fault Assistant is a web application built around the Tennessee Eastman Process (TEP). Its three sections follow one workflow: **understand the process → ask a technical question → explore fault data**.
+TEP Fault Assistant is a web application built around the Tennessee Eastman Process (TEP). Three independent tabs provide a process overview, a knowledge assistant, and root-cause exploration. Use the top navigation or the text-and-arrow links at the bottom of each view to switch between them.
 
 ### What is on the page?
 
 **01 Process overview.** An interactive SVG diagram explains the reactor, condenser, vapor–liquid separator, recycle compressor, and stripper. An approximately eight-second loop shows material moving from feed to product. Click a device to see its role and connected streams.
 
-**02 Knowledge assistant.** Ask about the process, equipment, variables, or predefined faults. The application retrieves passages from its TEP handbook and sends the relevant material to an online language model, which answers with expandable source references. It supports limited follow-up questions and says when the available material is insufficient.
+**02 Knowledge assistant.** Ask about the process, equipment, variables, or predefined faults. Messages appear in chronological order above the bottom input area. Example questions fill the input without moving the page. The application retrieves passages from its TEP handbook and sends the relevant material to an online language model, which answers with expandable source references. It supports limited follow-up questions and says when the available material is insufficient. Switching tabs preserves the current conversation and diagnosis results.
 
 **03 Root-cause exploration.** Using the IDV(7) simulated fault, choose a post-fault sample window and time lag, then start the analysis. The page shows candidate root variables, a directed graph of Granger-predictive relationships, and candidate propagation paths. Selecting a path highlights it in the graph. These are predictive clues under the selected settings, **not proof of physical causality**.
 

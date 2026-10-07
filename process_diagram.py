@@ -57,7 +57,7 @@ def render_process_diagram():
 <div class="tep-timeline-labels" aria-hidden="true"><span>原料进入</span><span>反应 · 冷凝</span><span>分相 · 汽提</span><span>产品输出 ↻</span></div>
 <div class="tep-steps" role="group" aria-label="选择流程步骤">{tabs}</div>
 <div class="tep-explanation" aria-live="polite" aria-atomic="true"><span id="tep-caption-kicker" class="tep-kicker">{overview['eyebrow']}</span><h3 id="tep-caption-title">{overview['title']}</h3><p id="tep-caption-body">{overview['body']}</p><p id="tep-caption-note" class="tep-caption-note">{overview['note']}</p></div>
-<div class="process-next"><button id="tep-ask" type="button" data-question="TEP的主要设备和工作流程是什么？">向助手询问TEP流程 ↗</button><a href="#diagnosis">进入IDV(7)故障诊断 →</a></div>
+<div class="process-next"><button id="tep-ask" type="button" data-question="TEP的主要设备和工作流程是什么？">向助手询问TEP流程 ↗</button></div>
 <p class="tep-source">参考：<a href="https://users.abo.fi/khaggblo/RS/Downs.pdf" target="_blank" rel="noopener">Downs &amp; Vogel（1993），A plant-wide industrial process control problem</a>；知识手册 §2–4及论文图2.3。图中箭头表示物料流向。</p>
 <script type="application/json" id="tep-process-data">{data}</script>
 </section>'''

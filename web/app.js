@@ -1,9 +1,7 @@
 const form = document.getElementById('question-form');
 const log = document.getElementById('chat-log');
-const chatHistory = document.getElementById('chat-history');
-const historyLog = document.getElementById('chat-history-log');
-const historyToggle = document.getElementById('chat-history-toggle');
-let archivedTurns = 0;
+const questionInput = form.elements.question;
+let followChatEnd = true;
 const deployment = window.TEP_DEPLOYMENT || {};
 function apiUrl(path) {
   return (deployment.apiBase || '') + path;
@@ -19,12 +17,12 @@ let lastQuestion = '';
 const resetButton = document.getElementById('reset-chat');
 resetButton.addEventListener('click', () => {
   lastQuestion = '';
-  archivedTurns = 0;
-  historyLog.replaceChildren();
-  chatHistory.open = false;
-  chatHistory.hidden = true;
+  questionInput.value = '';
+  resizeQuestionInput();
+  followChatEnd = true;
   log.replaceChildren();
   addMessage('assistant', '你好，我是TEP智能助手，可以回答工艺流程、变量含义和预设故障相关问题。例如：IDV(7)是什么故障？');
+  questionInput.focus({preventScroll:true});
 });
 function addMessage(role, content, sources = []) {
   const bubble = document.createElement('div');
@@ -59,20 +57,19 @@ function renderAnswer(bubble, content, sources = []) {
   fragment.append(document.createTextNode(content.slice(offset)));
   bubble.replaceChildren(fragment);
 }
-function startChatTurn() {
-  if (log.querySelector('.message.user')) {
-    const turn = document.createElement('div');
-    turn.className = 'chat-turn';
-    turn.append(...log.children);
-    historyLog.appendChild(turn);
-    archivedTurns += 1;
-    historyToggle.textContent = '查看之前的对话（' + archivedTurns + '轮）';
-    chatHistory.hidden = false;
-  } else {
-    log.replaceChildren();
-  }
-  chatHistory.open = false;
+function scrollChatToLatest() {
+  requestAnimationFrame(() => {
+    if (!document.getElementById('knowledge').hidden) log.scrollTop = log.scrollHeight;
+  });
 }
+log.addEventListener('scroll', () => {
+  followChatEnd = log.scrollHeight - log.scrollTop - log.clientHeight < 80;
+}, {passive:true});
+function resizeQuestionInput() {
+  questionInput.style.height = 'auto';
+  questionInput.style.height = Math.min(110, Math.max(48, questionInput.scrollHeight)) + 'px';
+}
+questionInput.addEventListener('input', resizeQuestionInput);
 function addSources(bubble, sources) {
   const details = document.createElement('details');
   details.className = 'sources';
@@ -111,11 +108,13 @@ form.addEventListener('submit', async (event) => {
   resetButton.disabled = true;
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), deployment.apiBase ? 120000 : 45000);
-  startChatTurn();
+  followChatEnd = true;
   addMessage('user', question);
   form.elements.question.value = '';
+  resizeQuestionInput();
   const reply = addMessage('assistant', '正在查找资料并生成回答…');
   reply.classList.add('loading');
+  scrollChatToLatest();
   try {
     if (deployment.staticMode && !deployment.apiBase) {
       throw new Error('GitHub Pages 目前仅提供工艺图和故障诊断演示。在线知识问答需要部署独立的安全后端。');
@@ -135,17 +134,19 @@ form.addEventListener('submit', async (event) => {
       reply.appendChild(interpretation);
     }
     lastQuestion = data.next_question || '';
+    if (followChatEnd) scrollChatToLatest();
   } catch (error) {
     lastQuestion = '';
     reply.classList.remove('loading');
     reply.classList.add('error');
     reply.textContent = error.name === 'AbortError' ? '等待回答超时，请重试。' : (error.message || '问答失败，请重试');
+    if (followChatEnd) scrollChatToLatest();
   } finally {
     clearTimeout(timer);
     button.disabled = false;
     resetButton.disabled = false;
     // 用户可能已转去查看诊断，回答完成时不抢回焦点或移动页面。
-    if (form.contains(document.activeElement)) {
+    if (!document.getElementById('knowledge').hidden && form.contains(document.activeElement)) {
       form.elements.question.focus({preventScroll:true});
     }
   }
@@ -188,7 +189,9 @@ diagnoseForm.addEventListener('submit', async (event) => {
     output.innerHTML = data.html;
     emptyDiagnosis.hidden = true;
     setDiagnosisStatus('');
-    output.scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'});
+    if (!document.getElementById('diagnosis').hidden) {
+      output.scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'});
+    }
   } catch (error) {
     setDiagnosisStatus(error.name === 'AbortError' ? '分析超时，请重试。' : (error.message || '诊断失败，请重试'), true);
   } finally {
@@ -235,10 +238,11 @@ document.addEventListener('click', event => {
   if (sample) {
     if (form.querySelector('button[type="submit"]').disabled) return;
     form.elements.question.value = sample.dataset.question;
-    // 问答区内的示例仅填入问题；跨工作区的入口才导航到输入框。
+    // 问答内的示例只填入；其他页面的入口先切换到智能助手。
     if (!sample.closest('#knowledge')) {
-      form.scrollIntoView({block:'center', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+      activateTab('#knowledge', true);
     }
+    resizeQuestionInput();
     form.elements.question.focus({preventScroll:true});
   }
   const zoom = event.target.closest('.graph-zoom');
@@ -254,21 +258,58 @@ form.elements.question.addEventListener('keydown', event => {
     form.requestSubmit();
   }
 });
-// 三个工作区共享一条导航，滚动和点击使用相同的当前区状态。
+// 每次只显示一个工作区。切换页面时保留对话、诊断结果和各页的阅读位置。
 const navLinks = [...document.querySelectorAll('.main-nav a')];
-let navScheduled = false;
-function updateNavigation() {
-  let current = navLinks[0];
-  for (const link of navLinks) {
-    if (document.querySelector(link.getAttribute('href')).getBoundingClientRect().top <= 160) current = link;
+const tabPanels = [...document.querySelectorAll('main > .tab-panel')];
+const tabScrollPositions = new Map();
+let activePanel = null;
+function tabForHash(hash) {
+  if (hash === '#fallback-result') return navLinks[1];
+  if (hash === '#diagnose-output') return navLinks[2];
+  return navLinks.find(link => link.getAttribute('href') === hash) || navLinks[0];
+}
+function activateTab(hash, updateHistory = false) {
+  const tab = tabForHash(hash);
+  const panel = document.getElementById(tab.getAttribute('aria-controls'));
+  if (activePanel !== panel) {
+    if (activePanel) tabScrollPositions.set(activePanel.id, window.scrollY);
+    tabPanels.forEach(item => { item.hidden = item !== panel; });
+    activePanel = panel;
+    document.body.dataset.activeTab = panel.id;
+    window.scrollTo({top:tabScrollPositions.get(panel.id) || 0, behavior:'instant'});
   }
   navLinks.forEach(link => {
-    if (link === current) link.setAttribute('aria-current','location');
-    else link.removeAttribute('aria-current');
+    link.setAttribute('aria-selected', String(link === tab));
+    link.tabIndex = link === tab ? 0 : -1;
   });
-  navScheduled = false;
+  if (updateHistory && location.hash !== tab.getAttribute('href')) {
+    history.pushState(null, '', tab.getAttribute('href'));
+  }
+  if (panel.id === 'knowledge') {
+    resizeQuestionInput();
+    if (followChatEnd) scrollChatToLatest();
+  }
 }
-window.addEventListener('scroll', () => {
-  if (!navScheduled) { navScheduled = true; requestAnimationFrame(updateNavigation); }
-}, {passive:true});
-updateNavigation();
+document.addEventListener('click', event => {
+  const link = event.target.closest('a[href^="#"]');
+  if (!link || !['#tep-process','#knowledge','#diagnosis'].includes(link.getAttribute('href')) ||
+      event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  activateTab(link.getAttribute('href'), true);
+});
+document.querySelector('.main-nav').addEventListener('keydown', event => {
+  const index = navLinks.indexOf(event.target);
+  if (index < 0 || !['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+  event.preventDefault();
+  const next = event.key === 'Home' ? 0 : event.key === 'End' ? navLinks.length - 1 :
+    (index + (event.key === 'ArrowRight' ? 1 : -1) + navLinks.length) % navLinks.length;
+  activateTab(navLinks[next].getAttribute('href'), true);
+  navLinks[next].focus({preventScroll:true});
+});
+window.addEventListener('hashchange', () => activateTab(location.hash));
+window.addEventListener('popstate', () => activateTab(location.hash));
+const header = document.querySelector('.app-header');
+new ResizeObserver(() => {
+  document.documentElement.style.setProperty('--app-header-height', header.offsetHeight + 'px');
+}).observe(header);
+activateTab(location.hash);
