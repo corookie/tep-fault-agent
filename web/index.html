@@ -23,13 +23,15 @@
 <a class="text-link" href="#diagnosis">进入 IDV(7) 故障诊断 <span aria-hidden="true">↓</span></a></aside>
 <section class="chat card" aria-label="故障知识聊天">
 <div class="chat-toolbar"><span><i class="quiet-dot" aria-hidden="true"></i> TEP 知识问答</span><button type="button" id="reset-chat" class="quiet-button">新对话</button></div>
-<div id="chat-log" class="chat-log" role="log" aria-live="polite" aria-relevant="additions text">
-<div class="message assistant">你好，我是TEP智能助手，可以回答工艺流程、变量含义和预设故障相关问题。例如：IDV(7)是什么故障？</div>
-</div>
 <form id="question-form" class="composer" method="post" action="/ask#fallback-result">
 <label class="sr-only" for="question-input">故障问题</label><textarea id="question-input" name="question" rows="2" maxlength="500" required placeholder="例如：IDV(7) 与 X4 有什么关系？" aria-label="故障问题"></textarea>
 <div class="composer-footer"><span>Enter 发送 · Shift + Enter 换行</span><button type="submit" class="primary-button">发送 <span aria-hidden="true">↑</span></button></div>
-</form></section></div><div id="fallback-result">{qa_result}</div>
+</form>
+<details id="chat-history" class="chat-history" hidden><summary id="chat-history-toggle">查看之前的对话</summary><div id="chat-history-log" class="chat-history-log"></div></details>
+<div id="chat-log" class="chat-log" role="log" aria-live="polite" aria-relevant="additions text">
+<div class="message assistant">你好，我是TEP智能助手，可以回答工艺流程、变量含义和预设故障相关问题。例如：IDV(7)是什么故障？</div>
+</div>
+</section></div><div id="fallback-result">{qa_result}</div>
 </section>
 <section id="diagnosis" class="workspace" aria-labelledby="diagnosis-title">
 <div class="section-heading"><div><span class="eyebrow">03 / 故障诊断</span><h2 id="diagnosis-title">故障根源诊断</h2></div><p>基于格兰杰因果检验，使用核岭回归分析变量之间的因果关系，识别可能的故障根源变量，并生成候选传播路径。</p></div>

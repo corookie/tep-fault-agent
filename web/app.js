@@ -1,5 +1,9 @@
 const form = document.getElementById('question-form');
 const log = document.getElementById('chat-log');
+const chatHistory = document.getElementById('chat-history');
+const historyLog = document.getElementById('chat-history-log');
+const historyToggle = document.getElementById('chat-history-toggle');
+let archivedTurns = 0;
 const deployment = window.TEP_DEPLOYMENT || {};
 function apiUrl(path) {
   return (deployment.apiBase || '') + path;
@@ -15,6 +19,10 @@ let lastQuestion = '';
 const resetButton = document.getElementById('reset-chat');
 resetButton.addEventListener('click', () => {
   lastQuestion = '';
+  archivedTurns = 0;
+  historyLog.replaceChildren();
+  chatHistory.open = false;
+  chatHistory.hidden = true;
   log.replaceChildren();
   addMessage('assistant', '你好，我是TEP智能助手，可以回答工艺流程、变量含义和预设故障相关问题。例如：IDV(7)是什么故障？');
 });
@@ -26,8 +34,21 @@ function addMessage(role, content, sources = []) {
     addSources(bubble, sources);
   }
   log.appendChild(bubble);
-  log.scrollTop = log.scrollHeight;
   return bubble;
+}
+function startChatTurn() {
+  if (log.querySelector('.message.user')) {
+    const turn = document.createElement('div');
+    turn.className = 'chat-turn';
+    turn.append(...log.children);
+    historyLog.appendChild(turn);
+    archivedTurns += 1;
+    historyToggle.textContent = '查看之前的对话（' + archivedTurns + '轮）';
+    chatHistory.hidden = false;
+  } else {
+    log.replaceChildren();
+  }
+  chatHistory.open = false;
 }
 function addSources(bubble, sources) {
   const details = document.createElement('details');
@@ -67,6 +88,7 @@ form.addEventListener('submit', async (event) => {
   resetButton.disabled = true;
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), deployment.apiBase ? 120000 : 45000);
+  startChatTurn();
   addMessage('user', question);
   form.elements.question.value = '';
   const reply = addMessage('assistant', '正在查找资料并生成回答…');
@@ -99,8 +121,10 @@ form.addEventListener('submit', async (event) => {
     clearTimeout(timer);
     button.disabled = false;
     resetButton.disabled = false;
-    form.elements.question.focus();
-    log.scrollTop = log.scrollHeight;
+    // 用户可能已转去查看诊断，回答完成时不抢回焦点或移动页面。
+    if (form.contains(document.activeElement)) {
+      form.elements.question.focus({preventScroll:true});
+    }
   }
 });
 const diagnoseForm = document.getElementById('diagnose-form');
@@ -188,8 +212,10 @@ document.addEventListener('click', event => {
   if (sample) {
     if (form.querySelector('button[type="submit"]').disabled) return;
     form.elements.question.value = sample.dataset.question;
-    const target = window.innerWidth < 700 ? form : document.getElementById('knowledge');
-    target.scrollIntoView({block: window.innerWidth < 700 ? 'center' : 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+    // 问答区内的示例仅填入问题；跨工作区的入口才导航到输入框。
+    if (!sample.closest('#knowledge')) {
+      form.scrollIntoView({block:'center', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+    }
     form.elements.question.focus({preventScroll:true});
   }
   const zoom = event.target.closest('.graph-zoom');
