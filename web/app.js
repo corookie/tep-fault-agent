@@ -2,6 +2,8 @@ const form = document.getElementById('question-form');
 const log = document.getElementById('chat-log');
 const questionInput = form.elements.question;
 let followChatEnd = true;
+let hasReceivedAnswer = false;
+const welcomeMessage = '你好，可以向我提问 TEP 工艺、变量和预设故障。首次问答可能需要等待约一分钟，请稍候，无需重复发送。';
 const deployment = window.TEP_DEPLOYMENT || {};
 function apiUrl(path) {
   return (deployment.apiBase || '') + path;
@@ -21,7 +23,7 @@ resetButton.addEventListener('click', () => {
   resizeQuestionInput();
   followChatEnd = true;
   log.replaceChildren();
-  addMessage('assistant', '你好，我是TEP智能助手，可以回答工艺流程、变量含义和预设故障相关问题。例如：IDV(7)是什么故障？');
+  addMessage('assistant', welcomeMessage);
   questionInput.focus({preventScroll:true});
 });
 function addMessage(role, content, sources = []) {
@@ -112,7 +114,9 @@ form.addEventListener('submit', async (event) => {
   addMessage('user', question);
   form.elements.question.value = '';
   resizeQuestionInput();
-  const reply = addMessage('assistant', '正在查找资料并生成回答…');
+  const reply = addMessage('assistant', hasReceivedAnswer
+    ? '正在查找资料并生成回答…'
+    : '首次问答可能需要等待约一分钟，请稍候，无需重复发送。');
   reply.classList.add('loading');
   scrollChatToLatest();
   try {
@@ -123,6 +127,7 @@ form.addEventListener('submit', async (event) => {
       new URLSearchParams({question, previous_question: lastQuestion}), controller.signal);
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || '问答失败，请重试');
+    hasReceivedAnswer = true;
     reply.classList.remove('loading');
     renderAnswer(reply, data.answer, data.sources || []);
     if (data.sources && data.sources.length) {

@@ -17,7 +17,11 @@ html{scrollbar-gutter:stable}
 #process-panel{margin:0}
 #diagnosis{margin:0;padding-top:28px}
 #knowledge{display:flex;flex-direction:column;height:calc(100dvh - var(--app-header-height,82px));min-height:500px;margin:0;padding:24px 0 0}
-#knowledge .section-heading{flex:none;margin-bottom:22px}
+#knowledge .section-heading{display:block;margin-bottom:24px}
+#knowledge .section-heading h2{font-size:26px}
+#knowledge .knowledge-guide{padding-top:0}
+#knowledge .knowledge-guide h3{font-size:22px;margin-bottom:18px}
+#knowledge .guide-note{margin:16px 0}
 #knowledge .knowledge-layout{flex:1;min-height:0;align-items:stretch}
 #fallback-result:empty{display:none}
 .page-navigation{display:flex;flex:none;justify-content:space-between;align-items:center;gap:20px;padding:18px 0;margin-top:22px;border-top:1px solid var(--line)}
@@ -29,6 +33,7 @@ body[data-active-tab="knowledge"] .app-footer{display:none}
 @media(max-width:700px){
  #knowledge{padding-top:18px;min-height:500px}
  #knowledge .section-heading{margin-bottom:16px}
+ #knowledge .section-heading h2{font-size:25px}
  #knowledge .knowledge-layout{display:flex;flex-direction:column;gap:0}
  .knowledge-guide{flex:none}
  .chat{flex:1;height:auto}

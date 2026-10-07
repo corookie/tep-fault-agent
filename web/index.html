@@ -14,9 +14,8 @@
 <nav class="page-navigation" aria-label="切换功能"><a href="#diagnosis"><span aria-hidden="true">←</span> 根源诊断</a><a href="#knowledge">智能助手 <span aria-hidden="true">→</span></a></nav>
 </section>
 <section id="knowledge" class="workspace tab-panel" role="tabpanel" aria-labelledby="tab-knowledge">
-<div class="section-heading"><div><span class="eyebrow">02 / 智能问答</span><h2 id="knowledge-title">TEP Agent 智能助手</h2></div><p>基于TEP知识库和大模型，回答工艺流程、变量含义和预设故障相关问题。</p></div>
 <div class="knowledge-layout">
-<aside class="knowledge-guide"><h3>示例问题</h3><p class="guide-note">点击问题填入输入框，再点击“发送”。</p>
+<aside class="knowledge-guide"><div class="section-heading"><div><span class="eyebrow">02 / 智能问答</span><h2 id="knowledge-title">TEP Agent 智能助手</h2></div></div><h3>示例问题</h3><p class="guide-note">点击问题填入输入框，再点击“发送”。</p>
 <div class="question-examples" aria-label="示例问题">
 <button type="button" data-question="IDV(7)是什么故障？"><span>预设故障</span>IDV(7) 是什么故障？<i aria-hidden="true">↗</i></button>
 <button type="button" data-question="X4与X45有什么区别？"><span>变量含义</span>X4 与 X45 有什么区别？<i aria-hidden="true">↗</i></button>
@@ -25,7 +24,7 @@
 <section class="chat card" aria-label="故障知识聊天">
 <div class="chat-toolbar"><span><i class="quiet-dot" aria-hidden="true"></i> TEP 知识问答</span><button type="button" id="reset-chat" class="quiet-button">新对话</button></div>
 <div id="chat-log" class="chat-log" role="log" aria-live="polite" aria-relevant="additions text">
-<div class="message assistant">你好，我是TEP智能助手，可以回答工艺流程、变量含义和预设故障相关问题。例如：IDV(7)是什么故障？</div>
+<div class="message assistant">你好，可以向我提问 TEP 工艺、变量和预设故障。首次问答可能需要等待约一分钟，请稍候，无需重复发送。</div>
 </div>
 <form id="question-form" class="composer" method="post" action="/ask#fallback-result">
 <label class="sr-only" for="question-input">故障问题</label>

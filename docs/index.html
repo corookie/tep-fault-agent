@@ -31,7 +31,11 @@ html{scrollbar-gutter:stable}
 #process-panel{margin:0}
 #diagnosis{margin:0;padding-top:28px}
 #knowledge{display:flex;flex-direction:column;height:calc(100dvh - var(--app-header-height,82px));min-height:500px;margin:0;padding:24px 0 0}
-#knowledge .section-heading{flex:none;margin-bottom:22px}
+#knowledge .section-heading{display:block;margin-bottom:24px}
+#knowledge .section-heading h2{font-size:26px}
+#knowledge .knowledge-guide{padding-top:0}
+#knowledge .knowledge-guide h3{font-size:22px;margin-bottom:18px}
+#knowledge .guide-note{margin:16px 0}
 #knowledge .knowledge-layout{flex:1;min-height:0;align-items:stretch}
 #fallback-result:empty{display:none}
 .page-navigation{display:flex;flex:none;justify-content:space-between;align-items:center;gap:20px;padding:18px 0;margin-top:22px;border-top:1px solid var(--line)}
@@ -43,6 +47,7 @@ body[data-active-tab="knowledge"] .app-footer{display:none}
 @media(max-width:700px){
  #knowledge{padding-top:18px;min-height:500px}
  #knowledge .section-heading{margin-bottom:16px}
+ #knowledge .section-heading h2{font-size:25px}
  #knowledge .knowledge-layout{display:flex;flex-direction:column;gap:0}
  .knowledge-guide{flex:none}
  .chat{flex:1;height:auto}
@@ -87,9 +92,8 @@ body[data-active-tab="knowledge"] .app-footer{display:none}
 <nav class="page-navigation" aria-label="切换功能"><a href="#diagnosis"><span aria-hidden="true">←</span> 根源诊断</a><a href="#knowledge">智能助手 <span aria-hidden="true">→</span></a></nav>
 </section>
 <section id="knowledge" class="workspace tab-panel" role="tabpanel" aria-labelledby="tab-knowledge">
-<div class="section-heading"><div><span class="eyebrow">02 / 智能问答</span><h2 id="knowledge-title">TEP Agent 智能助手</h2></div><p>基于TEP知识库和大模型，回答工艺流程、变量含义和预设故障相关问题。</p></div>
 <div class="knowledge-layout">
-<aside class="knowledge-guide"><h3>示例问题</h3><p class="guide-note">点击问题填入输入框，再点击“发送”。</p>
+<aside class="knowledge-guide"><div class="section-heading"><div><span class="eyebrow">02 / 智能问答</span><h2 id="knowledge-title">TEP Agent 智能助手</h2></div></div><h3>示例问题</h3><p class="guide-note">点击问题填入输入框，再点击“发送”。</p>
 <div class="question-examples" aria-label="示例问题">
 <button type="button" data-question="IDV(7)是什么故障？"><span>预设故障</span>IDV(7) 是什么故障？<i aria-hidden="true">↗</i></button>
 <button type="button" data-question="X4与X45有什么区别？"><span>变量含义</span>X4 与 X45 有什么区别？<i aria-hidden="true">↗</i></button>
@@ -98,7 +102,7 @@ body[data-active-tab="knowledge"] .app-footer{display:none}
 <section class="chat card" aria-label="故障知识聊天">
 <div class="chat-toolbar"><span><i class="quiet-dot" aria-hidden="true"></i> TEP 知识问答</span><button type="button" id="reset-chat" class="quiet-button">新对话</button></div>
 <div id="chat-log" class="chat-log" role="log" aria-live="polite" aria-relevant="additions text">
-<div class="message assistant">你好，我是TEP智能助手，可以回答工艺流程、变量含义和预设故障相关问题。例如：IDV(7)是什么故障？</div>
+<div class="message assistant">你好，可以向我提问 TEP 工艺、变量和预设故障。首次问答可能需要等待约一分钟，请稍候，无需重复发送。</div>
 </div>
 <form id="question-form" class="composer" method="post" action="/ask#fallback-result">
 <label class="sr-only" for="question-input">故障问题</label>
@@ -185,6 +189,8 @@ const form = document.getElementById('question-form');
 const log = document.getElementById('chat-log');
 const questionInput = form.elements.question;
 let followChatEnd = true;
+let hasReceivedAnswer = false;
+const welcomeMessage = '你好，可以向我提问 TEP 工艺、变量和预设故障。首次问答可能需要等待约一分钟，请稍候，无需重复发送。';
 const deployment = window.TEP_DEPLOYMENT || {};
 function apiUrl(path) {
   return (deployment.apiBase || '') + path;
@@ -204,7 +210,7 @@ resetButton.addEventListener('click', () => {
   resizeQuestionInput();
   followChatEnd = true;
   log.replaceChildren();
-  addMessage('assistant', '你好，我是TEP智能助手，可以回答工艺流程、变量含义和预设故障相关问题。例如：IDV(7)是什么故障？');
+  addMessage('assistant', welcomeMessage);
   questionInput.focus({preventScroll:true});
 });
 function addMessage(role, content, sources = []) {
@@ -295,7 +301,9 @@ form.addEventListener('submit', async (event) => {
   addMessage('user', question);
   form.elements.question.value = '';
   resizeQuestionInput();
-  const reply = addMessage('assistant', '正在查找资料并生成回答…');
+  const reply = addMessage('assistant', hasReceivedAnswer
+    ? '正在查找资料并生成回答…'
+    : '首次问答可能需要等待约一分钟，请稍候，无需重复发送。');
   reply.classList.add('loading');
   scrollChatToLatest();
   try {
@@ -306,6 +314,7 @@ form.addEventListener('submit', async (event) => {
       new URLSearchParams({question, previous_question: lastQuestion}), controller.signal);
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || '问答失败，请重试');
+    hasReceivedAnswer = true;
     reply.classList.remove('loading');
     renderAnswer(reply, data.answer, data.sources || []);
     if (data.sources && data.sources.length) {
