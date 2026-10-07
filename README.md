@@ -43,6 +43,8 @@ python app.py
 
 Key 保存在当前用户的本地配置文件，不写入仓库或网页源码。也可以在服务端设置 `TEP_LLM_API_KEY`、`TEP_LLM_BASE_URL` 和 `TEP_LLM_MODEL` 环境变量。这里需要的是百炼模型 API Key，不是阿里云 AccessKey ID/Secret。
 
+项目也支持 DeepSeek 官方 API：设置 `TEP_LLM_API_KEY` 为 DeepSeek Key、`TEP_LLM_BASE_URL=https://api.deepseek.com` 和 `TEP_LLM_MODEL=deepseek-flash`，然后启动服务。三项必须匹配同一个服务商，具体配置见[部署说明](DEPLOYMENT.md)。上面的 `configure_local.py` 流程仍用于百炼本地配置。
+
 ## 技术与项目文档
 
 - **过程介绍：** SVG 工艺图、设备交互和循环动画。
@@ -79,6 +81,8 @@ python app.py
 ```
 
 On the first run, `configure_local.py` asks for an Alibaba Cloud Bailian **model API key** through a hidden terminal prompt. After that, start the server with `python app.py` and open `http://127.0.0.1:8765/`. The key stays in a private local configuration file, never in the repository or browser code. Rebuild the retrieval index once after cloning because it contains local file paths. Server-side environment variables `TEP_LLM_API_KEY`, `TEP_LLM_BASE_URL`, and `TEP_LLM_MODEL` are also supported.
+
+The official DeepSeek API is also supported. Set `TEP_LLM_API_KEY` to your DeepSeek key, `TEP_LLM_BASE_URL=https://api.deepseek.com`, and `TEP_LLM_MODEL=deepseek-flash` before starting the server. All three settings must match the same provider; see the [deployment guide](DEPLOYMENT.md). The `configure_local.py` flow above remains specific to local Bailian configuration.
 
 ### Implementation and documentation
 

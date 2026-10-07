@@ -36,6 +36,8 @@ GitHub Pages 只托管静态文件，不运行 Python。浏览器脚本对所有
 | `TEP_LLM_MODEL` | 默认 `qwen3.8-flash`；可在平台上覆盖 |
 | `TEP_ALLOWED_ORIGIN` | `https://corookie.github.io`，只允许该浏览器来源读取跨域响应 |
 
+使用 DeepSeek 官方 API 时，需要同时替换三项：`TEP_LLM_API_KEY` 填 DeepSeek Key，`TEP_LLM_BASE_URL` 填 `https://api.deepseek.com`，`TEP_LLM_MODEL` 填 `deepseek-flash`。仅替换 Key 无法切换服务商。程序在 DeepSeek 官方接口上关闭思考模式，继续使用知识库检索与资料引用。模型名称与参数以 [DeepSeek 官方文档](https://api-docs.deepseek.com/)为准。
+
 仓库根目录的 `render.yaml` 已设置免费 Python 服务、依赖安装、检索索引构建、启动命令和健康检查；`.python-version` 固定 Python 3.12。部署时在 Render 后台填写 `TEP_LLM_API_KEY`，不要提交其值。缺少模型密钥时，服务会拒绝启动。接口默认公开，所有人均可使用。旧部署中的 `TEP_ACCESS_TOKEN` 可以删除，代码不再读取它。
 
 后端有正式 HTTPS 域名后，在项目目录执行：
@@ -67,5 +69,7 @@ GitHub Pages serves the `docs/` folder on `main` at <https://corookie.github.io/
 ### Hosting online Q&A
 
 Pages cannot execute Python or protect an API key. Use a separate Python host. The repository includes a free-plan `render.yaml` that installs dependencies, rebuilds the retrieval index, starts `app.py`, and checks `/health`. Set `TEP_HOST=0.0.0.0`, use the provider's `PORT`, store `TEP_LLM_API_KEY` as a private runtime variable, and set `TEP_ALLOWED_ORIGIN=https://corookie.github.io`. Render deployments refuse to start without the model API key. The endpoints are public; the old `TEP_ACCESS_TOKEN` variable is no longer read and can be deleted. `TEP_LLM_BASE_URL` and `TEP_LLM_MODEL` may override the defaults.
+
+For the official DeepSeek API, set all three variables together: `TEP_LLM_API_KEY` to your DeepSeek key, `TEP_LLM_BASE_URL` to `https://api.deepseek.com`, and `TEP_LLM_MODEL` to `deepseek-flash`. Replacing only the key does not change providers. The client disables thinking mode for the official DeepSeek endpoint while keeping retrieval and source citations. Check the [official DeepSeek documentation](https://api-docs.deepseek.com/) for current model names and parameters.
 
 Once the backend has an HTTPS origin, run `python3 export_pages.py --api-base https://YOUR-BACKEND-HOST` and push the generated `docs/` files. The API base is public; the model key never enters the site output. No login or access token is required. Both Q&A and diagnosis run on the backend. Public Q&A consumes the project owner’s model quota. Configure model spending limits and inspect service logs; CORS restricts browser response access and is not authentication.

@@ -46,14 +46,13 @@ def main() -> None:
     page = page.replace("{configuration_status}", status)
     page = page.replace("{diagnose_result}", "").replace("{qa_result}", "")
     page = page.replace(" · 本地研究演示", " · 公开交互演示")
-    note = ("此页面可直接体验工艺动画、在线知识问答和实时故障诊断，无需登录或访问口令。"
-            if api_base else
-            "此公开页面可体验工艺动画和预计算的故障诊断结果（9组参数）。在线知识问答暂未启用；本地运行版本可使用完整功能。")
-    page = page.replace(
-        '<div class="chat-toolbar">',
-        f'<p class="deployment-note" role="status">{note}</p><div class="chat-toolbar">',
-        1,
-    )
+    if not api_base:
+        note = "此公开页面可体验工艺动画和预计算的故障诊断结果（9组参数）。在线知识问答暂未启用；本地运行版本可使用完整功能。"
+        page = page.replace(
+            '<div class="chat-toolbar">',
+            f'<p class="deployment-note" role="status">{note}</p><div class="chat-toolbar">',
+            1,
+        )
     (OUTPUT / "index.html").write_text(page, encoding="utf-8")
     (OUTPUT / ".nojekyll").write_text("", encoding="utf-8")
     print(f"Built {OUTPUT / 'index.html'} and nine diagnosis responses")

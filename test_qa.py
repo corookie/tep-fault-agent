@@ -119,6 +119,25 @@ class QATests(unittest.TestCase):
             with patch('qa.chat_completion', return_value=content):
                 with self.assertRaises(QAError): answer_question('X4是什么？')
 
+    def test_deepseek_official_request_and_cited_answer(self):
+        settings = {'TEP_LLM_API_KEY': 'test-only-deepseek',
+                    'TEP_LLM_BASE_URL': 'https://api.deepseek.com',
+                    'TEP_LLM_MODEL': 'deepseek-flash'}
+        response = BytesIO(json.dumps({'choices': [{'message': {
+            'content': 'IDV(7) 是 C 进料压力损失。[1]'}}]}).encode())
+        with patch.dict(os.environ, settings), patch('qa.urlopen', return_value=response) as call:
+            result = answer_question('IDV(7)是什么故障？')
+        request = call.call_args.args[0]
+        payload = json.loads(request.data)
+        self.assertEqual(request.full_url, 'https://api.deepseek.com/chat/completions')
+        self.assertEqual(request.get_header('Authorization'), 'Bearer test-only-deepseek')
+        self.assertEqual(payload['model'], 'deepseek-flash')
+        self.assertEqual(payload['thinking'], {'type': 'disabled'})
+        self.assertNotIn('enable_thinking', payload)
+        self.assertNotIn('test-only-deepseek', request.data.decode())
+        self.assertEqual(result['status'], 'answered')
+        self.assertEqual(result['sources'][0]['id'], 'FAULT-IDV07')
+
     def test_validation_and_model_failure(self):
         for q in ['', '长' * 501]:
             with self.assertRaises(QAError): answer_question(q)

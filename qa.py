@@ -117,6 +117,9 @@ def chat_completion(question: str, cards: list[dict], previous_question: str = "
     # 百炼 Qwen3.8 Flash 默认开启思考；本页使用非流式问答，需显式关闭。
     if model == "qwen3.8-flash":
         payload["enable_thinking"] = False
+    # DeepSeek 官方接口默认开启思考；知识问答沿用非思考模式。
+    if parsed.hostname == "api.deepseek.com":
+        payload["thinking"] = {"type": "disabled"}
     request = Request(
         f"{api_base}/chat/completions",
         data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
